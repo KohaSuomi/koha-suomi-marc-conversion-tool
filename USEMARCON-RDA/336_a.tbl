@@ -1,0 +1,31 @@
+336_a.tbl -- RDA-sisältötyypit koodit kentässä 336 $a
+File generated: Mon Jun  1 15:52:48 2015
+
+D a t a 	| d i g i t a a l i n e n 0x20 d a t a 
+D a t a 0x20 ( k a r t o g r a f i n e n ) 	| k a r t o g r a f i n e n 0x20 d a t a 
+E s i n e 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o l m i u l o t t e i n e n ) 	| k a r t o g r a f i n e n 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
+E s i n e 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o s k e t e l t a v a ) 	| k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
+E s i n e 0x20 ( k o l m i u l o t t e i n e n ) 	| k o l m i u l o t t e i n e n 0x20 m u o t o 
+E s i n e 0x20 ( k o s k e t e l t a v a ) 	| t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
+K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o s k e t e l t a v a ) 	| k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a 
+K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 l i i k k u v a ) 	| k a r t o g r a f i n e n 0x20 l i i k k u v a 0x20 k u v a 
+K u v a 0x20 ( k a r t o g r a f i n e n ) 	| k a r t o g r a f i n e n 0x20 k u v a 
+K u v a 0x20 ( l i i k k u v a 0x20 ; 0x20 k a k s i u l o t t e i n e n ) 	| k a k s i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a 
+K u v a 0x20 ( l i i k k u v a 0x20 ; 0x20 k o l m i u l o t t e i n e n ) 	| k o l m i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a 
+K u v a 0x20 ( s t i l l 0x20 ; 0x20 k o l m i u l o t t e i n e n ) 	| s t i l l k u v a 
+K u v a 0x20 ( s t i l l 0x20 ; 0x20 k a k s i u l o t t e i n e n )  | s t i l l k u v a 
+K u v a 0x20 ( s t i l l 0x20 ; 0x20 k o s k e t e l t a v a ) 	| t a k t i i l i 0x20 k u v a 
+K u v a 0x20 ( s t i l l ) 	| s t i l l k u v a 
+L i i k e 0x20 ( k o s k e t e l t a v a ; 0x20 n o t a t o i t u ) 	| t a k t i i l i 0x20 l i i k e n o t a a t i o 
+L i i k e 0x20 ( n o t a t o i t u ) 	| l i i k e n o t a a t i o 
+M u s i i k k i 0x20 ( e s i t e t t y ) 	| e s i t e t t y 0x20 m u s i i k k i 
+M u s i i k k i 0x20 ( k o s k e t e l t a v a 0x20 ; 0x20 n o t a t o i t u ) 	| t a k t i i l i 0x20 n u o t t i k i r j o i t u s 
+M u s i i k k i 0x20 ( n o t a t o i t u ) 	| n u o t t i k i r j o i t u s 
+M 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n 0x20 s i s 0xc3 0xa4 l t 0xc3 0xb6 t y y p p i 	| m 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n 
+P u h e 	| p u h e 
+T e k s t i 	| t e k s t i 
+T e k s t i 0x20 ( k o s k e t e l t a v a ) 	| t a k t i i l i 0x20 t e k s t i 
+T i e t o k o n e o h j e l m a 	| t i e t o k o n e o h j e l m a 
+U s e i t a 0x20 s i s 0xc3 0xa4 l t 0xc3 0xb6 t y y p p e j 0xc3 0xa4 | u s e i t a 0x20 s i s 0xc3 0xa4 l t 0xc3 0xb6 t y y p p e j 0xc3 0xa4 
+0xc3 0x84 0xc3 0xa4 n i 	| 0xc3 0xa4 0xc3 0xa4 n i 
+#DEFAULT	| COPY

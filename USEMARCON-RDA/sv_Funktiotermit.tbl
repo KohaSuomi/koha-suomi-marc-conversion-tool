@@ -1,0 +1,134 @@
+sv_Funktiotermit.tbl -- RDA-funktiotermien avaus, englanninkielisten kääntäminen, ruotsi (X00, X10, X11 $e, $j)
+
+a r r.   | a r r a n g 0xc3 0xb6 r
+a r t i s t  | e x e k u t 0xc3 0xb6 r
+e x e k .  | e x e k u t 0xc3 0xb6 r
+i l l .    | i l l u s t r a t 0xc3 0xb6 r
+k o m p .  | k o m p o s i t 0xc3 0xb6 r
+r e d .   | r e d a k t 0xc3 0xb6 r
+r e g .   | r e g i s s 0xc3 0xb6 r
+s o v . | a r r a n g 0xc3 0xb6 r
+s 0xc3 0xa4 v .  | k o m p o s i t 0xc3 0xb6 r
+t o n s .   | k o m p o s i t 0xc3 0xb6 r 
+0xc3 0xb6 v e r s .  | 0xc3 0xb6 v e r s 0xc3 0xa4 t t a r e
+
+a b r i d g e r   |  f 0xc3 0xb6 r k o r t a d 0x20 u t g 0xc3 0xa5 v a
+a c t o r   |  s k 0xc3 0xa5 d e s p e l a r e
+a d d r e s s e e   |  m o t t a g a r e
+a n i m a t o r   |  a n i m a t 0xc3 0xb6 r
+a n n o t a t o r    | f  0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 a n n o t a t i o n
+a p p e l l a n t   | k l a g a n d e 0x20 p a r t 0x20 i 0x20 a p p e l l a t i o n s d o m s t o l
+a p p e l l e e   | k l a g a n d e s 0x20 m o t p a r t 0x20 i 0x20 a p p e l l a t i o n s d o m s t o l
+a r c h i t e c t   | a r k i t e k t
+a r r a n g e r   | a r r a n g 0xc3 0xb6 r
+a r t 0x20 d i r e c t o r   |  s c e n o g r a f
+a r t i s t   | k o n s t n 0xc3 0xa4 r
+a u t h o r   | f 0xc3 0xb6 r f a t t a r e
+a u t o g r a p h e r   | s i g n a t u r
+b i n d e r   | b o k b i n d a r e
+b o o k 0x20 d e s i g n e r   | g r a f i s k 0x20 f o r m g i v a r e
+b r a i l l e 0x20 e m b o s s e r   | p u n k t s k r i f t s p r 0xc3 0xa4 g l a r e
+b r o a d c a s t e r   | s 0xc3 0xa4 n d n i n g s a n s v a r i g
+c a r t o g r a p h e r   | k a r t o g r a f
+c a s t e r   | g j u t a r e
+c h o r e o g r a p h e r   | k o r e o g r a f
+c o l l e c t i o n 0x20 r e g i s t r a r   |  s a m l i n g s r e g i s t r a t o r
+c o l l e c t o r   | s a m l a r e
+c o l l o t y p e r   | f r a m s t 0xc3 0xa4 l l a r e 0x20 a v 0x20 l j u s t r y c k
+c o m m e n t a t o r   | k o m m e n t a t o r
+c o m p i l e r   |  s a m m a n s t 0xc3 0xa4 l l a r e
+c o m p o s e r  |   k o m p o s i t 0xc3 0xb6 r 
+c o n d u c t o r   | d i r i g e n t
+c o n s u l t a n t   | e x p e r t
+c o s t u m e 0x20 d e s i g n e r   | k o s t y m 0xc3 0xb6 r
+c o u r t 0x20 g o v e r n e d    | d o m s t o l s 0x20 r e g e l v e r k
+c o u r t 0x20 r e p o r t e r   | d o m s t o l s s e k r e t e r a r e
+c u r a t o r   | k u r a t o r
+c u r r e n t 0x20 o w n e r   |   n u v a r a n d e 0x20 0xc3 0xa4 g a r e
+d a n c e r   | d a n s a r e
+d e d i c a t e e   |  v e r k 0x20 t i l l 0xc3 0xa4 g n a t
+d e d i c a t e e 0x20 o f 0x20 i t e m   |  e x e m p l a r 0x20 t i l l 0xc3 0xa4 g n a t
+d e d i c a t o r   |   v e r k 0x20 t i l l 0xc3 0xa4 g n a t 0x20 a v 
+d e f e n d a n t   |  s v a r a n d e 0x20 p a r t 0x20 i 0x20 r 0xc3 0xa4 t t e g 0xc3 0xa5 n g
+d e g r e e 0x20 g r a n t i n g 0x20 i n s t i t u t i o n   |  i n s t i t u t i o n 0x20 s o m 0x20 b e v i l j a r 0x20 l 0xc3 0xa4 r d o m s g r a d
+d e p o s i t o r   | d e p o n e r a t 0x20 a v
+d e s i g n e r   | f o r m g i v a r e
+d i r e c t o r   | r e g i s s 0xc3 0xb6 r
+d i r e c t o r 0x20 o f 0x20 p h o t o g r a p h y   | f i l m f o t o g r a f
+d o n o r   | d o n a t o r
+d r a f t s m a n   | r i t a r e
+e d i t o r   |   r e d a k t 0xc3 0xb6 r
+e d i t o r 0x20 o f 0x20 c o m p i l a t i o n   | | r e d a k t 0xc3 0xb6 r 0x20 f 0xc3 0xb6 r 0x20 s a m l i n g s v e r k
+e d i t o r 0x20 o f 0x20 m o v i n g 0x20 i m a g e   | r e d i g e r a r e
+e n a c t i n g 0x20 j u r i s d i c t i o n   | v e r k s t 0xc3 0xa4 ä l l a n d e 0x20 j u r i s d i k t i o n
+e n g r a v e r   | g r a v 0xc3 0xb6 r
+e t c h e r   | e t s a r e
+f i l m 0x20 d i r e c t o r   | f i l m r e g i s s 0xc3 0xb6 r   
+f i l m 0x20 d i s t r i b u t o r   | f i l m d i s t r i b u t 0xc3 0xb6 r
+f i l m 0x20 p r o d u c e r   | f i l m p r o d u c e n t
+f i l m m a k e r   | f i l m s k a p a r e
+f o r m e r 0x20 o w n e r   | t i d i g a r e 0x20 0xc3 0xa4 g a r e
+h o n o u r e e    | f e s t s k r i f t s f 0xc3 0xb6 r e m 0xc3 0xa5 l
+h o n o u r e e 0x20 o f 0x20 i t e m   | f e s t s k r i f t s f 0xc3 0xb6 r e m 0xc3 0xa5 l
+h o s t  | p r o g r a m l e d a r e
+h o s t 0x20 i n s t i t u t i o n   | v 0xc3 0xa4 r d o r g a n i s a t i o n
+i l l u m i n a t o r   | i l l u m i n a t o r
+i l l u s t r a t o r    | i l l u s t r a t 0xc3 0xb6 r
+i n s c r i b e r    | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 d e d i k a t i o n
+i n s t r u m e n t a l i s t   | i n s t r u m e n t a l i s t
+i n t e r v i e w e e   |  i n t e r v j u o b j e k t
+i n t e r v i e w e r   | i n t e r v j u a r e
+i n v e n t o r   | u p p f i n n a r e
+i s s u i n g 0x20 b o d y   | u t g i v a r e
+j o i n t 0x20 a u t h o r   | f 0xc3 0xb6 r f a t t a r e
+j u d g e   | d o m a r e
+j u r i s d i c t i o n 0x20 g o v e r n e d   | t i l l 0xc3 0xa4 m p l i g 0x20 j u r i s d i k t i o n
+l a n d s c a p e 0x20 a r c h i t e c t   | l a n d s k a p s a r k i t e k t
+l i b r e t t i s t   | l i b r e t t i s t
+l i t h o g r a p h e r   | l i t o g r a f
+l y r i c i s t   | s 0xc3 0xa5 n g t e x t f 0xc3 0xb6 r f a t t a r e
+m u s i c a l 0x20 d i r e c t o r     | m u s i k a l i s k 0x20 l e d a r e
+n a r r a t o r  | b e r 0xc3 0xa4 t t a r e
+p a n e l i s t     | d e l t a g a r e 0x20 i 0x20 p a n e l d i s k u s s i o n
+p e r f o r m e r   | e x e k u t 0xc3 0xb6 r
+p h o t o g r a p h e r   | f o t o g r a f
+p l a i n t i f f    |  k 0xc3 0xa4 r a n d e 
+p l a t e m a k e r    | t r y c k p l 0xc3 0xa5 t s t i l l v e r k a r e
+p r a e s e s   | p r e s e s
+p r e s e n t e r    |  p r e s e n t a t 0xc3 0xb6 r
+p r i n t e r    | b o k t r y c k a r e
+p r i n t m a k e r   | k l i c h e t i l l v e r k a r e
+p r o d u c e r   | p r o d u c e n t
+p r o d u c t i o n 0x20 c o m p a n y   | p r o d u k t i o n s b o l a g
+p r o d u c t i o n 0x20 d e s i g n e r    | p r o d u k t i o n s d e s i g n e r
+p r o g r a m m e r    | p r o g r a m m e r a r e
+p u p p e t e e r   | m a r i o n e t t s p e l a r e
+r a d i o 0x20 d i r e c t o r    | r a d i o r e g i s s 0xc3 0xb6 r
+r a d i o 0x20 p r o d u c e r     | r a d i o p r o d u c e n t
+r e c o r d i n g 0x20 e n g i n e e r   | v i d e o t e k n i k e r
+r e c o r d i s t   | l j u d t e k n i k e r
+r e s p o n d e n t   | r e s p o n d e n t
+r e s t o r a t i o n i s t   | k o n s e r v a t o r
+s c r e e n w r i t e r   | m a n u s f 0xc3 0xb6 r f a t t a r e
+s c u l p t o r   | s k u l p t 0xc3 0xb6 r
+s e l l e r   | f 0xc3 0xb6 r s 0xc3 0xa4 l j a r e
+s i n g e r    | s 0xc3 0xa5 n g a r e
+s p e a k e r   | t a l a r e
+s p o n s o r i n g 0x20 b o d y   | s p o n s o r
+s t a g e 0x20 d i r e c t o r   | s c e n r e g i s s 0xc3 0xb6 r
+s t or y t e l l e r    | h i s t o r i e b e r 0xc3 0xa4 t t a r e
+s u r v e y o r    | l a n t m 0xc3 0xa4 t a r e
+t e a c h e r  | l 0xc3 0xa4 r a r e
+t e l e v i s i o n 0x20 d i r e c t o r    | T V - r e g i s s 0xc3 0xb6 r
+t e l e v i s i o n 0x20 p r o d u c e r    | T V - p r o d u c e n t
+t r a n s c r i b e r    | t r a n s l i t t e r e r a r e
+t r a n s l a t o r     | 0xc3 0xb6 v e r s 0xc3 0xa4 t t a r e
+v o i c e 0x20 a c t o r   | r 0xc3 0xb6 s t s k 0xc3 0xa5 d e s p e l a r e
+w r i t e r 0x20 o f 0x20 a d d e d 0x20 c o m m e n t a r y   | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 t e x t k o m m e n t a r
+w r i t e r 0x20 o f 0x20 a d d e d 0x20 l y r i c s    | k o m p l e t t e r a n d e 0x20 t e x t 0x20  t i l l 0x20 m u s i k v e r k
+w r i t e r 0x20 o f 0x20 a d d e d 0x20 t e x t    | k o m p l e t t e r a n d e 0x20 t e x t 0x20 t i l l 0x20 i c k e - s p r 0xc3 0xa5 k l i g a 0x20 r e s u r s e r
+w r i t e r 0x20 o f 0x20 i n t r o d u c t i o n   | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 i n t r o d u k t i o n
+w r i t e r 0x20 o f 0x20 p r e f a c e    | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 f 0xc3 0xb6 r o r d
+w r i t e r 0x20 o f 0x20 s u p p l e m e n t a r y 0x20 t e x t u a l 0x20 c o n t e n t   | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 f 0xc3 0xb6 r o r d , i n t r o d u c e r a n d e 0x20 m a t e r i a l , 0x20 e t c .
+
+#DEFAULT	| COPY

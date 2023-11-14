@@ -1,0 +1,131 @@
+Tekijanfunktiot.tbl -- tekijän funktiotermien lyhenteiden avaus
+File generated: Wed Nov 18 10:17:44 2015
+
+a b r   | l y h e n t 0xc3 0xa4 j 0xc3 0xa4
+a c t 	| n 0xc3 0xa4 y t t e l i j 0xc3 0xa4 
+a f t   | l o p p u s a n o j e n 0x20 k i r j o i t t a j a 
+a n m 	| a n i m a a t t o r i 
+a n n  	| h u o m a u t u s t e n 0x20 k i r j o i t t a j a
+a p p   | m u u t o k s e n h a k i j a
+a q t  	| o h e i s t e k s t i n 0x20 k i r j o i t t a j a 
+a r c   | a r k k i t e h t i
+a r d   | l a v a s t a j a
+a r r 	| s o v i t t a j a 
+a r t  	| t a i t e i l i j a 
+a t o   | n i m i k i r j o i t u k s e n 0x20 k i r j o i t t a j a
+a t t  	| k i r j o i t t a j a 
+a u i  	| e s i p u h e e n 0x20 k i r j o i t t a j a 
+a u s 	| k 0xc3 0xa4 s i k i r j o i t t a j a 
+a u t 	| k i r j o i t t a j a
+b n d 	| s i t o j a 
+b r d   | l 0xc3 0xa4 h e t y k s e s t 0xc3 0xa4 0x20 v a s t a a v a
+b r l   | p i s t e k i r j o i t u k s e n 0x20 v a l m i s t a j a
+c a s   | v a l a j a
+c h r 	| k o r e o g r a f i 
+c l t   | k o l l o t y p i a n 0x20 v a l m i s t a j a
+c m m 	| s e l o s t a j a 
+c m p 	| s 0xc3 0xa4 v e l t 0xc3 0xa4 j 0xc3 0xa4 
+c n d 	| j o h t a j a 
+c n g 	| k u v a a j a 
+c o l   | k o k o e l m a n 0x20 m u o d o s t a j a
+c o m 	| k o k o a j a 
+c o r   | k o k o e l m a n 0x20 l u e t t e l o i j a
+c o u   | t u o m i o i s t u i m e s s a 0x20 v o i m a s s a
+c p h 	| t e k i j 0xc3 0xa4 n o i k e u d e n 0x20 o m i s t a j a 
+c r t   | t u o m i o i s t u i m e n 0x20 k i r j u r i
+c s l   | a s i a n t u n t i j a
+c s t   | p u v u s t a j a
+c t b 	| a v u s t a j a 
+c t g  	| k a r t a n t e k i j 0xc3 0xa4 
+c u r   | k u r a a t t o r i
+c w t  	| k o m m e n t a a t t o r i 
+d f d   | v a s t a a j a 0x20 o i k e u d e n k 0xc3 0xa4 y n n i s s 0xc3 0xa4
+d g g   | o p p i a r v o n 0x20 m y 0xc3 0xb6 n t 0xc3 0xa4 n y t 0x20 l a i t o s
+d i s   | r e s p o n d e n t t i
+d n c 	| t a n s s i j a
+d n r   | l a h j o i t t a j a
+d p t   | a i n e i s t o n 0x20 t a l l e t t a j a
+d r m 	| p i i r t 0xc3 0xa4 j 0xc3 0xa4 
+d r t 	| o h j a a j a 
+d s r 	| s u u n n i t t e l i j a 
+d s t 	| j a k a j a 
+d t e   | t e o s 0x20 o m i s t e t t u
+d t o   | t e o k s e n 0x20 o m i s t a n u t
+d u b  	| k i r j o i t t a j a 
+e d c   | k o k o o m a t e o k s e n 0x20 t o i m i t t a j a
+e d m   | l e i k k a a j a
+e d t 	| t o i m i t t a j a 
+e g r 	| k a i v e r t a j a 
+e t r   | e t s a a j a
+f a c 	| j 0xc3 0xa4 l j e n t e e n 0x20 t o t e u t t a j a 
+f d s   | e l o k u v a n 0x20 j a k e l i j a
+f l m 	| l e i k k a a j a 
+f m d   | e l o k u v a o h j a a j a
+f m k   | e l o k u v a n t e k i j 0xc3 0xa4
+f m o   | a i k a i s e m p i 0x20 o m i s t a j a
+f m p   | e l o k u v a t u o t t a j a
+h i s   | i s 0xc3 0xa4 n t 0xc3 0xa4 o r g a n i s a a t i o
+h n r  	| k u n n i a n o s o i t u k s e n 0x20 k o h d e 
+h s t   | j u o n t a j a
+i l l 	| k u v i t t a j a 
+i l u   | i l l u m i n o i n n i n 0x20 t e k i j 0xc3 0xa4
+i n s   | o m i s t u s k i r j o i t u k s e n 0x20 k i r j o i t t a j a
+i n v   | k e k s i j 0xc3 0xa4
+i s b   | j u l k a i s i j a
+i t r 	| s o i t t a j a 
+i v e 	| h a a s t a t e l t a v a 
+i v r 	| h a a s t a t t e l i j a 
+j u d   | t u o m a r i
+l b t 	| l i b r e t i s t i 
+l t g   | l i t o g r a f i
+l y r 	| s a n o i t t a j a 
+m s d   | m u s i i k k i j o h t a j a
+m u s  	| e s i t t 0xc3 0xa4 j 0xc3 0xa4 
+n r t 	| k e r t o j a 
+o t h 	| m u u 
+o w n  	| n y k y i n e n 0x20 o m i s t a j a
+p a n   | p a n e l i s t i
+p b d  	| t o i m i t t a j a 
+p b l 	| j u l k a i s i j a 
+p h t 	| v a l o k u v a a j a 
+p l t   | p a i n o l a a t a n 0x20 v a l m i s t a j a
+p p t   | n u k e t t a j a
+p r a   | p r e e s e s
+p r d  	| t u o t t a j a 
+p r e   | e s i t t 0xc3 0xa4 m i s e s t 0xc3 0xa4 0x20 v a s t a a v a
+p r f 	| e s i t t 0xc3 0xa4 j 0xc3 0xa4 
+p r g   | o h j e l m o i j a
+p r m   | k u v a l a a t a n 0x20 v a l m i s t a j a
+p r n   | t u o t a n t o y h t i 0xc3 0xb6
+p r o 	| t u o t t a j a 
+p r s   | t u o t a n t o s u u n n i t t e l i j a
+p r t  	| k i r j a n p a i n a j a 
+p t f   | k a n t a j a 0X20 o i k e u d e n k 0xc3 0xa4 y n n i s s 0xc3 0xa4
+r c e 	| 0xc3 0x84 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
+r c p   | v a s t a a n o t t a j a
+r d d   | r a d i o - o h j e l m a n 0x20 o h j a a j a
+r e v 	| k r i i t i k k o 
+r p c   | r a d i o t u o t t a j a
+r p y  	| t o i m i t t a j a
+r s p   | r e s p o n d e n t t i
+r s r   | e n t i s 0xc3 0xb6 i j 0xc3 0xa4
+s c l   | k u v a n v e i s t 0xc3 0xa4 j 0xc3 0xa4
+s g d   | n 0xc3 0xa4 y t t 0xc3 0xa4 m 0xc3 0xb6 o h j a a j a 
+s l l   | m y y j 0xc3 0xa4
+s n g 	| l a u l a j a 
+s p n   | s p o n s o r i
+s p k 	| p u h u j a 
+s r v   | m a a n m i t t a r i
+s t l   | t a r i n a n k e r t o j a
+s t d 	| l a v a s t a j a 
+t c h 	| o p e t t a j a 
+t l d   | t e l e v i s i o - o h j a a j a
+t l p   | t e l e v i s i o t u o t t a j a
+t r c   | t r a n s k r i b o i j a
+t r l 	| k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
+v o c  	| l a u l a j a 
+w a c   | k o m m e n t a a r i n 0x20 k i r j o i t t a j a
+w a l   | l i s 0xc3 0xa4 t y n 0x20 s a n o i t u k s e n 0x20 k i r j o i t t a j a
+w a m 	| l i i t e a i n e i s t o n 0x20 t e k i j 0xc3 0xa4 
+w a t   | l i s 0xc3 0xa4 t y n 0x20 t e k s t i n 0x20 k i r j o i t t a j a
+#DEFAULT | COPY

@@ -1,0 +1,52 @@
+338_b.tbl -- RDA-tallennetyyppien koodit kentässä 338 $b
+File generated: Mon Jun  1 14:25:19 2015
+
+a p e r t u r e 0x20 c a r d 	| h a 
+a u d i o 0x20 c a r t r i d g e 	| s g 
+a u d i o 0x20 c y l i n d e r 	| s e 
+a u d i o 0x20 d i s c 	| s d 
+a u d i o 0x20 r o l l 	| s q 
+a u d i o c a s s e t t e 	| s s 
+a u d i o t a p e 0x20 r e e l 	| s t 
+c a r d 	| n o 
+c o m p u t e r 0x20 c a r d 	| c k 
+c o m p u t e r 0x20 c h i p 0x20 c a r t r i d g e 	| c b 
+c o m p u t e r 0x20 d i s c 	| c d 
+c o m p u t e r 0x20 d i s c 0x20 c a r t r i d g e 	| c e 
+c o m p u t e r 0x20 t a p e 0x20 c a r t r i d g e 	| c a 
+c o m p u t e r 0x20 t a p e 0x20 c a s s e t t e 	| c f 
+c o m p u t e r 0x20 t a p e 0x20 r e e l 	| c h 
+f i l m 0x20 c a r t r i d g e 	| m c 
+f i l m 0x20 c a s s e t t e 	| m f 
+f i l m 0x20 r e e l 	| m r 
+f i l m 0x20 r o l l 	| m o 
+f i l m s l i p 	| g d 
+f i l m s t r i p 	| g f 
+f i l m s t r i p 0x20 c a r t r i d g e 	| g c 
+f l i p c h a r t 	| n n 
+m i c r o f i c h e 	| h e 
+m i c r o f i c h e 0x20 c a s s e t t e 	| h f 
+m i c r o f i l m 0x20 c a r t r i d g e 	| h b 
+m i c r o f i l m 0x20 c a s s e t t e 	| h c 
+m i c r o f i l m 0x20 r e e l 	| h d 
+m i c r o f i l m 0x20 r o l l 	| h j 
+m i c r o f i l m 0x20 s l i p 	| h h 
+m i c r o o p a q u e 	| h g 
+m i c r o s c o p e 0x20 s l i d e 	| p p 
+o b j e c t 	| n r 
+o n l i n e 0x20 r e s o u r c e 	| c r 
+o t h e r 	| v z 
+o v e r h e a d 0x20 t r a n s p a r e n c y 	| g t 
+r o l l 	| n a 
+s h e e t 	| n b 
+s l i d e 	| g s 
+s o u n d - t r a c k 0x20 r e e l 	| s i 
+s t e r e o g r a p h 0x20 c a r d 	| e h 
+s t e r e o g r a p h 0x20 d i s c 	| e s 
+u n s p e c i f i e d 	| z u 
+v i d e o 0x20 c a r t r i d g e 	| v c 
+v i d e o c a s s e t t e 	| v f 
+v i d e o d i s c 	| v d 
+v i d e o t a p e 0x20 r e e l 	| v r 
+v o l u m e 	| n c 
+#DEFAULT	| COPY

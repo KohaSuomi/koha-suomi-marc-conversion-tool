@@ -1,0 +1,411 @@
+Format checking file
+Generated: 2016-03-09 10:06:22
+
+// Tietueen kontrollinumero, bib-id
+001? | I1= | I2= |
+
+// Tietueen kontrollinumeron tunniste
+003? | I1= | I2= |
+
+// Viimeisimmän päivityksen ajankohta
+005_ | I1= | I2= |
+
+// Informaatiokoodit
+008_ | I1= | I2= |
+
+// Library of congress kontrollinumero
+010? | I1=_ | I2=_ | $a? | $z* | $8* | $5* | $9* | 
+
+// Linkitys liittyvään jatkuvan julkaisun tai moniosaisen teoksen bibliografiseen tietueeseen
+014* | I1=_ | I2=_ | $a_ | $6? | $8* | $5* | $9* | 
+
+// Kansallisbibliografian kontrollinumero
+016* | I1=_7 | I2=_ | $a? | $z* | $2? | $8* | $5* | $9* | 
+
+// Isbn-tunnus, international standard book number
+020* | I1=_ | I2=_ | $a_ | $c? | $q* | $z* | $6? | $8* | $5* | $9* | 
+
+// Issn-tunnus, international standard serial number
+022* | I1=_ | I2=_ | $a_ | $l? | $m* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Muut standarditunnukset
+024* | I1=78 | I2=_ | $a? | $c? | $d? | $q* | $z* | $2? | $6? | $8* | $5* | $9* | 
+
+// Musiikkiaineiston incipit-tiedot
+031* | I1=_ | I2=_ | $a? | $b? | $c? | $d* | $e? | $g? | $m? | $n? | $o? | $p? | $q* | $r? | $s* | $t* | $u* | $y* | $z* | $2? | $6? | $8* | $5* | $9* | 
+
+// Kartta-aineiston matemaattiset tiedot koodeina
+034* | I1=_ | I2=_01 | $d? | $e? | $f? | $g? | $j? | $k? | $m? | $n? | $p? | $r? | $s* | $t* | $x* | $y* | $z* | $0* | $2* | $3? | $6? | $8* | $5* | $9* | 
+
+// Järjestelmän tuottama kontrollinumero
+035* | I1=_ | I2=_ | $a_ | $z* | $6? | $8* | $5* | $9* | 
+
+// Luetteloiva organisaatio
+040? | I1=_ | I2=_ | $a? | $b? | $c? | $d* | $e* | $f? | $6? | $8* | $5* | $9* | 
+
+// Autentikointikoodi
+042? | I1=_ | I2=_ | $a+ | $5* | $9* | 
+
+// Maantieteellisen alueen koodi
+043? | I1=_ | I2=_ | $a* | $b* | $c* | $0* | $2* | $6? | $8* | $5* | $9* | 
+
+// Ajankohta tai ajanjakso
+045? | I1=_012 | I2=_ | $a* | $b* | $c* | $6? | $8* | $5* | $9* | 
+
+// Erikoiskoodatut ajankohdat
+046* | I1=_ | I2=_ | $f? | $g? | $k? | $l? | $o? | $p? | $q? | $r? | $s? | $t? | $u* | $v? | $2? | $6? | $8* | $5* | $9* | 
+
+// Library of congress -luokitus sarjoille
+050* | I1=_ | I2=04 | $a* | $b? | $d? | $5* | $6? | $8* | $9* | 
+
+// Maantieteellinen luokitus
+052* | I1=_17 | I2=_ | $a? | $b* | $d* | $2? | $6? | $8* | $5* | $9* | 
+
+// Library of congress -luokitus
+053* | I1=_ | I2=04 | $a? | $b? | $c? | $5* | $6? | $8* | $9* | 
+
+// Library and archives canada -luokitus sarjoille
+055* | I1=_ | I2=04 | $a? | $b? | $d? | $5* | $6? | $8* | $9* | 
+
+// National library of medicine -luokitus sarjoille
+060* | I1=_ | I2=04 | $a? | $b? | $d? | $5* | $6? | $8* | $9* | 
+
+// Muu luokitus
+065* | I1=_ | I2=_ | $a? | $b? | $c? | $2? | $5* | $6? | $8* | $9* | 
+
+// Merkistöt
+066? | I1=_ | I2=_ | $a? | $b? | $c* | $5* | $9* | 
+
+// National agricultural library -luokitus sarjoille
+070* | I1=_ | I2=_ | $a? | $b? | $d? | $6? | $8* | $5* | $9* | 
+
+// Aihealuekoodi
+072* | I1=_ | I2=_07 | $a_ | $x* | $2? | $6? | $8* | $5* | $9* | 
+
+// Lisämääreiden käyttöä kuvaava koodi
+073? | I1=_ | I2=_ | $a+ | $z? | $6? | $8* | $5* | $9* | 
+
+// Yleinen kymmenluokitus, udk
+080* | I1=_01 | I2=_ | $a? | $b? | $x* | $2? | $6? | $8* | $5* | $9* | 
+
+// Deweyn luokitus sarjoille, ddc
+082* | I1=017 | I2=_04 | $a* | $b? | $d? | $2? | $5* | $6? | $8* | $9* | 
+
+// Deweyn luokitus
+083* | I1=017 | I2=_04 | $a? | $b? | $c? | $z? | $y* | $2? | $5* | $6? | $8* | $9* | 
+
+// Virallisjulkaisujen luokitus sarjoille
+086* | I1=_01 | I2=_ | $a? | $d? | $z* | $2? | $5* | $6? | $8* | $9* | 
+
+// Virallisjulkaisujen luokitus
+087* | I1=_01 | I2=_ | $a? | $b? | $c? | $2? | $6? | $8* | $5* | $9* | 
+
+// Paikalliset luokitukset sarjoille
+
+090* | I1=_ | I2=_ | $a+ | $b? | $e? | $f? |
+
+092* | I1=_01 | I2=_ | $a_ | $b? | $e? | $f? | $2? |
+
+096* | I1=_ | I2=_ | $a_ | $b? | $e? | $f? |
+
+098* | I1=0123 | I2=0123456789 | $a+ | $e? | $f? |
+
+099* | I1=_ | I2=_019 | $a+ | $e? | $f? |
+
+// Otsikkomuoto - henkilönnimi
+100? | I1=013 | I2=_ | $a_ | $b? | $c* | $d? | $e* | $f? | $g* | $h? | $j* | $k* | $l? | $m* | $n* | $o? | $p* | $q? | $r? | $s? | $t? | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - yhteisönnimi
+110? | I1=012 | I2=_ | $a_ | $b* | $c* | $d* | $e* | $f? | $g* | $h? | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - kokouksen nimi
+111? | I1=012 | I2=_ | $a_ | $c* | $d? | $e* | $f? | $g* | $h? | $j* | $k* | $l? | $n* | $p* | $q? | $s? | $t? | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - yhtenäistetty nimeke
+130? | I1=_ | I2=0123456789 | $a_ | $d* | $f? | $g* | $h? | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - aikaa ilmaiseva termi
+148? | I1=_ | I2=_ | $a_ | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - aihetta ilmaiseva termi
+150? | I1=_ | I2=_ | $a_ | $b? | $g* | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - maantieteellinen nimi
+151? | I1=_ | I2=_ | $a_ | $g* | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - lajityyppiä/muotoa ilmaiseva termi
+155? | I1=_ | I2=_ | $a_ | $v* | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - esityskokoonpanoa ilmaiseva termi
+162? | I1=_ | I2=_ | $a_ | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - yleinen lisämääre
+180? | I1=_ | I2=_ | $v* | $x+ | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - maantieteellinen lisämääre
+181? | I1=_ | I2=_ | $v* | $x* | $y* | $z+ | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - aikaa ilmaiseva lisämääre
+182? | I1=_ | I2=_ | $v* | $x* | $y+ | $z* | $6? | $8* | $5* | $9* | 
+
+// Otsikkomuoto - muotoa ilmaiseva lisämääre
+185? | I1=_ | I2=_ | $v+ | $x* | $y* | $z* | $6? | $8* | $5* | $9* | 
+
+// Monitahoinen katso-viittaus, asiasana
+260* | I1=_ | I2=_ | $a* | $i* | $0* | $6? | $8* | $5* | $9* | 
+
+// Sisältötyyppi
+336* | I1=_ | I2=_ | $a+ | $b* | $2? | $3? | $6? | $8* | $5* | $9* | 
+
+// Monitahoinen katso myös -viittaus, asiasana
+360* | I1=_ | I2=_ | $a* | $i* | $0* | $6? | $8* | $5* | $9* | 
+
+// Henkilön tai yhteisön ominaisuuksia
+368* | I1=_ | I2=_ | $a* | $b* | $c* | $d* | $s? | $t? | $u* | $v* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Paikannimi
+370* | I1=_ | I2=_ | $a? | $b? | $c* | $e* | $f* | $g* | $s? | $t? | $u* | $v* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Osoite
+371* | I1=_ | I2=_ | $a+ | $b? | $c? | $d? | $e? | $m* | $s? | $t? | $u* | $v* | $z* | $4* | $6? | $8* | $5* | $9* | 
+
+// Toiminta-ala
+372* | I1=_ | I2=_ | $a+ | $s? | $t? | $u* | $v* | $z* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Yhteys ryhmään
+373* | I1=_ | I2=_ | $a* | $s? | $t? | $u* | $v* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Ammatti
+374* | I1=_ | I2=_ | $a+ | $s? | $t? | $u* | $v* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Sukupuoli
+375* | I1=_ | I2=_ | $a+ | $s? | $t? | $u* | $v* | $2? | $6? | $8* | $5* | $9* | 
+
+// Tietoa suvusta
+376* | I1=_ | I2=_ | $a* | $b* | $c* | $s? | $t? | $u* | $v* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Kieli
+377* | I1=_ | I2=_7 | $a* | $l* | $2? | $6? | $8* | $5* | $9* | 
+
+// Henkilönnimen täydellisempi muoto
+378* | I1=_ | I2=_ | $q_ | $u* | $v* | $6? | $8* | $5* | $9* | 
+
+// Teoksen muoto
+380* | I1=_ | I2=_ | $a+ | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Teoksen tai ekspression muut erityispiirteet
+381* | I1=_ | I2=_ | $a* | $u* | $v* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Esityskokoonpano
+382* | I1=_01 | I2=_ | $a+ | $b* | $d* | $e* | $n* | $p* | $s? | $v* | $0* | $2? | $6? | $8* | $5* | $9* | 
+
+// Musiikkiteoksen numerointimerkintö
+383* | I1=_ | I2=_ | $a* | $b* | $c* | $d? | $e? | $2? | $6? | $8* | $5* | $9* | 
+
+// Sävellaji
+384? | I1=_01 | I2=_ | $a_ | $6? | $8* | $5* | $9* | 
+
+// Kohderyhmän ominaisuudet
+385* | I1=_ | I2=_ | $a+ | $b* | $m? | $n? | $0* | $2? | $3? | $6? | $8* | $5* | $9* | 
+
+// Tekijän ominaisuudet
+386* | I1=_ | I2=_ | $a+ | $b* | $m? | $n? | $0* | $2? | $3? | $6? | $8* | $5* | $9* | 
+
+// Luomisaika
+388* | I1=_12 | I2=_ | $a+ | $0* | $2? | $3? | $6? | $8* | $5* | $9* | 
+
+// Katso-viittaus - henkilönnimi
+400* | I1=013 | I2=_ | $a_ | $b? | $c* | $d? | $e* | $f? | $g* | $h? | $i* | $j* | $k* | $l? | $m* | $n* | $o? | $p* | $q? | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - yhteisönnimi
+410* | I1=012 | I2=_ | $a_ | $b* | $c* | $d* | $e* | $f? | $g* | $h? | $i* | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - kokouksen nimi
+411* | I1=012 | I2=_ | $a? | $c* | $d? | $e* | $f? | $g* | $h? | $i* | $j* | $k* | $l? | $n* | $p* | $q? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - yhtenäistetty nimeke
+430* | I1=_ | I2=0123456789 | $a_ | $d* | $f? | $g* | $h? | $i* | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - aikaa ilmaiseva termi
+448* | I1=_ | I2=_ | $a_ | $i* | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - aihetta ilmaiseva termi
+450* | I1=_ | I2=_ | $a? | $b? | $g* | $i* | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - maantieteellinen nimi
+451* | I1=_ | I2=_ | $a_ | $g* | $i* | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - lajityyppiä/muotoa ilmaiseva termi
+455* | I1=_ | I2=_ | $a? | $i* | $v* | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - esityskokoonpanoa ilmaiseva termi
+462* | I1=_ | I2=_ | $a_ | $i* | $w? | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - yleinen lisämääre
+480* | I1=_ | I2=_ | $i* | $v* | $w? | $x+ | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - maantieteellinen lisämääre
+481* | I1=_ | I2=_ | $i* | $v* | $w? | $x* | $y* | $z+ | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - aikaa ilmaiseva lisämääre
+482* | I1=_ | I2=_ | $i* | $v* | $w? | $x* | $y+ | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso-viittaus - muotoa ilmaiseva lisämääre
+485* | I1=_ | I2=_ | $i* | $v+ | $w? | $x* | $y* | $z* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - henkilönnimi
+500* | I1=013 | I2=_ | $a_ | $b? | $c* | $d? | $e* | $f? | $g* | $h? | $i* | $j* | $k* | $l? | $m* | $n* | $o? | $p* | $q? | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - yhteisönnimi
+510* | I1=012 | I2=_ | $a_ | $b* | $c* | $d* | $e* | $f? | $g* | $h? | $i* | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* |
+
+// Katso myös -viittaus - kokouksen nimi
+511* | I1=012 | I2=_ | $a? | $c* | $d? | $e* | $f? | $g* | $h? | $i* | $j* | $k* | $l? | $n* | $p* | $q? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - yhtenäistetty nimeke
+530* | I1=_ | I2=0123456789 | $a_ | $d* | $f? | $g* | $h? | $i* | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - aikaa ilmaiseva termi
+548* | I1=_ | I2=_ | $a_ | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - aihetta ilmaiseva termi
+550* | I1=_ | I2=_ | $a? | $b? | $g* | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - maantieteellinen nimi
+551* | I1=_ | I2=_ | $a_ | $g* | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - lajityyppiä/muotoa ilmaiseva termi
+555* | I1=_ | I2=_ | $a? | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - esiintymiskokoonpanoa ilmaiseva termi
+562* | I1=_ | I2=_ | $a_ | $i* | $w? | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - yleinen lisämääre
+580* | I1=_ | I2=_ | $i* | $v* | $w? | $x+ | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - maantieteellinen lisämääre
+581* | I1=_ | I2=_ | $i* | $v* | $w? | $x* | $y* | $z+ | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - aikaa ilmaiseva lisämääre
+582* | I1=_ | I2=_ | $i* | $v* | $w? | $x* | $y+ | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Katso myös -viittaus - muotoa ilmaiseva lisämääre
+585* | I1=_ | I2=_ | $i* | $v+ | $w? | $x* | $y* | $z* | $0* | $4* | $5* | $6? | $8* | $9* | 
+
+// Sarjan julkaisuaika ja/tai järjestys
+640* | I1=01 | I2=_ | $a_ | $z? | $6? | $8* | $5* | $9* | 
+
+// Sarjan numeroinnin epäsäännöllisyys
+641* | I1=_ | I2=_ | $a? | $z? | $6? | $8* | $5* | $9* | 
+
+// Sarjan numerointiesimerkki
+642* | I1=_ | I2=_ | $a? | $d? | $5* | $6? | $8* | $9* | 
+
+// Sarjan julkaisupaikka ja julkaisija
+643* | I1=_ | I2=_ | $a+ | $b+ | $d? | $6? | $8* | $5* | $9* | 
+
+// Sarjan erittelykäytäntö
+644* | I1=_ | I2=_ | $a_ | $b? | $d? | $5* | $6? | $8* | $9* | 
+
+// Sarjan viittauskäytäntö
+645* | I1=_ | I2=_ | $a_ | $d? | $5* | $6? | $8* | $9* | 
+
+// Sarjan luokituskäytäntö
+646* | I1=_ | I2=_ | $a_ | $d? | $5* | $6? | $8* | $9* | 
+
+// Monitahoinen katso myös -viittaus, nimi
+663? | I1=_ | I2=_ | $a* | $b* | $t* | $6? | $8* | $5* | $9* | 
+
+// Monitahoinen katso-viittaus, nimi
+664? | I1=_ | I2=_ | $a* | $b* | $t* | $6? | $8* | $5* | $9* | 
+
+// Historiaviittaus
+665? | I1=_ | I2=_ | $a+ | $6? | $8* | $5* | $9* | 
+
+// Yleinen selittävä viittaus, nimi
+666? | I1=_ | I2=_ | $a+ | $6? | $8* | $5* | $9* | 
+
+// Yleinen huomautus, sisäinen
+667* | I1=_ | I2=_ | $a? | $5* | $6? | $8* | $9* | 
+
+// Huomautus tiedonlähteestä, josta otsikkomuotoa koskevaa tietoa löytyy
+670* | I1=_ | I2=_ | $a? | $b? | $u* | $6? | $8* | $5* | $9* | 
+
+// Huomautus entiteettiin liittyvästä nimekkeestä(t)
+672? | I1=_ | I2=0123456789 | $a? | $b? | $f? | $w* | $0* | $6? | $8* | $5* | $9* | 
+
+// Huomautus nimekkeestä, joka ei liity entiteettiin
+673* | I1=_ | I2=0123456789 | $a? | $b? | $f? | $w* | $0* | $6? | $8* | $5* | $9* | 
+
+// Huomautus tiedonlähteestä, josta otsikkomuotoa koskevaa tietoa ei löydy
+675? | I1=_ | I2=_ | $a* | $6? | $8* | $5* | $9* | 
+
+// Huomautus elämäkerta- tai historiatiedoista
+678* | I1=_01 | I2=_ | $a* | $b? | $u* | $6? | $8* | $5* | $9* | 
+
+// Yleinen huomautus, julkinen
+680* | I1=_ | I2=_ | $a* | $i* | $5* | $6? | $8* | $9* | 
+
+// Huomautus asiasanaviittauksen esimerkistä
+681* | I1=_ | I2=_ | $a* | $i* | $6? | $8* | $5* | $9* | 
+
+// Huomautus poistetusta otsikkomuodosta
+682? | I1=_ | I2=_ | $a* | $i* | $0* | $6? | $8* | $5* | $9* | 
+
+// Huomautus käytön historiasta
+688* | I1=_ | I2=_ | $a_ | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - henkilönnimi
+700* | I1=013 | I2=01234567 | $a_ | $b? | $c* | $d? | $e* | $f? | $g* | $h? | $i* | $j* | $k* | $l? | $m* | $n* | $o? | $p* | $q? | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - yhteisönnimi
+710* | I1=012 | I2=01234567 | $a_ | $b* | $c* | $d* | $e* | $f? | $g* | $h? | $i* | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - kokouksen nimi
+711* | I1=012 | I2=01234567 | $a? | $c* | $d? | $e* | $f? | $g* | $h? | $i* | $j* | $k* | $l? | $n* | $p* | $q? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - yhtenäistetty nimeke
+730* | I1=_ | I2=01234567 | $a_ | $d* | $f? | $g* | $h? | $i* | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - aikaa ilmaiseva termi
+748* | I1=_ | I2=01234567 | $a_ | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - aihetta ilmaiseva termi
+750* | I1=_ | I2=01234567 | $a? | $b? | $g* | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - maantieteellinen nimi
+751* | I1=_ | I2=01234567 | $a_ | $g* | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - lajityyppiä/muotoa ilmaiseva termi
+755* | I1=_ | I2=01234567 | $a? | $i* | $v* | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - esityskokoonpanoa ilmaiseva termi
+762* | I1=_ | I2=01234567 | $a+ | $i* | $w? | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - yleinen lisämääre
+780* | I1=_ | I2=01234567 | $i* | $v* | $w? | $x+ | $y* | $z* | $0* | $2? | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - maantieteellinen lisämääre
+781* | I1=_ | I2=01234567 | $i* | $v* | $w? | $x* | $y* | $z+ | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - aikaa ilmaiseva lisämääre
+782* | I1=_ | I2=01234567 | $i* | $v* | $w? | $x* | $y+ | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Linkkikenttä - muotoa ilmaiseva lisämääre
+785* | I1=_ | I2=01234567 | $i* | $v+ | $w? | $x* | $y* | $z* | $0* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Monitahoinen linkkikenttä
+788? | I1=_ | I2=01234567 | $a* | $i* | $2? | $4* | $5* | $6? | $8* | $9* | 
+
+// Elektronisen aineiston sijainti ja käyttö
+856* | I1=_012347 | I2=_ | $a* | $b* | $c* | $d* | $f* | $h? | $i* | $j? | $k? | $l? | $m* | $n? | $o? | $p? | $q? | $r? | $s* | $t* | $u* | $v* | $w* | $x* | $y* | $z* | $2? | $3? | $6? | $8* | $5* | $9* | 
+
+// Tiedot vaihtoehtoisella kirjaimistolla
+880* | I1=_0123456789 | I2=_0123456789 | $a* | $b* | $c* | $d* | $e* | $f* | $g* | $h* | $i* | $j* | $k* | $l* | $m* | $n* | $o* | $p* | $q* | $r* | $s* | $t* | $u* | $v* | $w* | $x* | $y* | $z* | $0* | $1* | $2* | $3* | $4* | $5* | $6* | $7* | $8* | $9* |
+
+// Koneellisesti luodun metatiedon alkuperä (provenanssi)
+883* | I1=_01 | I2=_ | $a? | $c? | $d? | $q? | $x? | $u? | $w* | $0* | $8* | $5* | $9* | 
+
+// Konversion tiedot 
+884* | I1=_ | I2=_ | $a? | $g? | $k? | $q? | $u* | $5* | $9* | 
+

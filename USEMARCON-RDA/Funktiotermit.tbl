@@ -1,0 +1,160 @@
+Funktiotermit.tbl -- RDA-funktiotermien avaus, englanninkielisten kääntäminen (X00, X10, X11 $e, $j)
+File generated: Wed Nov 18 12:51:30 2015
+
+a n i m . | a n i m a a t t o r i 
+d r a m a t . | d r a m a t u r g i 
+e s i t t .	| e s i t t 0xc3 0xa4 j 0xc3 0xa4 
+g r a a f .	| g r a a f i k k o 
+i l l .  | i l l u s t r a t 0xc3 0xb6 r
+j o h t .  	| j o h t a j a 
+k a i v e r t .	| k a i v e r t a j a 
+k e r t .	| k e r t o j a 
+k i r j .	| k i r j o i t t a j a 
+k o k .	| k o k o a j a 
+k o r e o g r .	| k o r e o g r a f i 
+k u v .  	| k u v a a j a 
+k u v a t a i t .	| t a i t e i l i j a 
+k 0xc3 0xa4 s i k .	| k 0xc3 0xa4 s i k i r j o i t t a j a 
+k 0xc3 0xa4 0xc3 0xa4 n t . | k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
+l a v .	| l a v a s t a j a 
+l e i k k .	| l e i k k a a j a 
+l e i k .	| l e i k k a a j a 
+m i k s .	| m i k s a a j a 
+m u s .  | m u s i i k k i j o h t a j a
+n 0xc3 0xa4 y t t . | n 0xc3 0xa4 y t t e l i j 0xc3 0xa4 
+o h j . | o h j a a j a 
+o p e t t . | o p e t t a j a 
+p i i r t .	| p i i r t 0xc3 0xa4 j 0xc3 0xa4 
+p u v . | p u v u s t a j a
+r e d . | r e d a k t 0xc3 0xb6 r
+r e g . | r e g i s s 0xc3 0xb6 r
+s a n .	| s a n o i t t a j a 
+s o r m . | s o r m i t u k s e n 0x20 t e k i j 0xc3 0xa4
+s o v . | s o v i t t a j a 
+s u o m . | s u o m e n t a j a 
+s u u n n . | s u u n n i t t e l i j a 
+s 0xc3 0xa4 v . | s 0xc3 0xa4 v e l t 0xc3 0xa4 j 0xc3 0xa4 
+t a n s s i . | t a n s s i j a 
+t o i m . | t o i m i t t a j a 
+t o n s . | t o n s 0xc3 0xa4 t t a r e
+t u o t t .	| t u o t t a j a 
+v a l o k . | v a l o k u v a a j a 
+0xc3 0xa4 0xc3 0xa4 n i t t . | 0xc3 0xa4 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
+0xc3 0xa4 0xc3 0xa4 n . | 0xc3 0xa4 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
+0xc3 0xb6 v e r s . | 0xc3 0xb6 v e r s 0xc3 0xa4 t t a r e
+
+a b r i d g e r   | l y h e n t 0xc3 0xa4 j 0xc3 0xa4 
+a c t o r   | n 0xc3 0xa4 y t t e l i j 0xc3 0xa4 
+a d d r e s s e e   | v a s t a a n o t t a j a 
+a n i m a t o r   | a n i m a a t t o r i 
+a n n o t a t o r   | h u o m a u t u s t e n 0x20 t e k i j 0xc3 0xa4 
+a p p e l l a n t   | m u u t o k s e n h a k i j a 
+a p p e l l e e   | m u u t o k s e n h a k i j a n 0x20 v a s t a p u o l i 
+a r c h i t e c t   | a r k k i t e h t i 
+a r r a n g e r   | s o v i t t a j a 
+a r t 0x20 d i r e c t o r  | l a v a s t a j a 
+a r t i s t   | t a i t e i l i j a 
+a u t o g r a p h e r   | n i m i k i r j o i t u k s e n 0x20 a n t a j a 
+b i n d e r   | s i t o j a 
+b o o k 0x20 d e s i g n e r  | g r a a f i n e n 0x20 s u u n n i t t e l i j a 
+b r a i l l e 0x20 e m b o s s e r  | p i s t e k i r j o i t u k s e n 0x20 v a l m i s t a j a 
+b r o a d c a s t e r   | l 0xc3 0xa4 h e t y k s e s t 0xc3 0xa4 0x20 v a s t a a v a 
+c a r t o g r a p h e r   | k a r t a n t e k i j 0xc3 0xa4 
+c a s t e r   | v a l a j a 
+c h o r e o g r a p h e r   |   k o r e o g r a f i 
+c o l l e c t i o n 0x20 r e g i s t r a r  | k o k o e l m a n 0x20 l u e t t e l o i j a 
+c o l l e c t o r   | k o k o e l m a n 0x20 m u o d o s t a j a 
+c o l l o t y p e r   | k o l l o t y p i a n 0x20 t e k i j 0xc3 0xa4 
+c o m p i l e r   | k o k o a j a 
+c o m p o s e r   | s 0xc3 0xa4 v e l t 0xc3 0xa4 j 0xc3 0xa4 
+c o n d u c t o r   | j o h t a j a 
+c o n s u l t a n t   | a s i a n t u n t i j a 
+c o s t u m e 0x20 d e s i g n e r  | p u v u s t a j a 
+c o u r t 0x20 g o v e r n e d  | t u o m i o i s t u i m e s s a 0x20 v o i m a s s a 
+c o u r t 0x20 r e p o r t e r  | t u o m i o i s t u i m e n 0x20 k i r j u r i 
+c u r a t o r   | k u r a a t t o r i 
+c u r r e n t 0x20 o w n e r  | n y k y i n e n 0x20 o m i s t a j a 
+d a n c e r   | t a n s s i j a 
+d e d i c a t e e   | t e o s 0x20 o m i s t e t t u 
+d e d i c a t e e 0x20 o f 0x20 i t e m   | k a p p a l e 0x20 o m i s t e t t u 
+d e d i c a t o r   | t e o k s e n 0x20 … 0x20 o m i s t a n u t 
+d e f e n d a n t   | v a s t a a j a 0x20 o i k e u d e n k 0xc3 0xa4 y n n i s s 0xc3 0xa4 
+d e g r e e 0x20 g r a n t i n g 0x20 i n s t i t u t i o n   | o p p i a r v o n 0x20 m y 0xc3 0xb6 n t 0xc3 0xa4 n y t 0x20 l a i t o s 
+d e p o s i t o r   | a i n e i s t o n 0x20 t a l l e t t a j a 
+d i r e c t o r   | o h j a a j a 
+d i r e c t o r 0x20 o f 0x20 p h o t o g r a p h y   | k u v a a j a 
+d o n o r   | l a h j o i t t a j a 
+d r a f t s m a n   | p i i r t 0xc3 0xa4 j 0xc3 0xa4     
+e d i t o r   | t o i m i t t a j a 
+e d i t o r 0x20 o f 0x20 c o m p i l a t i o n   | k o k o o m a t e o k s e n 0x20 t o i m i t t a j a 
+e d i t o r 0x20 o f 0x20 m o v i n g 0x20 i m a g e  | l e i k k a a j a 
+e n a c t i n g 0x20 j u r i s d i c t i o n  | l a i n 0x20 s 0xc3 0xa4 0xc3 0xa4 t 0xc3 0xa4 v 0xc3 0xa4 0x20 l a i n k 0xc3 0xa4 y t t 0xc3 0xb6 a l u e 
+e n g r a v e r   | k a i v e r t a j a 
+e t c h e r   | e t s a a j a 
+f i l m 0x20 d i r e c t o r  | e l o k u v a o h j a a j a 
+f i l m 0x20 d i s t r i b u t o r  | e l o k u v a n 0x20 j a k a j a 
+f i l m 0x20 p r o d u c e r  | e l o k u v a t u o t t a j a 
+f i l m m a k e r   | e l o k u v a n t e k i j 0xc3 0xa4 
+f o r m e r 0x20 o w n e r  | a i k a i s e m p i 0x20 o m i s t a j a 
+h o n o u r e e   | k u n n i a n o s o i t u k s e n 0x20 k o h d e 
+h o n o u r e e 0x20 o f 0x20 i t e m   | k u n n i a n o s o i t u k s e n 0x20 k o h d e 
+h o s t 0x20 i n s t i t u t i o n  | i s 0xc3 0xa4 n t 0xc3 0xa4 o r g a n i s a a t i o 
+i l l u m i n a t o r   | i l l u m i n o i n n i n 0x20 t e k i j 0xc3 0xa4 
+i l l u s t r a t o r   | k u v i t t a j a 
+i n s c r i b e r   | o m i s t u s k i r j o i t u k s e n 0x20 k i r j o i t t a j a 
+i n s t r u m e n t a l i s t   | s o i t t a j a 
+i n t e r v i e w e e   | h a a s t a t e l t a v a 
+i n t e r v i e w e r   | h a a s t a t t e l i j a 
+i n v e n t o r   | k e k s i j 0xc3 0xa4 
+i s s u i n g 0x20 b o d y  | j u l k a i s i j a 
+j o i n t 0x20 a u t h o r  | k i r j o i t t a j a 
+j u d g e   | t u o m a r i 
+j u r i s d i c t i o n 0x20 g o v e r n e d  | l a i n k 0xc3 0xa4 y t t 0xc3 0xb6 a l u e e l l a 0x20 v o i m a s s a 
+l a n d s c a p e 0x20 a r c h i t e c t  | m a i s e m a - a r k k i t e h t i 
+l i b r e t t i s t   | l i b r e t i s t i 
+l i t h o g r a p h e r   | l i t o g r a f i 
+l y r i c i s t   | s a n o i t t a j a 
+m u s i c a l 0x20 d i r e c t o r  | m u s i i k k i j o h t a j a 
+n a r r a t o r   | k e r t o j a 
+p a n e l i s t   | p a n e l i s t i 
+p e r f o r m e r   | e s i t t 0xc3 0xa4 j 0xc3 0xa4 
+p h o t o g r a p h e r   | v a l o k u v a a j a 
+p l a i n t i f f   | k a n t a j a 0x20 o i k e u d e n k 0xc3 0xa4 y n n i s s 0xc3 0xa4 
+p l a t e m a k e r   | p a i n o l a a t a n 0x20 t e k i j 0xc3 0xa4 
+p r a e s e s   | p r e e s e s 
+p r e s e n t e r   | e s i t t 0xc3 0xa4 m i s e s t 0xc3 0xa4 0x20 v a s t a a v a 
+p r i n t e r   | k i r j a n p a i n a j a 
+p r i n t m a k e r   | k u v a l a a t a n 0x20 t e k i j 0xc3 0xa4 
+p r o d u c e r   | t u o t t a j a 
+p r o d u c t i o n 0x20 c o m p a n y  | t u o t a n t o y h t i 0xc3 0xb6 
+p r o d u c t i o n 0x20 d e s i g n e r  | t u o t a n t o s u u n n i t t e l i j a 
+p r o g r a m m e r   | o h j e l m o i j a 
+p u p p e t e e r   | n u k e t t a j a
+r a d i o 0x20 d i r e c t o r  | r a d i o - o h j e l m a n 0x20 o h j a a j a 
+r a d i o 0x20 p r o d u c e r  | r a d i o t u o t t a j a 
+r e c o r d i n g 0x20 e n g i n e e r  | v i d e o t e k n i k k o 
+r e c o r d i s t   | 0xc3 0xa4 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
+r e s t o r a t i o n i s t   | e n t i s 0xc3 0xb6 i j 0xc3 0xa4 
+s c r e e n w r i t e r   |   k 0xc3 0xa4 s i k i r j o i t t a j a 
+s c u l p t o r   | k u v a n v e i s t 0xc3 0xa4 j 0xc3 0xa4 
+s e l l e r   | m y y j 0xc3 0xa4 
+s i n g e r   | l a u l a j a 
+s p e a k e r   | p u h u j a 
+s p o n s o r i n g 0x20 b o d y  | s p o n s o r i 
+s t a g e 0x20 d i r e c t o r  | n 0xc3 0xa4 y t t 0xc3 0xa4 m 0xc3 0xb6 o h j a a j a 
+s t o r y t e l l e r   | t a r i n a n k e r t o j a 
+s u r v e y o r   | m a a n m i t t a r i 
+t e a c h e r   | o p e t t a j a 
+t e l e v i s i o n 0x20 d i r e c t o r  | t e l e v i s i o - o h j a a j a 
+t e l e v i s i o n 0x20 p r o d u c e r  | t e l e v i s i o t u o t t a j a 
+t r a n s c r i b e r   | t r a n s k r i b o i j a 
+t r a n s l a t o r   | k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
+v o i c e 0x20 a c t o r  | 0xc3 0xa4 0xc3 0xa4 n i n 0xc3 0xa4 y t t e l i j 0xc3 0xa4
+w r i t e r 0x20 o f 0x20 a d d e d 0x20 c o m m e n t a r y  | k o m m e n t a a r i n 0x20 k i r j o i t t a j a 
+w r i t e r 0x20 o f 0x20 a d d e d 0x20 l y r i c s  | l i s 0xc3 0xa4 t y n 0x20 s a n o i t u k s e n 0x20 k i r j o i t t a j a 
+w r i t e r 0x20 o f 0x20 a d d e d 0x20 t e x t  | l i s 0xc3 0xa4 t y n 0x20 t e k s t i n 0x20 k i r j o i t t a j a 
+w r i t e r 0x20 o f 0x20 i n t r o d u c t i o n   | j o h d a n n o n 0x20 k i r j o i t t a j a 
+w r i t e r 0x20 o f 0x20 p r e f a c e   | e s i p u h e e n 0x20 k i r j o i t t a j a 
+w r i t e r 0x20 o f 0x20 s u p p l e m e n t a r y 0x20 t e x t u a l 0x20 c o n t e n t   | o h e i s t e k s t i n 0x20 k i r j o i t t a j a
+
+#DEFAULT	| COPY

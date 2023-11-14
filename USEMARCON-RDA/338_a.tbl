@@ -1,0 +1,53 @@
+338_a.tbl -- RDA-tallennetyyppien käännökset kentässä 338 $a
+File generated: Mon Jun  1 14:24:32 2015
+
+a p e r t u r e 0x20 c a r d 	| i k k u n a k o r t t i 
+a u d i o 0x20 c a r t r i d g e 	| 0xc3 0xa4 0xc3 0xa4 n i s i l m u k k a k a s e t t i 
+a u d i o 0x20 c y l i n d e r 	| 0xc3 0xa4 0xc3 0xa4 n i l i e r i 0xc3 0xb6 
+a u d i o 0x20 d i s c 	| 0xc3 0xa4 0xc3 0xa4 n i l e v y 
+a u d i o 0x20 r o l l 	| p i a n o r u l l a 
+a u d i o 0x20 w i r e 0x20 r e e l 	| 0x20 
+a u d i o c a s s e t t e 	| 0xc3 0xa4 0xc3 0xa4 n i k a s e t t i 
+a u d i o t a p e 0x20 r e e l 	| 0xc3 0xa4 0xc3 0xa4 n i k e l a 
+c a r d 	| k o r t t i 
+c o m p u t e r 0x20 c a r d 	| m u i s t i k o r t t i 
+c o m p u t e r 0x20 c h i p 0x20 c a r t r i d g e 	| p i i r i k o t e l o 
+c o m p u t e r 0x20 d i s c 	| t i e t o l e v y 
+c o m p u t e r 0x20 d i s c 0x20 c a r t r i d g e 	| t i e t o l e v y k o t e l o 
+c o m p u t e r 0x20 t a p e 0x20 c a r t r i d g e 	| t i e t o n a u h a n 0x20 s i l m u k k a k a s e t t i 
+c o m p u t e r 0x20 t a p e 0x20 c a s s e t t e 	| t i e t o k a s e t t i 
+c o m p u t e r 0x20 t a p e 0x20 r e e l 	| t i e t o n a u h a k e l a 
+f i l m 0x20 c a r t r i d g e 	| f i l m i s i l m u k k a k a s e t t i 
+f i l m 0x20 c a s s e t t e 	| f i l m i k a s e t t i 0x20 
+f i l m 0x20 r e e l 	| f i l m i k e l a 
+f i l m 0x20 r o l l 	| f i l m i r u l l a 
+f i l m s l i p 	| f i l m i l i u s k a 
+f i l m s t r i p 	| r a i n a 
+f i l m s t r i p 0x20 c a r t r i d g e 	| r a i n a k a s e t t i 
+f l i p c h a r t 	| l e h t i 0xc3 0xb6 t a u l u 
+m i c r o f i c h e 	| m i k r o k o r t t i 
+m i c r o f i c h e 0x20 c a s s e t t e 	| m i k r o k o r t t i k a s e t t i 
+m i c r o f i l m 0x20 c a r t r i d g e 	| m i k r o f i l m i s i l m u k k a k a s e t t i 
+m i c r o f i l m 0x20 c a s s e t t e 	| m i k r o f i l m i k a s e t t i 
+m i c r o f i l m 0x20 r e e l 	| m i k r o f i l m i k e l a 
+m i c r o f i l m 0x20 r o l l 	| m i k r o f i l m i r u l l a 
+m i c r o f i l m 0x20 s l i p 	| m i k r o f i l m i l i u s k a 
+m i c r o o p a q u e 	| m i k r o k o r t t i 0x20 ( l 0xc3 0xa4 p i n 0xc3 0xa4 k y m 0xc3 0xa4 t 0xc3 0xb6 n ) 
+m i c r o s c o p e 0x20 s l i d e 	| p r e p a r a a t t i l a s i 
+o b j e c t 	| o b j e k t i 
+o n l i n e 0x20 r e s o u r c e 	| v e r k k o a i n e i s t o 
+o t h e r 	| m u u 
+o v e r h e a d 0x20 t r a n s p a r e n c y 	| p i i r t o h e i t i n k a l v o 
+r o l l 	| r u l l a 
+s h e e t 	| a r k k i 
+s l i d e 	| d i a 
+s o u n d - t r a c k 0x20 r e e l 	| 0xc3 0xa4 0xc3 0xa4 n i r a i t a k e l a 
+s t e r e o g r a p h 0x20 c a r d 	| s t e r e o g r a f i n e n 0x20 k o r t t i 
+s t e r e o g r a p h 0x20 d i s c 	| s t e r e o g r a f i n e n 0x20 l e v y 
+u n s p e c i f i e d 	| m 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n 
+v i d e o 0x20 c a r t r i d g e 	| v i d e o s i l m u k k a k a s e t t i 
+v i d e o c a s s e t t e 	| v i d e o k a s e t t i 
+v i d e o d i s c 	| v i d e o l e v y 
+v i d e o t a p e 0x20 r e e l 	| v i d e o k e l a 
+v o l u m e 	| n i d e 
+#DEFAULT	| COPY

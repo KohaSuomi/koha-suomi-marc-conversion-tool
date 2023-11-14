@@ -1,0 +1,106 @@
+336_b.tbl -- RDA-sisältötyyppien koodit kentässä 336 $b - kustakin termistä katsotaan suomen- ja ruotsinkieliset RDA- ja ISBD-termit
+File generated: Mon Jun  1 15:52:13 2015
+
+D a t a   | c o d 
+d i g i t a a l i n e n 0x20 d a t a  | c o d 
+D a t a s e t | c o d 
+d a t a s e t | c o d 
+D a t a 0x20 ( k a r t o g r a f i n e n ) 	| c r d 
+k a r t o g r a f i n e n 0x20 d a t a  | c r d 
+D a t a s e t  ( k a r t o g r a f i s k t )  | c r d 
+k a r t o g r a f i s k t 0x20 d a t a s e t  | c r d 
+E s i n e 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o l m i u l o t t e i n e n ) 	| c r f 
+k a r t o g r a f i n e n 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o   | c r f 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( k a r t o g r a f i s k t 0x20 ; 0x20 t r e d i m e n s i o n e l l t )  | c r f 
+k a r t o g r a f i s k 0x20 t r e d i m e n s i o n e l l 0x20 f o r m   | c r f 
+E s i n e 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o s k e t e l t a v a ) 	| c r n 
+k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o  | c r n 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( k a r t o g r a f i s k t 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a )  | c r n 
+k a r t o g r a f i s k 0x20 t a k t i l 0x20 t r e d i m e n s i o n e l l 0x20 f o r m   | c r n 
+E s i n e 0x20 ( k o l m i u l o t t e i n e n ) 	| t d f 
+k o l m i u l o t t e i n e n 0x20 m u o t o   | t d f 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( t r e d i m e n s i o n e l l t )   | t d f 
+t r e d i m e n s i o n e l l 0x20 f o r m    | t d f 
+E s i n e 0x20 ( k o s k e t e l t a v a ) 	| t c f 
+t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o  | t c f 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( a t t 0x20 v i d r 0xc3 0xb6 r a )   | t c f 
+t a k t i l 0x20 t r e d i m e n s i o n e l l 0x20 f o r m   | t c f 
+K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o s k e t e l t a v a ) 	| c r t 
+k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a   | c r t 
+B i l d 0x20 ( k a r t o g r a f i s k 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a )   | c r t 
+k a r t o g r a f i s k 0x20 t a k t i l 0x20 b i l d   | c r t 
+K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 l i i k k u v a ) 	| c r m 
+k a r t o g r a f i n e n 0x20 l i i k k u v a 0x20 k u v a   | c r m 
+B i l d 0x20 ( k a r t o g r a f i s k 0x20 ; 0x20 r 0xc3 0xb6 r l i g )  | c r m 
+k a r t o g r a f i s k 0x20 r 0xc3 0xb6 r l i g 0x20 b i l d   | c r m 
+K u v a 0x20 ( k a r t o g r a f i n e n ) 	| c r i 
+k a r t o g r a f i n e n 0x20 k u v a  | c r i 
+B i l d 0x20 ( k a r t o g r a f i s k )  | c r i 
+k a r t o g r a f i s k 0x20 b i l d  | c r i 
+K u v a 0x20 ( l i i k k u v a 0x20 ; 0x20 k a k s i u l o t t e i n e n ) 	| t d i 
+k a k s i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a   | t d i 
+B i l d 0x20 ( r 0xc3 0xb6 r l i g 0x20 ; 0x20 t v 0xc3 0xa5 d i m e n s i o n e l l )  | t d i 
+t v 0xc3 0xa5 d i m e n s i o n e l l 0x20 r 0xc3 0xb6 r l i g 0x20 b i l d   | t d i 
+K u v a 0x20 ( l i i k k u v a 0x20 ; 0x20 k o l m i u l o t t e i n e n ) 	| t d m 
+k o l m i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a   | t d m 
+B i l d 0x20 ( r 0xc3 0xb6 r l i g 0x20 ; 0x20 t v 0xc3 0xa5 d i m e n s i o n e l l )  | t d m 
+t v 0xc3 0xa5 d i m e n s i o n e l l 0x20 r 0xc3 0xb6 r l i g 0x20 b i l d  | t d m 
+K u v a 0x20 ( s t i l l 0x20 ; 0x20 k o l m i u l o t t e i n e n ) 	| s t i 
+s t i l l k u v a   | s t i 
+B i l d 0x20 ( s t i l l 0x20 ; 0x20 t v 0xc3 0xa5 d i m e n s i o n e l l )  | s t i 
+s t i l l b i l d   | s t i 
+K u v a 0x20 ( s t i l l 0x20 ; 0x20 k o s k e t e l t a v a ) 	| t c i 
+t a k t i i l i 0x20 k u v a  | t c i 
+B i l d 0x20 ( s t i l l 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a )  | t c i 
+t a k t i l 0x20 b i l d  | t c i 
+K u v a 0x20 ( s t i l l ) 	| s t i 
+B i l d 0x20 ( s t i l l )  | s t i 
+L i i k e 0x20 ( k o s k e t e l t a v a ; 0x20 n o t a t o i t u ) 	| t c n 
+t a k t i i l i 0x20 l i i k e n o t a a t i o   | t c n 
+R 0xc3 0xb6 r e l s e 0x20 ( n o t a t i o n 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a )   | t c n 
+t a k t i l 0x20 r 0xc3 0xb6 r e l s e n o t a t i o n   | t c n 
+L i i k e 0x20 ( n o t a t o i t u ) 	| n t v 
+l i i k e n o t a a t i o   | n t v 
+R 0xc3 0xb6 r e l s e 0x20 ( n o t a t i o n )  | n t v 
+r 0xc3 0xb6 r e l s e n o t a t i o n   | n t v 
+M u s i i k k i 0x20 ( e s i t e t t y ) 	| p r m 
+e s i t e t t y 0x20 m u s i i k k i    | p r m 
+M u s i k 0x20 ( f r a m f 0xc3 0xb6 r d )   | p r m 
+M u s i k 0x20 ( p e r f o r m a n c e )   | p r m 
+f r a m f 0xc3 0xb6 r d 0x20 m u s i k  | p r m 
+M u s i i k k i 0x20 ( k o s k e t e l t a v a 0x20 ; 0x20 n o t a t o i t u ) 	| t c m 
+t a k t i i l i 0x20 n u o t t i k i r j o i t u s  | t c m 
+M u s i k 0x20 ( n o t a t i o n 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a )   | t c m 
+t a k t i l 0x20 m u s i k n o t a t i o n   | t c m 
+M u s i i k k i 0x20 ( n o t a t o i t u ) 	| n t m 
+n u o t t i k i r j o i t u s   | n t m 
+M u s i k 0x20 ( n o t a t i o n )  | n t m 
+m u s i k n o t a t i o n   | n t m 
+M 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n 0x20 s i s 0xc3 0xa4 l t 0xc3 0xb6 t y y p p i 	| z z z 
+m 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n   | z z z 
+O b e s t 0xc3 0xa4 m d 0x20 i n n e h 0xc3 0xa5 l l s t y p   | z z z 
+o s p e c i f i c e r a d   | z z z 
+O s p e c i f i c e r a d 0x20 i n n e h 0xc3 0xa5 l l s t y p   | z z z 
+P u h e 	| s p w 
+p u h e   | s p w 
+T a l   | s p w 
+t a l   | s p w 
+T e k s t i 	| t x t 
+t e k s t i   | t x t 
+T e x t   | t x t 
+t e x t   | t x t  
+T e k s t i 0x20 ( k o s k e t e l t a v a ) 	| t c t 
+t a k t i i l i 0x20 t e k s t i  | t c t 
+T e x t 0x20 ( a t t 0x20 v i d r 0xc3 0xb6 r a )   | t c t 
+t a k t i l 0x20 t e x t    | t c t 
+T i e t o k o n e o h j e l m a 	| c o p 
+t i e t o k o n e o h j e l m a   | c o p  
+D a t o r p r o g r a m   | c o p 
+d a t o r p r o g r a m   | c o p 
+0xc3 0x84 0xc3 0xa4 n i 	| s n d 
+0xc3 0xa4 0xc3 0xa4 n i   | s n d  
+L j u d   | s n d 
+l j u d   | s n d  
+U s e i t a 0x20 s i s 0xc3 0xa4 l t 0xc3 0xb6 t y y p p e j 0xc3 0xa4 | z z z
+u s e i t a 0x20 s i s 0xc3 0xa4 l t 0xc3 0xb6 t y y p p e j 0xc3 0xa4 | z z z
+#DEFAULT	| COPY

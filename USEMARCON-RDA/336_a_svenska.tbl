@@ -1,0 +1,35 @@
+336_a_svenska.tbl -- Innehållstyper i delfält 336 $a
+File generated: Thu Mar  3 16:21:58 2016
+
+B i l d 	| s t i l l b i l d 
+B i l d 0x20 ( k a r t o g r a f i s k 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a ) 	| k a r t o g r a f i s k 0x20 t a k t i l 0x20 b i l d 
+B i l d 0x20 ( k a r t o g r a f i s k 0x20 ; 0x20 r 0xc3 0xb6 r l i g ) 	| k a r t o g r a f i s k 0x20 r 0xc3 0xb6 r l i g 0x20 b i l d 
+B i l d 0x20 ( k a r t o g r a f i s k ) 	| k a r t o g r a f i s k 0x20 b i l d 
+B i l d 0x20 ( r 0xc3 0xb6 r l i g 0x20 ; 0x20 t r e d i m e n s i o n e l l ) 	| t r e d i m e n s i o n e l l 0x20 r 0xc3 0xb6 r l i g 0x20 b i l d 
+B i l d 0x20 ( r 0xc3 0xb6 r l i g 0x20 ; 0x20 t v 0xc3 0xa5 d i m e n s i o n e l l ) 	| t v 0xc3 0xa5 d i m e n s i o n e l l 0x20 r 0xc3 0xb6 r l i g 0x20 b i l d 
+B i l d 0x20 ( s t i l l 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a ) 	| t a k t i l 0x20 b i l d 
+B i l d 0x20 ( s t i l l 0x20 ; 0x20 t r e d i m e n s i o n e l l ) 	| s t i l l b i l d 
+B i l d 0x20 ( s t i l l 0x20 ; 0x20 t v 0xc3 0xa5 d i m e n s i o n e l l ) 	| s t i l l b i l d 
+B i l d 0x20 ( s t i l l ) 	| s t i l l b i l d 
+D a t a s e t	| d a t a s e t 
+D a t a s e t  ( k a r t o g r a f i s k t ) 	| k a r t o g r a f i s k t 0x20 d a t a s e t 
+D a t o r p r o g r a m 	| d a t o r p r o g r a m 
+F l e r a 0x20 i n n e h 0xc3 0xa5 l l s t y p e r 	| 0xc3 0xb6 v r i g 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 	| t r e d i m e n s i o n e l l 0x20 f o r m 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( a t t 0x20 v i d r 0xc3 0xb6 r a ) 	| t a k t i l 0x20 t r e d i m e n s i o n e l l 0x20 f o r m 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( k a r t o g r a f i s k t 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a ) 	| k a r t o g r a f i s k 0x20 t a k t i l 0x20 t r e d i m e n s i o n e l l 0x20 f o r m 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( k a r t o g r a f i s k t 0x20 ; 0x20 t r e d i m e n s i o n e l l t ) 	| k a r t o g r a f i s k 0x20 t r e d i m e n s i o n e l l 0x20 f o r m 
+F 0xc3 0xb6 r e m 0xc3 0xa5 l 0x20 ( t r e d i m e n s i o n e l l t ) 	| t r e d i m e n s i o n e l l 0x20 f o r m 
+L j u d 	| l j u d 
+M u s i k 0x20 ( f r a m f 0xc3 0xb6 r d ) 	| f r a m f 0xc3 0xb6 r d 0x20 m u s i k 
+M u s i k 0x20 ( n o t a t i o n 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a ) 	| t a k t i l 0x20 m u s i k n o t a t i o n 
+M u s i k 0x20 ( n o t a t i o n ) 	| m u s i k n o t a t i o n 
+M u s i k 0x20 ( p e r f o r m a n c e ) 	| f r a m f 0xc3 0xb6 r d 0x20 m u s i k 
+O b e s t 0xc3 0xa4 m d 0x20 i n n e h 0xc3 0xa5 l l s t y p 	| o s p e c i f i c e r a d 
+O s p e c i f i c e r a d 0x20 i n n e h 0xc3 0xa5 l l s t y p 	| o s p e c i f i c e r a d 
+R 0xc3 0xb6 r e l s e 0x20 ( n o t a t i o n 0x20 ; 0x20 a t t 0x20 v i d r 0xc3 0xb6 r a ) 	| t a k t i l 0x20 r 0xc3 0xb6 r e l s e n o t a t i o n 
+R 0xc3 0xb6 r e l s e 0x20 ( n o t a t i o n ) 	| r 0xc3 0xb6 r e l s e n o t a t i o n 
+T a l 	| t a l 
+T e x t 	| t e x t 
+T e x t 0x20 ( a t t 0x20 v i d r 0xc3 0xb6 r a ) 	| t a k t i l 0x20 t e x t 
+#DEFAULT	| COPY
