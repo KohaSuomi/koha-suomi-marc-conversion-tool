@@ -4,3 +4,6 @@
 [submodule "USEMARCON-RDA"]
 	path = USEMARCON-RDA
 	url = https://github.com/NatLibFi/USEMARCON-RDA.git
+[submodule "yso-marcbib"]
+	path = yso-marcbib
+	url = https://github.com/NatLibFi/yso-marcbib
