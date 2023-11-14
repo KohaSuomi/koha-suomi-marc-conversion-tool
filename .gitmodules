@@ -1,6 +1,3 @@
-[submodule "usemarcon"]
-	path = usemarcon
-	url = https://github.com/NatLibFi/usemarcon.git
 [submodule "USEMARCON-RDA"]
 	path = USEMARCON-RDA
 	url = https://github.com/NatLibFi/USEMARCON-RDA.git
