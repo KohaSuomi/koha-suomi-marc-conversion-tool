@@ -1,0 +1,3 @@
+[submodule "usemarcon"]
+	path = usemarcon
+	url = https://github.com/NatLibFi/usemarcon.git
