@@ -3,12 +3,13 @@ Marc conversion tool
 
 # Install USEMARCON
 
-1. sudo apt install libtool automake autoconf
-2. ./buildconf.sh
-3. cd pcre/
-3. ./configure --enable-utf8 --enable-unicode-properties --disable-shared --disable-cpp
-4. make && make install
-
+```shell
+sudo apt install libtool automake autoconf
+./buildconf.sh
+cd pcre/
+./configure --enable-utf8 --enable-unicode-properties --disable-shared --disable-cpp
+make && make install
+```
 # Run RDA conversion to bibliografic records
 
 ```shell
