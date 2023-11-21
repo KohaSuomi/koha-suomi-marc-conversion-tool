@@ -33,6 +33,7 @@ use XML::LibXML;
 use C4::Record qw( marc2marcxml );
 
 use Converter::Modules::Chunker;
+use Converter::Modules::UsemarconConverter;
 
 use open ':std', ':encoding(UTF-8)';
 
@@ -44,18 +45,20 @@ sub usage {
   -p --path
   -l --limit
   -v --verbose
+  --usemarcon-config
 
 USAGE
     exit $_[0];
 }
 
-my ( $help, $config, $path, $limit, $verbose );
+my ( $help, $config, $path, $limit, $verbose, $usemarcon_config );
 
 GetOptions(
     'h|help'       => \$help,
     'p|path:s'     => \$path,
     'l|limit:i'    => \$limit,
     'v|verbose'  => \$verbose,
+    'usemarcon-config:s' => \$usemarcon_config,
 ) || usage(1);
 
 usage(0) if ($help);
@@ -66,8 +69,17 @@ if ( !$path || !-d $path || !-w $path ) {
     usage(1);
 }
 
+if (!$usemarcon_config) {
+    print STDERR
+"Error: You must specify a valid usemarcon config file.\n";
+    usage(1);
+}
+
 my $count = 0;
 my $chunker = Converter::Modules::Chunker->new(undef, $limit, undef, $verbose);
+my $converter = Converter::Modules::UsemarconConverter->new({verbose => $verbose}); # Create a new instance of UsemarconConverter
+my $yso_converter = Converter::Modules::YSOConverter->new({verbose => $verbose});
+
 while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     my $xml = MARC::File::XML::header('UTF-8');
     my $timestamp = POSIX::strftime( "%Y%m%d%H%M%S", localtime );
@@ -93,5 +105,10 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     open(my $fh, '>', $path.$filename);
     print $fh $xml;
     close $fh;
+
+    # Convert the output file using Usemarcon
+    my ($output_path, $output_file) = $converter->convertRecords($path, $filename, $usemarcon_config);
+    
     print "Added ".$records_count." records to file ".$filename.".\n" if $verbose;
+    
 }
