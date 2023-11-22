@@ -59,7 +59,7 @@ sub getChunkAsMARCRecord {
         my $marcxml = C4::Biblio::GetXmlBiblio($bi->{biblionumber});
         my $error = "";
         ($error, $chunk->[$i]) = C4::Record::marcxml2marc($marcxml);
-        die "Couldn't get MARC::Record for biblio $bi->{biblionumber}" if $error;
+        print "ERROR: MARC::Record for biblio $bi->{biblionumber} is broken, skipping...\n" if $error;
         $chunk->[$i]->{biblionumber} = $bi->{biblionumber};
         $chunk->[$i]->{biblioitemnumber} = $bi->{biblioitemnumber};
         $chunk->[$i]->{frameworkcode} = $bi->{frameworkcode};
