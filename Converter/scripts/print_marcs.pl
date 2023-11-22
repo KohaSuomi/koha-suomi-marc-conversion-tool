@@ -29,6 +29,7 @@ BEGIN {
 
 use Getopt::Long;
 use XML::LibXML;
+use Try::Tiny;
 
 use C4::Record qw( marc2marcxml );
 
@@ -42,22 +43,26 @@ sub usage {
   Will print all active MARC records in database to
   OUTPUT_DIRECTORY .
 
-  -p --path
-  -l --limit
-  -v --verbose
+  -p  --path           Where to print files.
+  -l  --limit          How many records are printed (for testing purposes).
+  -s  --size           Size of record chunk.
+  -b  --biblionumber   Start from specific biblionumber.
+  -v  --verbose        Make this script more talkative.
   --usemarcon-config
 
 USAGE
     exit $_[0];
 }
 
-my ( $help, $config, $path, $limit, $verbose, $usemarcon_config );
+my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, $usemarcon_config );
 
 GetOptions(
-    'h|help'       => \$help,
-    'p|path:s'     => \$path,
-    'l|limit:i'    => \$limit,
-    'v|verbose'  => \$verbose,
+    'h|help'             => \$help,
+    'p|path:s'           => \$path,
+    'l|limit:i'          => \$limit,
+    's|size:i'           => \$pagesize,
+    'b|biblionumber:i'   => \$biblionumber,
+    'v|verbose'          => \$verbose,
     'usemarcon-config:s' => \$usemarcon_config,
 ) || usage(1);
 
@@ -76,7 +81,7 @@ if (!$usemarcon_config) {
 }
 
 my $count = 0;
-my $chunker = Converter::Modules::Chunker->new(undef, $limit, undef, $verbose);
+my $chunker = Converter::Modules::Chunker->new(undef, $limit, $pagesize, $biblionumber, $verbose);
 my $converter = Converter::Modules::UsemarconConverter->new({verbose => $verbose}); # Create a new instance of UsemarconConverter
 
 while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
@@ -84,10 +89,10 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     my $timestamp = POSIX::strftime( "%Y%m%d%H%M%S", localtime );
     $count++;
     my $records_count = 0;
-    my $filename = "MARCrecords_".$timestamp."_".$count;
+    my $filename = "MARCrecordsChunk_".$count.".xml";
 
     foreach my $record (@$records) {
-        eval {
+        try {
             #fetch and parse records
             my $marc_xml = marc2marcxml($record, 'UTF-8', C4::Context->preference("marcflavour"));
             my $parser = XML::LibXML->new(recover => 1);
@@ -96,8 +101,10 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             #add records to new xml file
             $xml .= $row."\n";
             $records_count++;
+        }
+        catch {
+            warn $@ if $@;
         };
-        warn $@ if $@;
     }
 
     #send file to output directory
@@ -107,7 +114,6 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
 
     # Convert the output file using Usemarcon
     my ($output_path, $output_file) = $converter->convertRecords($path, $filename, $usemarcon_config);
-    
+
     print "Added ".$records_count." records to file ".$filename.".\n" if $verbose;
-    
 }

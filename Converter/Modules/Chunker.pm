@@ -33,14 +33,15 @@ unexpected consequences. This object paginates a DB access to the biblio-table.
 =cut
 
 sub new {
-    my ($class, $startingBiblionumber, $endingBiblionumber, $pageSize, $verbose) = @_;
+    my ($class, $start, $end, $pageSize, $starting_biblionumber, $verbose) = @_;
     my $self = {};
-    $self->{startingBiblionumber} = $startingBiblionumber || 0;
-    $self->{endingBiblionumber} = $endingBiblionumber || 99999999999;
+    $self->{start} = $start || 0;
+    $self->{end} = $end || 99999999999;
     $self->{pageSize} = $pageSize  || 100;
+    $self->{starting_biblionumber} = $starting_biblionumber || 0;
     $self->{position} = {
-        start => $self->{startingBiblionumber},
-        end => $self->{startingBiblionumber} + $self->{pageSize},
+        start => $self->{start},
+        end => $self->{start} + $self->{pageSize},
         page => 1,
     };
     $self->{verbose} = $verbose || 0;
@@ -82,13 +83,14 @@ sub _getChunk {
     unless ($self->_isChunkWithinBounds()) {
         return undef;
     }
+
     my $dbh = C4::Context->dbh();
-    my $query = "(
-        SELECT b.biblionumber, b.timestamp, b.frameworkcode, 0 as deleted FROM biblio b
-        WHERE b.biblionumber >= ? AND b.biblionumber < ?
-    )";
+    my $query = "(SELECT b.biblionumber FROM biblio b ";
+    $query .= "WHERE b.biblionumber >= ".$self->{starting_biblionumber} if $self->{starting_biblionumber};
+    $query .= " LIMIT ".$self->{position}->{start}.",".$self->{pageSize}.")";
+
     my $sth = $dbh->prepare($query);
-    $sth->execute( $self->_getPosition() );
+    $sth->execute();
     if ($sth->err) {
         die $cc[3]."():> ".$sth->errstr;
     }
@@ -143,9 +145,9 @@ sub _getNextId {
 sub _isChunkWithinBounds {
     my ($self) = @_;
 
-    if ($self->{endingBiblionumber} < $self->{position}->{end}) {
-        if ($self->{endingBiblionumber} > ($self->{position}->{end} - $self->{pageSize})) {
-            $self->{position}->{end} = $self->{endingBiblionumber};
+    if ($self->{end} < $self->{position}->{end}) {
+        if ($self->{end} > ($self->{position}->{end} - $self->{pageSize})) {
+            $self->{position}->{end} = $self->{end};
             return 1;
         }
         else {
