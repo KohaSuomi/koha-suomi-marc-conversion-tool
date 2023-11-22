@@ -78,7 +78,6 @@ if (!$usemarcon_config) {
 my $count = 0;
 my $chunker = Converter::Modules::Chunker->new(undef, $limit, undef, $verbose);
 my $converter = Converter::Modules::UsemarconConverter->new({verbose => $verbose}); # Create a new instance of UsemarconConverter
-my $yso_converter = Converter::Modules::YSOConverter->new({verbose => $verbose});
 
 while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     my $xml = MARC::File::XML::header('UTF-8');
