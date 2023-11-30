@@ -22,7 +22,7 @@ Muunnosprosessi on kuvattu [Kiwissä](https://www.kiwi.fi/display/ysall2yso/):
 Ohjelmassa on korjattu joitain havaittuja puutteita. Ne on listattu [KIWI-sivulle](https://www.kiwi.fi/display/ysall2yso/Konversiossa+havaittuja+ongelmia). Ohjelmistovirheistä voi raportoida [GitHub-issuena](https://github.com/NatLibFi/yso-marcbib/issues).
 
 Ohjelma käyttää Musa (sisältää Cillan), Ysa-, Allärs-, Yso-, SEKO- ja SLM-sanastoja, jotka testiversiossa on ladattava ohjelman pääkansioon rdf-muodossa Finton sivulta: https://finto.fi/
-Ohjelma käyttää Python-kirjastoja pymarc, rdflib, unidecode, jotka on asennettava ennen käyttöä, esim. `pip install <kirjaston nimi>`.
+Ohjelma käyttää Python-kirjastoja pymarc3.2.0, rdflib4.2.2, unidecode, jotka on asennettava ennen käyttöä, esim. `pip install <kirjaston nimi>`.
     
 **Ohjelman käynnistysparametrit**
 
