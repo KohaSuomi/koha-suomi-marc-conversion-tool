@@ -49,12 +49,13 @@ sub usage {
   -b  --biblionumber   Start from specific biblionumber.
   -v  --verbose        Make this script more talkative.
   --usemarcon-config
+  --usemarcon-path
 
 USAGE
     exit $_[0];
 }
 
-my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, $usemarcon_config );
+my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, $usemarcon_config, $usemarcon_path );
 
 GetOptions(
     'h|help'             => \$help,
@@ -64,6 +65,7 @@ GetOptions(
     'b|biblionumber:i'   => \$biblionumber,
     'v|verbose'          => \$verbose,
     'usemarcon-config:s' => \$usemarcon_config,
+    'usemarcon-path:s'   => \$usemarcon_path,
 ) || usage(1);
 
 usage(0) if ($help);
@@ -77,6 +79,12 @@ if ( !$path || !-d $path || !-w $path ) {
 if (!$usemarcon_config) {
     print STDERR
 "Error: You must specify a valid usemarcon config file.\n";
+    usage(1);
+}
+
+if (!$usemarcon_path) {
+    print STDERR
+"Error: You must specify a valid usemarcon path.\n";
     usage(1);
 }
 
@@ -113,7 +121,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     close $fh;
 
     # Convert the output file using Usemarcon
-    my ($output_path, $output_file) = $converter->convertRecords($path, $filename, $usemarcon_config);
+    my ($output_path, $output_file) = $converter->convertRecords($path, $filename, $usemarcon_config, $usemarcon_path);
 
     print "Added ".$records_count." records to file ".$filename.".\n" if $verbose;
 }

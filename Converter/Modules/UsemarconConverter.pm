@@ -20,9 +20,7 @@ sub verbose {
 }
 
 sub convertRecords {
-    my ($self, $input_path, $input_file, $usemarcon_config) = @_;
-
-    my $project_root = "$Bin/../..";  # This will give you the project root path
+    my ($self, $input_path, $input_file, $usemarcon_config, $usemarcon_path) = @_;
 
     my $output_path = $input_path."/rda/";
     my $output_file = $input_file.".rda";
@@ -30,7 +28,7 @@ sub convertRecords {
     # Create the output directory if it does not exist
     make_path($output_path);
 
-    my $converted_record = capture("$project_root/usemarcon/program/usemarcon", $usemarcon_config, $input_path.$input_file, $output_path.$output_file);
+    my $converted_record = capture($usemarcon_path, $usemarcon_config, $input_path.$input_file, $output_path.$output_file);
     
     print "$converted_record\n" if $self->verbose;
     return ($output_path, $output_file);
