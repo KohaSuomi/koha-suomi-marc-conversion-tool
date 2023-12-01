@@ -99,16 +99,7 @@ sub _getChunk {
         $self->_incrementPosition();
         return $chunk;
     }
-    else {
-        my $nextAvailableBiblioitemnumber = $self->_getNextId();
-        if ($nextAvailableBiblioitemnumber) {
-            $self->_incrementPosition($nextAvailableBiblioitemnumber);
-            return $self->getChunk();
-        }
-        else {
-            return undef;
-        }
-    }
+
     return (ref $chunk eq 'ARRAY' && scalar(@$chunk)) ? $chunk : undef;
 }
 
