@@ -184,7 +184,7 @@ class YsoConverter():
     def __init__(self, input_file, input_directory, output_file, output_directory, file_format, field_links=False, all_languages=False, write_all=False):
         Field.as_marc = as_marc
         Record.decode_marc = decode_marc
-        self.log_directory = "logs"
+        self.log_directory = "/var/log/koha/yso-logs"
         if not os.path.isdir(self.log_directory):
             os.mkdir(self.log_directory)
         if input_file:
@@ -444,6 +444,9 @@ class YsoConverter():
                         input_path = i_file
                     try:
                         pymarc.map_xml(self.read_and_write_record, input_path)
+                    except NoFieldsFound as e:
+                        logging.error("Tiedosto %s ei ole MARCXML-muodossa"%input_path)
+                        logging.error(e)
                     except SAXParseException as e:
                         logging.warning("XML-rakenne viallinen")
                         logging.warning(e)
