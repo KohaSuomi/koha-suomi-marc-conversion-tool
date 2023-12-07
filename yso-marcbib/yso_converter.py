@@ -444,6 +444,9 @@ class YsoConverter():
                         input_path = i_file
                     try:
                         pymarc.map_xml(self.read_and_write_record, input_path)
+                    except (ValueError, IndexError) as e:
+                        logging.error("Tiedosto %s ei ole MARCXML-muodossa"%input_path)
+                        logging.error(e)
                     except NoFieldsFound as e:
                         logging.error("Tiedosto %s ei ole MARCXML-muodossa"%input_path)
                         logging.error(e)
