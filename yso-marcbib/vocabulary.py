@@ -308,8 +308,11 @@ class Vocabulary():
                 if len(valid_uris) == 0 or len(valid_uris) > 1:
                     raise ValueError("2")
             if valid_uris:
-                label = self.labels[valid_uris[0]][language]
-                return {"label": label, "uris": valid_uris, "code": self.target_vocabulary_code + "/" + self.convert_to_ISO_639_2(language)}  
+                try:
+                    label = self.labels[valid_uris[0]][language]
+                    return {"label": label, "uris": valid_uris, "code": self.target_vocabulary_code + "/" + self.convert_to_ISO_639_2(language)}
+                except KeyError:
+                    ValueError("2")  
             else:
                 raise ValueError("2")
         elif uri in self.labels:
