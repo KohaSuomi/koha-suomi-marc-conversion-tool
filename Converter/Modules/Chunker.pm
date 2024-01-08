@@ -33,7 +33,7 @@ unexpected consequences. This object paginates a DB access to the biblio-table.
 =cut
 
 sub new {
-    my ($class, $start, $end, $pageSize, $starting_biblionumber, $verbose) = @_;
+    my ($class, $start, $end, $pageSize, $starting_biblionumber, $verbose, @biblionumbers) = @_;
     my $self = {};
     $self->{start} = $start || 0;
     $self->{end} = $end || 99999999999;
@@ -45,6 +45,7 @@ sub new {
         page => 1,
     };
     $self->{verbose} = $verbose || 0;
+    $self->{biblionumbers} = \@biblionumbers if scalar(@biblionumbers);
     bless($self, $class);
     return $self;
 }
@@ -85,9 +86,16 @@ sub _getChunk {
     }
 
     my $dbh = C4::Context->dbh();
-    my $query = "(SELECT bm.biblionumber, bm.metadata FROM biblio_metadata bm ";
-    $query .= "WHERE bm.biblionumber >= ".$self->{starting_biblionumber} if $self->{starting_biblionumber};
-    $query .= " LIMIT ".$self->{position}->{start}.",".$self->{pageSize}.")";
+    my $query = "SELECT bm.biblionumber, bm.metadata FROM biblio_metadata bm ";
+
+    if (scalar($self->{biblionumbers})) {
+        $query .= "WHERE bm.biblionumber IN (".join(',', @{$self->{biblionumbers}}).")";
+    }
+    else {
+        $query .= "WHERE bm.biblionumber >= ".$self->{starting_biblionumber} if $self->{starting_biblionumber};
+    }
+
+    $query .= " LIMIT ".$self->{position}->{start}.",".$self->{pageSize};
 
     my $sth = $dbh->prepare($query);
     $sth->execute();

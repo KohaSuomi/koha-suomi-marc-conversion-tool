@@ -34,7 +34,6 @@ use Try::Tiny;
 use C4::Record qw( marc2marcxml );
 
 use Converter::Modules::Chunker;
-use Converter::Modules::UsemarconConverter;
 
 use open ':std', ':encoding(UTF-8)';
 
@@ -48,14 +47,14 @@ sub usage {
   -s  --size           Size of record chunk.
   -b  --biblionumber   Start from specific biblionumber.
   -v  --verbose        Make this script more talkative.
-  --usemarcon-config
-  --usemarcon-path
+  -h  --help           This help message.
+  --biblionumber_file  File containing biblionumbers to print.
 
 USAGE
     exit $_[0];
 }
 
-my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, $usemarcon_config, $usemarcon_path );
+my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers, $biblionumber_file );
 
 GetOptions(
     'h|help'             => \$help,
@@ -64,8 +63,7 @@ GetOptions(
     's|size:i'           => \$pagesize,
     'b|biblionumber:i'   => \$biblionumber,
     'v|verbose'          => \$verbose,
-    'usemarcon-config:s' => \$usemarcon_config,
-    'usemarcon-path:s'   => \$usemarcon_path,
+    'biblionumber_file:s'=> \$biblionumber_file,
 ) || usage(1);
 
 usage(0) if ($help);
@@ -76,21 +74,17 @@ if ( !$path || !-d $path || !-w $path ) {
     usage(1);
 }
 
-if (!$usemarcon_config) {
-    print STDERR
-"Error: You must specify a valid usemarcon config file.\n";
-    usage(1);
-}
-
-if (!$usemarcon_path) {
-    print STDERR
-"Error: You must specify a valid usemarcon path.\n";
-    usage(1);
+if ( $biblionumber_file && -e $biblionumber_file ) {
+    open( my $fh, '<', $biblionumber_file );
+    while ( my $line = <$fh> ) {
+        chomp $line;
+        push @biblionumbers, $line;
+    }
+    close $fh;
 }
 
 my $count = 0;
-my $chunker = Converter::Modules::Chunker->new(undef, $limit, $pagesize, $biblionumber, $verbose);
-my $converter = Converter::Modules::UsemarconConverter->new({verbose => $verbose}); # Create a new instance of UsemarconConverter
+my $chunker = Converter::Modules::Chunker->new(undef, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers);
 
 while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     my $xml = MARC::File::XML::header('UTF-8');
@@ -119,9 +113,6 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     open(my $fh, '>', $path.$filename);
     print $fh $xml;
     close $fh;
-
-    # Convert the output file using Usemarcon
-    my ($output_path, $output_file) = $converter->convertRecords($path, $filename, $usemarcon_config, $usemarcon_path);
 
     print "Added ".$records_count." records to file ".$filename.".\n" if $verbose;
 }
