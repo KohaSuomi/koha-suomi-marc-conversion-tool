@@ -10,18 +10,12 @@ cd pcre/
 ./configure --enable-utf8 --enable-unicode-properties --disable-shared --disable-cpp
 make && make install
 ```
-# Run RDA conversion to bibliografic records
+# Run conversions
 
-```shell
-
-~/koha-suomi-marc-conversion-tool/usemarcon/program/usemarcon ../../USEMARCON-RDA/ma21RDA_bibliografiset.ini INPUTFILE OUTPUTFILE
-
-```
-
-# Run RDA conversion to authority records
-
-```shell
-
-~/koha-suomi-marc-conversion-tool/usemarcon/program/usemarcon ../../USEMARCON-RDA/ma21RDA_auktoriteetit.ini INPUTFILE OUTPUTFILE
-
-```
+1. Print marcxml records to files
+    1. perl -I ~/koha-suomi-marc-conversion-tool/ ~/koha-suomi-marc-conversion-tool/Converter/scripts/print_marcs.pl -p <OUTPUT_PATH>
+1. Convert with usemarcon
+    1. ~/koha-suomi-marc-conversion-tool/Converter/scripts/usemarcon_converter.sh ~/koha-suomi-marc-conversion-tool/USEMARCON-ISBD/ma2maisbd0.ini <INPUT_PATH> <OUTPUT_PATH>
+    1. ~/koha-suomi-marc-conversion-tool/Converter/scripts/usemarcon_converter.sh ~/koha-suomi-marc-conversion-tool/USEMARCON-RDA/ma21RDA_bibliografiset.ini <INPUT_PATH> <OUTPUT_PATH>
+1. Stage records to Koha 
+    1. perl -I ~/koha-suomi-marc-conversion-tool/ ~/koha-suomi-marc-conversion-tool/Converter/scripts/import_records.pl -d <INPUT_PATH> --matcher_id <number> -v
