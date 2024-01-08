@@ -14,6 +14,7 @@ my $commit = 0;
 my $revert = 0;
 my $verbose = 0;
 my $matcher_id = 0;
+my $batch_size = 0;
 
 # Get command line options
 GetOptions(
@@ -25,6 +26,7 @@ GetOptions(
     'revert' => \$revert,
     'v|verbose' => \$verbose,
     'matcher_id=i' => \$matcher_id,
+    'batch_size=i' => \$batch_size,
 );
 
 # Print help
@@ -39,6 +41,7 @@ if ($help) {
     print "  --revert\t\t\tRevert the records\n";
     print "  --verbose\t\t\tVerbose output\n";
     print "  --matcher_id\t\t\tMatcher ID\n";
+    print "  --batch_size\t\t\tBatch size\n";
     exit 0;
 }
 
@@ -66,6 +69,8 @@ my $koha_importer = Converter::Modules::KohaImporter->new({
 # Open the directory
 opendir(my $dh, $dir) or die "Cannot open directory: $!";
 
+my $count = 0;
+
 # Read files
 while (my $filename = readdir $dh) {
     # Skip if not a file
@@ -77,8 +82,12 @@ while (my $filename = readdir $dh) {
     my $file_path = "$dir/$filename";
 
     # Import the file
-    $koha_importer->importRecords($file_path);
+    my $batch_id = $koha_importer->importRecords($file_path);
+    next unless $batch_id;
+    $count++;
+    last if $count == $batch_size && $batch_size > 0;
 }
-
 # Close the directory
 closedir $dh;
+
+print "Imported $count files\n";

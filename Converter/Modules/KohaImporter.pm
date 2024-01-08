@@ -103,6 +103,8 @@ sub importRecords {
         my $num_with_matches = $self->matchRecords($batch_id, $self->matcher_id);
 
         print "Records with matches: $num_with_matches\n" if $self->verbose;
+    } else {
+        return 0;
     }
 
     if ($self->commit) {
@@ -123,7 +125,7 @@ sub importRecords {
         print "Errors: ".Data::Dumper::Dumper(@import_errors)."\n";
     }
 
-    return;
+    return $batch_id;
 }
 
 sub matchRecords {
