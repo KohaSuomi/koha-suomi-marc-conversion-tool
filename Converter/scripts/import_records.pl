@@ -36,6 +36,7 @@ if ($help) {
     print "  --record_type\t\tRecord type (biblio or auth)\n";
     print "  --encoding\t\t\tEncoding of the files\n";
     print "  --commit\t\t\tCommit the records\n";
+    print "  --revert\t\t\tRevert the records\n";
     print "  --verbose\t\t\tVerbose output\n";
     print "  --matcher_id\t\t\tMatcher ID\n";
     exit 0;
