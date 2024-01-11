@@ -129,7 +129,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
         open(my $fh, '>', $path.$svFileName);
         print $fh $sv_xml;
         close $fh;
-        print "Added swedish ".$sv_records_count." records to file ".$svFileName.".\n" if $verbose;
+        print "Added ".$sv_records_count." swedish records to file ".$svFileName.".\n" if $verbose;
     }
 }
 
