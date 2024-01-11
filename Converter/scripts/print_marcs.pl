@@ -88,11 +88,13 @@ my $chunker = Converter::Modules::Chunker->new(undef, $limit, $pagesize, $biblio
 
 while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     my $xml = MARC::File::XML::header('UTF-8');
+    my $sv_xml = MARC::File::XML::header('UTF-8');
     my $timestamp = POSIX::strftime( "%Y%m%d%H%M%S", localtime );
     $count++;
     my $records_count = 0;
-    my $filename = "MARCrecordsChunk_".$count.".xml";
-
+    my $sv_records_count = 0;
+    my $filename = "MARCrecordsChunk_".$count."_fi.xml";
+    my $svFileName = "MARCrecordsChunk_".$count."_sv.xml";
     foreach my $record (@$records) {
         try {
             #fetch and parse records
@@ -101,18 +103,48 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             my $doc = $parser->load_xml(string => $marc_xml);
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
-            $xml .= $row."\n";
-            $records_count++;
+            if (primary_language($record) eq 'swe') {
+                $sv_xml .= $row."\n";
+                $sv_records_count++;
+            } else {
+                $xml .= $row."\n";
+                $records_count++;
+            }
         }
         catch {
             warn $@ if $@;
         };
     }
 
-    #send file to output directory
-    open(my $fh, '>', $path.$filename);
-    print $fh $xml;
-    close $fh;
+    if($records_count > 0) {
+        #send file to output directory
+        open(my $fh, '>', $path.$filename);
+        print $fh $xml;
+        close $fh;
+        print "Added ".$records_count." records to file ".$filename.".\n" if $verbose;
+    }
 
-    print "Added ".$records_count." records to file ".$filename.".\n" if $verbose;
+    #send file to output directory
+    if($sv_records_count > 0) {
+        open(my $fh, '>', $path.$svFileName);
+        print $fh $sv_xml;
+        close $fh;
+        print "Added swedish ".$sv_records_count." records to file ".$svFileName.".\n" if $verbose;
+    }
+}
+
+sub primary_language {
+    my ($record) = @_;
+    my $f008 = $record->field('008');
+    my $primaryLanguage = 'OTH';
+
+    if( $f008 && substr($f008->data(), 35, 3) && ( substr($f008->data(), 35, 3) =~ /(.*[a-zA-Z]){3}/ )) {
+        $primaryLanguage = substr($f008->data(), 35, 3);
+    } elsif ( $record->subfield('041', 'a') && ( $record->subfield('041', 'a') =~ /(.*[a-zA-Z]){3}/ ) ) {
+        $primaryLanguage = $record->subfield('041', 'a');
+    } elsif ( $record->subfield('041', 'd') && ( $record->subfield('041', 'd') =~ /(.*[a-zA-Z]){3}/ ) ) {
+        $primaryLanguage = $record->subfield('041', 'd');
+    }
+
+    return $primaryLanguage;
 }

@@ -33,8 +33,16 @@ OUTPUT_FOLDER=$3
 # Create the output folder if it doesn't exist
 mkdir -p "$OUTPUT_FOLDER"
 
+LANGUAGE=$4
+
+# Check if the language is set
+if [ -z "$LANGUAGE" ]; then
+    echo "Language is not set, fi or sv"
+    exit 1
+fi
+
 # Loop through each file in the input folder
-for file in "$INPUT_FOLDER"/*.xml
+for file in "$INPUT_FOLDER"/*_"$LANGUAGE".xml
 do
     # Get the filename without the path
     filename=$(basename "$file")
