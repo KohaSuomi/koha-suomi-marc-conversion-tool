@@ -54,7 +54,7 @@ USAGE
     exit $_[0];
 }
 
-my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers, $biblionumber_file );
+my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers, $biblionumber_file, $check_sv );
 
 GetOptions(
     'h|help'             => \$help,
@@ -64,6 +64,8 @@ GetOptions(
     'b|biblionumber:i'   => \$biblionumber,
     'v|verbose'          => \$verbose,
     'biblionumber_file:s'=> \$biblionumber_file,
+    'check_sv'           => \$check_sv,
+
 ) || usage(1);
 
 usage(0) if ($help);
@@ -103,7 +105,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             my $doc = $parser->load_xml(string => $marc_xml);
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
-            if (primary_language($record) eq 'swe') {
+            if ($check_sv && primary_language($record) eq 'swe') {
                 $sv_xml .= $row."\n";
                 $sv_records_count++;
             } else {
