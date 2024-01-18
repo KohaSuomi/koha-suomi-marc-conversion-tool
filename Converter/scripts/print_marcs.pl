@@ -49,12 +49,14 @@ sub usage {
   -v  --verbose        Make this script more talkative.
   -h  --help           This help message.
   --biblionumber_file  File containing biblionumbers to print.
+  --check_sv           Check if record is in swedish and print to separate file.
+  --no_rda             Do not print RDA records.
 
 USAGE
     exit $_[0];
 }
 
-my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers, $biblionumber_file, $check_sv );
+my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers, $biblionumber_file, $check_sv, $no_rda );
 
 GetOptions(
     'h|help'             => \$help,
@@ -65,6 +67,7 @@ GetOptions(
     'v|verbose'          => \$verbose,
     'biblionumber_file:s'=> \$biblionumber_file,
     'check_sv'           => \$check_sv,
+    'no_rda'          => \$no_rda,
 
 ) || usage(1);
 
@@ -105,6 +108,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             my $doc = $parser->load_xml(string => $marc_xml);
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
+            return if $no_rda && checkRDARecord($record);
             if ($check_sv && primary_language($record) eq 'swe') {
                 $sv_xml .= $row."\n";
                 $sv_records_count++;
@@ -149,4 +153,31 @@ sub primary_language {
     }
 
     return $primaryLanguage;
+}
+
+sub checkRDARecord {
+    my ($record) = @_;
+    my $f040 = $record->field('040');
+    my $f338 = $record->field('338');
+    my $rda = 0;
+
+    if ($f040) {
+        my @subfields = $f040->subfields();
+        foreach my $subfield (@subfields) {
+            if ($subfield->[0] eq 'e' && $subfield->[1] eq 'rda') {
+                $rda = 1;
+            }
+        }
+    }
+
+    if ($f338) {
+        my @subfields = $f338->subfields();
+        foreach my $subfield (@subfields) {
+            if ($subfield->[0] eq 'a') {
+                $rda = 1;
+            }
+        }
+    }
+    #print "RDA record found, ". $record->subfield('999', 'c') ."\n" if $rda && $verbose;
+    return $rda;
 }
