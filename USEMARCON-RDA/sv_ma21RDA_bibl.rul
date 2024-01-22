@@ -402,10 +402,10 @@ T36   | <DEL  | S
               (RegFind(@336(3)$a, 'eksti|ext|otat') >= 0) Or \
               (RegFind(@336(4)$a, 'eksti|ext|otat') >= 0) ) \
                And \
-            ( (RegFind(@337(1)$a, 'laitetta|medietyp|oförmedlad') >= 0) Or \
-              (RegFind(@337(2)$a, 'laitetta|medietyp|oförmedlad') >= 0) Or \
-              (RegFind(@337(3)$a, 'laitetta|medietyp|oförmedlad') >= 0) Or \
-              (RegFind(@337(4)$a, 'laitetta|medietyp|oförmedlad') >= 0) ) \
+            ( (RegFind(@337(1)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) Or \
+              (RegFind(@337(2)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) Or \
+              (RegFind(@337(3)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) Or \
+              (RegFind(@337(4)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) ) \
           ) \
         Or (RegFind(@300$a, '[Bb]ok|artbok|atlas|[Tt]ekstivihko|[Kk]irja|[Kk]artasto') >= 0) \
         Or (RegFind(%336$a, 'Kartograf') >=0) )

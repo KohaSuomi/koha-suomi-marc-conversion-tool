@@ -436,7 +436,7 @@ T36   | <DEL  | S
   And If ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or \
         (RegFind(@300$a, '[Bb]ok|artbok|atlas') >= 0) Or (RegFind(%336$a, 'artografisk') >=0) ) \
   And If (Not Exists(@773)) \
-  And If (RegFind(@337, 'ingen medietyp|oförmedlad') >= 0)
+  And If (RegFind(@337, 'ingen medietyp|oförmedlad|omedierad') >= 0)
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'volym'
@@ -447,7 +447,7 @@ T36   | <DEL  | S
 #if (Not Exists(%338)) \
   And (Not Exists(@773)) \
   And (RegFind(%336$a, 'ext') >= 0) \
-  And (RegFind(%337$a, 'oförmedlad') >= 0)
+  And (RegFind(%337$a, 'oförmedlad|omedierad') >= 0)
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'volym'
