@@ -121,7 +121,8 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             warn $@ if $@;
         };
     }
-
+    $xml .= MARC::File::XML::footer('UTF-8');
+    $sv_xml .= MARC::File::XML::footer('UTF-8');
     if($records_count > 0) {
         #send file to output directory
         open(my $fh, '>', $path.$filename);
