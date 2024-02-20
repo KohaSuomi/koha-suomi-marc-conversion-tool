@@ -423,7 +423,7 @@ T36   | <DEL  | S
 
 #if Not (Exists(@336$b))
 336(ns)$a | 336(no)$b | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
-336(ns)$a | 336(no)$2 | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table 'rdacontent'
+336(ns)$a | 336(no)$2 | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
 #endif
 
 
