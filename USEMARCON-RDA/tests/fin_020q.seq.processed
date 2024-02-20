@@ -1,0 +1,16 @@
+005009831 LDR   L XXXXXcam^a2200XXXXi^4500
+005009831 001   L 005009831
+005009831 005   L 20200202020202.0
+005009831 007   L aj|^^a|||
+005009831 008   L 170207s2014^^^^fi^||||||b||^||||||eng|c
+005009831 015   L $$aF12345$$qkovakantinen
+005009831 020   L $$a123-456-78-90$$qmjuka pärmar
+005009831 020   L $$a123-456-78-90$$qpehmeäkantinen
+005009831 0248  L $$a123-456-78-90$$qhårda pärmar
+005009831 0248  L $$a123-456-78-90$$qhårda pärmar
+005009831 02850 L $$bwhatever$$aABCD-123$$qpehmeäkantinen
+005009831 040   L $$bsaa
+005009831 1102  L $$aYhtye,$$eesittäjä.
+005009831 24500 L $$aFillariopas
+005009831 300   L $$a1 whatever.
+005009831 500   L $$aTässä testataan erilaisia 020$q-muunnoksia

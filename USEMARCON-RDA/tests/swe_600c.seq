@@ -1,0 +1,11 @@
+005009831 LDR   L XXXXXcam a22003015i 4500
+005009831 001   L 005009831
+005009831 005   L 20200202020202.0
+005009831 007   L aj|  a|||
+005009831 008   L 170207s2014    fi ||||||b|| ||||||eng|c
+005009831 040   L $$bfin
+005009831 24500 L $$aFillariopas
+005009831 300   L $$a1 whatever.
+005009831 500   L $$aTässä testataan 600- ja 610-kentän välimerkkejä.
+005009831 60014 L $$aSukunimi, Etunimi,$$cfikt.
+005009831 61024 L $$aIso Paha Yhtiö,$$cfikt.
