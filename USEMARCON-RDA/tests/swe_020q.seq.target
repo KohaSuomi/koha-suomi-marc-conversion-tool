@@ -6,11 +6,15 @@
 005009831 015   L $$aF12345$$qkovakantinen
 005009831 020   L $$a123-456-78-90$$qmjuka pärmar
 005009831 020   L $$a123-456-78-90$$qpehmeäkantinen
+005009831 020   L $$a123-456-78-90$$qhårda pärmar
 005009831 0248  L $$a123-456-78-90$$qhårda pärmar
 005009831 0248  L $$a123-456-78-90$$qhårda pärmar
 005009831 02850 L $$bwhatever$$aABCD-123$$qpehmeäkantinen
-005009831 040   L $$bsaa
+005009831 040   L $$bswe
 005009831 1102  L $$aYhtye,$$eesittäjä.
-005009831 24500 L $$aFillariopas
+005009831 24510 L $$aFillariopas.
 005009831 300   L $$a1 whatever.
+005009831 336   L $$atext$$btxt$$2rdacontent
+005009831 337   L $$aomedierad$$bn$$2rdamedia
+005009831 338   L $$avolym$$bnc$$2rdacarrier
 005009831 500   L $$aTässä testataan erilaisia 020$q-muunnoksia

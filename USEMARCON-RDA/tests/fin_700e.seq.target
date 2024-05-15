@@ -2,9 +2,17 @@
 005009831 001   L 005009831
 005009831 005   L 20200202020202.0
 005009831 007   L aj|^^a|||
-005009831 008   L 170207s2014^^^^fi^||||||b||^||||||eng|c
+005009831 008   L 170207s2014^^^^fi^|||||ab||^||||||eng|c
 005009831 040   L $$bfin
-005009831 24500 L $$aFillariopas
+005009831 1001  L $$aSukunimi, Etunimi,$$esäveltäjä,$$esanoittaja,$$esovittaja.
+005009831 1001  L $$aSukunimi, Etunimi,$$esäveltäjä.
+005009831 1001  L $$aSukunimi, Etunimi,$$esäveltäjä.$$0(FI-ASTERI-N)012345678
+005009831 24510 L $$aFillariopas.
 005009831 300   L $$a1 whatever.
+005009831 336   L $$ateksti$$btxt$$2rdacontent
+005009831 337   L $$amikromuoto$$bh$$2rdamedia
+005009831 338   L $$amikrofilmirulla$$bhj$$2rdacarrier
 005009831 500   L $$aTässä testataan 600- ja 610-kentän välimerkkejä.
 005009831 7001  L $$aSukunimi, Etunimi,$$esäveltäjä,$$esanoittaja,$$esovittaja.
+005009831 7001  L $$aSukunimi, Etunimi,$$esäveltäjä.
+005009831 7001  L $$aSukunimi, Etunimi,$$esäveltäjä.$$0(FI-ASTERI-N)012345678

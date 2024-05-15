@@ -1,0 +1,222 @@
+//
+// CREATE FIELD(S) 336 IF NEEDED (= none exists) 
+//
+// If cataloging language is swedish, use swedish values in $a, otherwise
+// Finnish values.
+
+// Hacks: create multi-336 based on LDR/06 and field 300:
+
+// BOOKS AND SERIALS (LDR/07=a or t)
+// Note that 245$h might contain something of interest,
+// but since it hasn't been used in 10+ years, I'm not bothering with it.
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'a' Or 000/7/ = 't'	) And \
+    (008/30/ = 'f' )
+000 | <B36$b | 'tct'    
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'a' Or 000/7/ = 't'	)	
+000 | <B36$b | 'txt'    
+#endif
+
+// NOTATED MUSIC (LDR/07=c/d)
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'c' Or 000/7/ = 'd'	) And \
+    (008/30/ = 'f' )
+000 | <B36$b | 'tcm'    
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'c' Or 000/7/ = 'd'	)
+000 | <B36$b | 'ntm'    
+#endif
+
+// MAPS (LDR/06=e or f)
+#if (Not Exists(@336)) And (Not Exists(@B36)) And \
+    (000/7/ = 'e' Or 000/7/ = 'f') And (007/1-2/ = 'aq' )
+000 | <B36$b | 'crt'    
+#endif
+
+// PROJECTED (LDR/06=k, partial)
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'g') And \
+    (007/1/ = 'g' )
+000 | <B36$b | 'sti'    
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'g') And \
+    (007/1/ = 'c' Or 007/1/ = ' Or 007/1/ == 'v')
+000 | <B36$b | 'tdi'    
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And \
+    (000/7/ = 'e' Or 000/7/ = 'f') And (008/26/ = 'd' )
+000 | <B36$b | 'crf'    
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And \
+    (000/7/ = 'e' Or 000/7/ = 'f')
+000 | <B36$b | 'cri'    
+#endif
+
+
+// SPOKEN WORD (LDR/06=i)
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'i')
+000 | <B36$b | 'spw'    
+#endif
+
+// MUSIC (LDR/06=j)
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'j')
+000 | <B36$b | 'prm'    
+#endif
+
+// 2D NONPROJECTABLE GRAPHIC (LDR/06=k)
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'k') And \
+    (008/30/ = 'f' )
+000 | <B36$b | 'tci'    
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'k')
+
+#endif
+
+
+// ELECTRONIC RESOURCE
+// Phase 1: check 008/26 (type of computer file)
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    (008/27/ = 'a' Or 008/27/ = 'c')
+000 | <B36$b | 'cod'        
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    (008/27/ = 'b' Or 008/27/ = 'f')
+000 | <B36$b | 'cop'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    (008/27/ = 'd' Or 008/27/ = 'e')
+000 | <B36$b | 'txt'
+#endif
+
+// Videogame gets two values
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    (008/27/ = 'g')
+000 | <C36$b | 'cop'
+000 | <B36$b | 'tdi'        
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    (008/27/ = 'h')
+000 | <B36$b | 'snd'
+#endif
+
+// Electronic resource, phase 2: 256/316
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, '[Oo]hjelma') >= 0 Or \
+      RegFind(@516$a, '[Oo]hjelma') > 0 )
+000 | <B36$b | 'cop'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, '[Aa]udio ?book|[Dd]aisy|nikirja') >= 0 Or \
+      RegFind(@516$a, '[Aa]udio ?book|[Dd]aisy|nikirja') >= 0 )    
+000 | <B36$b | 'spw'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, '[Aa]rti[ck]|[Aa]vhand|[Bb]ook|[Ee]-bok|[Ee]-diss|[Ee]-thesis|[Kk]irja|[Ll]ehti|[Tt]eksti|[Tt]idskrift') >= 0 Or \
+      RegFind(@516$a, '[Aa]rti[ck]|[Aa]vhand|[Bb]ook|[Ee]-bok|[Ee]-diss|[Ee]-thesis|[Kk]irja|[Ll]ehti|[Pp][Dd][Ff]|[Tt]eksti|[Tt]idskrift') >= 0 )
+000 | <B36$b | 'txt'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, '[Pp]eli\b') >= 0 Or \
+      RegFind(@516$a, '[Pp]eli\b') >= 0 )    
+000 | <C36$b | 'cop'
+000 | <B36$b | 'tdi'        
+#endif
+
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, '[Dd]ata|[Tt]ietokanta') >= 0 Or \
+      RegFind(@516$a, '[Dd]ata|[Tt]ietokanta') >= 0 )    
+000 | <B36$b | 'cod'        
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, '[Kk]artta') >= 0 Or \
+      RegFind(@516$a, '[Kk]artta') >= 0 )    
+000 | <B36$b | 'cri'        
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, '[Ee]lokuva|[Ll]iikkuva kuva') >= 0 Or \
+      RegFind(@516$a, '[Ee]lokuva|[Ll]iikkuva kuva') >= 0 )    
+000 | <B36$b | 'tdi'        
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    ( RegFind(@256$a, 'erkkoaineisto.*[1-9]') >= 0 Or \
+      RegFind(@516$a, 'erkkoaineisto.*[1-9]') >= 0 )    
+000 | <B36$b | 'txt'        
+#endif
+
+// Phase 3: Check 300 (Add later if the need arises etc)
+
+// Phase 4: Fallbacks xxx=other and zzz=unspecified
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm') And \
+    (008/27/ = 'i' Or 008/27/ = 'j' Or 008/27/ = 'm')
+000 | <B36$b | 'xxx'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'm')
+000 | <B36$b | 'zzz'
+#endif
+
+
+// O and P
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'o') And \
+    (008/30/ = 'd' Or 008/30/ = 'r')
+000 | <B36$b | 'txt'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'p') And \
+    (008/24/ = 'd' Or 008/24/ = 'r')
+000 | <B36$b | 'txt'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'o' Or 000/7/ = 'p')
+000 | <B36$b | 'xxx'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'r')
+000 | <B36$b | 'tdf'
+#endif
+
+#if (Not Exists(@336)) And (Not Exists(@B36))
+000 | <B36$b | 'zzz'
+#endif
+
+
+
+// Create a new 336 field based on B36
+#if Exists(@B36) And (Not Exists(@336))
+000   | 336(1)I1 | ' '
+000   | 336(1)I2 | ' '
+B36$b | 336(1)$a | If (RegFind(@040$b, 'swe') >= 0) Table('map_swe_336b_to_a') Else Table('map_fin_336b_to_a')
+B36$b | 336(1)$b | S
+B36$b | 336(1)$2 | 'rdacontent'
+
+#endif
+
+// Create *second* 336 field if needed.
+// NB! Here we don't check whether field 336 exists
+#if Exists(@C36)
+000   | 336(2)I1 | ' '
+000   | 336(2)I2 | ' '
+C36$b | 336(2)$a | If (RegFind(@040$b, 'swe') >= 0) Table('map_swe_336b_to_a') Else Table('map_fin_336b_to_a')
+C36$b | 336(2)$b | S
+C36$b | 336(2)$2 | 'rdamedia'
+#endif
+
+B36 | <DEL  | S
+C36 | <DEL  | S
+

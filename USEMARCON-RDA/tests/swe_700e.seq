@@ -4,7 +4,11 @@
 005009831 007   L aj|^^a|||
 005009831 008   L 170207s2014^^^^fi^||||||b||^||||||eng|c
 005009831 040   L $$bfin
+005009831 1001  L $$aSukunimi, Etunimi,$$esäv.,$$esan.$$esov.
 005009831 24500 L $$aFillariopas
 005009831 300   L $$a1 whatever.
 005009831 500   L $$aTässä testataan 600- ja 610-kentän välimerkkejä.
-005009831 7001  L $$aSukunimi, Etunimi,$$esäv.,$$esan.$$esov.
+005009831 7001  L $$aSukunimi, Etunimi,$$esäv.,$$esäv,$$esan.$$esov.
+005009831 7001  L $$aSukunimi, Etunimi,$$eförfattare
+005009831 7001  L $$aSukunimi, Etunimi,$$eförfattare$$0(FI-ASTERI-N)012345678
+005009831 7001  L $$aSukunimi4, Etunimi4,$$earr.$$4act$$4xxx

@@ -7,5 +7,8 @@
 005009831 24500 L $$aFillariopas
 005009831 300   L $$a1 whatever.
 005009831 500   L $$aTässä testataan 600- ja 610-kentän välimerkkejä.
+005009831 500   L $$aEi osata lisätä LC:lle (ind2=0) loppipistettä usemarconin bugisuuden takia (@600I2 tarkistaisi kaikki osakentät)
 005009831 60014 L $$aSukunimi, Etunimi,$$cfikt.
+005009831 60004 L $$aJoku$zPaikka
+005009831 60000 L $$aJoku$zPaikka
 005009831 61024 L $$aIso Paha Yhtiö,$$cfikt.

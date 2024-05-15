@@ -1,17 +1,4 @@
-sv_Funktiotermit.tbl -- RDA-funktiotermien avaus, englanninkielisten kääntäminen, ruotsi (X00, X10, X11 $e, $j)
-
-a r r.   | a r r a n g 0xc3 0xb6 r
-a r t i s t  | e x e k u t 0xc3 0xb6 r
-e x e k .  | e x e k u t 0xc3 0xb6 r
-i l l .    | i l l u s t r a t 0xc3 0xb6 r
-k o m p .  | k o m p o s i t 0xc3 0xb6 r
-r e d .   | r e d a k t 0xc3 0xb6 r
-r e g .   | r e g i s s 0xc3 0xb6 r
-s a n .	| s 0xc3 0xa5 n g t e x t f 0xc3 0xb6 r f a t t a r e
-s o v . | a r r a n g 0xc3 0xb6 r
-s 0xc3 0xa4 v .  | k o m p o s i t 0xc3 0xb6 r
-t o n s .   | k o m p o s i t 0xc3 0xb6 r 
-0xc3 0xb6 v e r s .  | 0xc3 0xb6 v e r s 0xc3 0xa4 t t a r e
+sv_Funktiotermit.tbl -- RDA-funktiotermien avaus, englanninkielisten kääntäminen, ruotsi (X00$e, X10$e, X11$j, X30$e)
 
 a b r i d g e r   |  f 0xc3 0xb6 r k o r t a d 0x20 u t g 0xc3 0xa5 v a
 a c t o r   |  s k 0xc3 0xa5 d e s p e l a r e
@@ -110,15 +97,18 @@ r e c o r d i n g 0x20 e n g i n e e r   | v i d e o t e k n i k e r
 r e c o r d i s t   | l j u d t e k n i k e r
 r e s p o n d e n t   | r e s p o n d e n t
 r e s t o r a t i o n i s t   | k o n s e r v a t o r
+s a n o i t t a j a   | s 0xc3 0xa5 n g t e x t f 0xc3 0xb6 r f a t t a r e
 s c r e e n w r i t e r   | m a n u s f 0xc3 0xb6 r f a t t a r e
 s c u l p t o r   | s k u l p t 0xc3 0xb6 r
 s e l l e r   | f 0xc3 0xb6 r s 0xc3 0xa4 l j a r e
 s i n g e r    | s 0xc3 0xa5 n g a r e
+s o v i t t a j a   | a r r a n g 0xc3 0xb6 r
 s p e a k e r   | t a l a r e
 s p o n s o r i n g 0x20 b o d y   | s p o n s o r
 s t a g e 0x20 d i r e c t o r   | s c e n r e g i s s 0xc3 0xb6 r
 s t or y t e l l e r    | h i s t o r i e b e r 0xc3 0xa4 t t a r e
 s u r v e y o r    | l a n t m 0xc3 0xa4 t a r e
+s 0xc3 0xa4 v e l t 0xC3 0xA4 j 0xC3 0xA4  | k o m p o s i t 0XC3 0xB6 r
 t e a c h e r  | l 0xc3 0xa4 r a r e
 t e l e v i s i o n 0x20 d i r e c t o r    | T V - r e g i s s 0xc3 0xb6 r
 t e l e v i s i o n 0x20 p r o d u c e r    | T V - p r o d u c e n t

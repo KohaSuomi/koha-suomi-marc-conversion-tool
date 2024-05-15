@@ -9,10 +9,11 @@ echo Testataan...
 
 rm -fv *.output
 
-for i in swe_*.seq; do
+for i in swe*.seq; do
     echo Process test for $i
 
     $project_dir/tests/any2marc.perl $i > $usemarcon_input_file 2>/dev/null
+    
     $usemarcon_command $usemarcon_ini_file $usemarcon_input_file $usemarcon_output_file > /dev/null 2>/dev/null
     if [ ! -e $use_marcon_output_file ]; then
         echo ERROR

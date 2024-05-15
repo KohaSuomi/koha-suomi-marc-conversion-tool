@@ -1,0 +1,13 @@
+
+
+245I1 | 245I1  | If (Exists(@100) Or Exists(@110) Or Exists(@111) Or Exists(@130)) Then '1' Else '0'
+245I2 | 245I2  | S
+
+// Aineiston yleismäärettä 245$h ei enää käytetä, sitä ei siis kopioida.
+245$h | <DEL   | S
+245$? | <F45$? | S
+
+F45 | 245 | RegReplace('($a[^$]*[^:])$b', '\\1 :$b'); \
+    RegReplace('($[ab][^$]*[^/=])$c', '\\1 /$c'); \
+    RegReplace('($[a-z][^$]*[^.])\$', '\\1.'); \
+    S

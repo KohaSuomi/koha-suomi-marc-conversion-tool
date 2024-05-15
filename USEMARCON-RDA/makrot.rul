@@ -1,0 +1,546 @@
+// Put all macros here, to avoid copypaste coding between Finnish and Swedish.
+// 2024-03-14
+
+
+// This rule is intented for fields with a single $e subfield.
+// Useamarcon is crappy and will fail spectacularily with multiple $es.
+// (= same rule is applied for all $e subfield, apparently it's always the first
+// $e subfield for which the nexSub($e) check is done.
+#define macro RELATORTERM | Table ('Funktiotermit.tbl'); S
+
+
+#define macro LCPUNC | RegReplace('a', 'A'); S
+
+// TODO: refator FI300AE vs SV300AE
+// TODO: refator FI300BE vs SV300BE
+
+#define macro FI300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+                      RegReplace('(\\d+) s\\.', '\\1 sivua', 'g'); \
+                      RegReplace('(\\[\\d+\\]) s\\.', '\\1 sivua', 'g'); \
+                      RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
+                      RegReplace('\\bs\\. (\\d+-\\d+)', 'sivut \\1', 'g'); \
+                      RegReplace('S\\. (\\d+-\\d+)', 'sivut \\1', 'g'); \
+                      RegReplace('1 vol\\.', '\\1 nide', 'g'); \
+                      RegReplace('(\\d+) vol\\.', '\\1 nidettä', 'g'); \
+                      RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
+                      RegReplace('\\bss\\.', 'sivut', 'g'); \
+                      RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
+                      RegReplace('\\bmuotokuv\\.', 'muotokuvia', 'g'); \
+                      RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
+                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
+
+#define macro SV300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+                      RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
+                      RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
+                      RegReplace('\\bss\\.', 'sivut', 'g'); \
+                      RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
+                      RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
+                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
+		      
+// Usemarcon has Mixed() but I (nv) can't get it to work
+#define macro UPPERCASE130L | RegReplace('^a', 'A'); RegReplace('^b', 'B'); \
+	RegReplace('^c', 'C'); RegReplace('^d', 'D'); RegReplace('^e', 'E'); \
+	RegReplace('^f', 'F'); RegReplace('^g', 'G'); RegReplace('^h', 'H'); \
+	RegReplace('^i', 'I'); RegReplace('^j', 'J'); RegReplace('^k', 'K'); \
+	RegReplace('^l', 'L'); RegReplace('^m', 'M'); RegReplace('^n', 'N'); \
+	RegReplace('^o', 'O'); RegReplace('^p', 'P'); RegReplace('^q', 'Q'); \
+	RegReplace('^r', 'R'); RegReplace('^s', 'S'); RegReplace('^t', 'T'); \
+	RegReplace('^u', 'U'); RegReplace('^v', 'V'); RegReplace('^w', 'W'); \
+	RegReplace('^x', 'X'); RegReplace('^y', 'Y'); RegReplace('^z', 'Z')
+
+#define macro FI300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
+                      RegReplace('kuv\\.', 'kuvitettu', 'g'); \
+		      RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
+		      RegReplace('\\b1 videokas\\.', '1 videokasetti', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) videokas\\.', '\\1 videokasettia', 'g'); \
+		      RegReplace('vär\\.', 'värillinen', 'g'); \
+                      RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
+		      RegReplace('\\b1 äänikas\\.', '1 äänikasetti', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) äänikas\\.', '\\1 äänikasettia', 'g'); \
+		      RegReplace('nuott\\.', 'nuotteja', 'g'); \
+                      RegReplace('kuval\\.', 'kuvalehteä', 'g'); \
+                      RegReplace('diagrs\\.', 'diagrams', 'g'); \
+                      RegReplace('incl\\.', 'includes', 'g'); \
+                      RegReplace('fold(\\.)* maps', 'folded maps', 'g'); \
+                      RegReplace('(\\d+) irtol\\.', '\\1 irtolehteä'); \
+                      Replace('kuvas.' By 'kuvasivua'); \
+                      RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoa', 'g'); \
+                      RegReplace('\\btaul\\.', 'taulukkoja', 'g'); \
+                      RegReplace('hakem\\.|hakem(\$|\\b)', 'hakemisto', 'g'); \
+                      RegReplace('lyh\\. luett\\.', 'lyhenneluettelo', 'g'); \
+                      RegReplace('lähdel\\.|lähdel(\$|\\b)', 'lähdeluettelo', 'g'); \
+                      RegReplace('liitel\\.|liitel(\$|\\b)', 'liiteluettelo', 'g'); \
+                      RegReplace('(\\d*) taul\\.', '\\1 taulukkoa', 'g'); \
+                      RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä', 'g'); \
+                      RegReplace('\\] kuvas\\.|\\] kuvas(\$|\\b)', '] kuvasivua', 'g'); \
+                      RegReplace('1 liites\\.|1 liites(\$|\\b)', '1 liitesivu', 'g'); \
+                      RegReplace('liites\\.|liites(\$|\\b)', 'liitesivua', 'g'); \
+                      RegReplace('liitt\\.', 'liitteitä', 'g'); \
+                      RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
+
+
+#define macro SV300BE | RegReplace('\\bill\\.', 'illustrationer', 'g'); \
+	      	      RegReplace('($[abcde])ill\\.', '\\1illustrationer', 'g'); \
+	      	      RegReplace('kartt\\.', 'karttoja', 'g'); \
+                      RegReplace('kart\\.', 'kartor', 'g'); \
+                      RegReplace('kuv\\.', 'kuvitettu', 'g'); \
+		      RegReplace('\\b1 ljudkass\\.', '1 ljudkassett', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) ljudkass\\.', '\\1 ljudkassetter', 'g'); \
+		      RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
+		      RegReplace('\\b1 videokass\\.', '1 videokassett', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) videokass\\.', '\\1 videokassetter', 'g'); \
+		      RegReplace('vär\\.', 'värillinen', 'g'); \
+                      RegReplace('\\bl\\.', 'blad', 'g'); \
+                      RegReplace('\\bfig\\.', 'figurer', 'g'); \
+                      RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
+                      RegReplace('nuott\\.', 'nuotteja', 'g'); \
+                      RegReplace('\\bbil\\.', 'bilder', 'g'); \
+                      RegReplace('kuval\\.', 'kuvalehteä', 'g'); \
+                      RegReplace('diagrs\\.', 'diagrams', 'g'); \
+                      RegReplace('incl\\.', 'includes', 'g'); \
+                      RegReplace('fold(\\.)* maps', 'folded maps', 'g'); \
+                      RegReplace('(\\d+) irtol\\.', '\\1 irtolehteä'); \
+                      Replace('kuvas.' By 'kuvasivua'); \
+                      RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoa', 'g'); \
+                      RegReplace('\\btaul\\.', 'taulukkoja', 'g'); \
+                      RegReplace('hakem\\.|hakem(\$|\\b)', 'hakemisto', 'g'); \
+                      RegReplace('lyh\\. luett\\.', 'lyhenneluettelo', 'g'); \
+                      RegReplace('lähdel\\.|lähdel(\$|\\b)', 'lähdeluettelo', 'g'); \
+                      RegReplace('liitel\\.|liitel(\$|\\b)', 'liiteluettelo', 'g'); \
+                      RegReplace('(\\d*) taul\\.', '\\1 taulukkoa', 'g'); \
+                      RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä', 'g'); \
+                      RegReplace('\\] kuvas\\.|\\] kuvas(\$|\\b)', '] kuvasivua', 'g'); \
+                      RegReplace('1 liites\\.|1 liites(\$|\\b)', '1 liitesivu', 'g'); \
+                      RegReplace('liites\\.|liites(\$|\\b)', 'liitesivua', 'g'); \
+                      RegReplace('liitt\\.', 'liitteitä', 'g'); \
+                      RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
+
+
+#define macro 300C | RegReplace('\\b2:o', 'folio', 'g'); \
+	RegReplace('\\b4:o', 'kvartto', 'g'); \
+	RegReplace('\\b8:o', 'oktaavo', 'g')
+
+
+// Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
+
+#define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
+                                 RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
+                                 RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
+                                 RegReplace('\\bork\\.|\\bork(\$|\\b)', 'orkesteri', 'g'); \
+                                 RegReplace('jousiork\\.|jousiork(\$|\\b)', 'jousiorkesteri'); \
+                                 RegReplace('kamariork\\.|kamariork(\$|\\b)', 'orkesteri'); \
+                                 RegReplace('puhallinork\\.|puhallinork(\$|\\b)', 'puhallinorkesteri'); \
+                                 RegReplace('\\bkät\\.|\\bkät(\$|\\b)', 'kätisesti'); \
+                                 RegReplace('soitinääni', 'määrittämätön soitin'); \
+                                 If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
+                                 If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') < 0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
+                                 If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') < 0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
+                                 If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') < 0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
+                                 If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') < 0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+
+
+#define macro AANITYYPPI RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
+  RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopraano\\1', 'g'); \
+  RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraanot \\1', 'g'); \
+  RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopraano\\1', 'g'); \
+  RegReplace('\\bA\\s*(\\(\\d+)', 'altot \\1', 'g'); \
+  RegReplace('\\bA(,|\\s|/|\\)|\$)', 'altto\\1', 'g'); \
+  RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorit \\1', 'g'); \
+  RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenori\\1', 'g'); \
+  RegReplace('\\bT\\s*(\\(\\d+)', 'tenorit \\1', 'g'); \
+  RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenori\\1', 'g'); \
+  RegReplace('\\bBar\\s*(\\(\\d+)', 'baritonit \\1', 'g'); \
+  RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baritoni\\1', 'g'); \
+  RegReplace('\\bB\\s*(\\(\\d+)', 'bassot \\1', 'g'); \
+  RegReplace('\\bB(,|\\s|/|\\)|\$)', 'basso\\1', 'g');
+
+
+#define macro ROSTTYP RegReplace('\\bS\\s*(\\(\\d+)', 'sopraner \\1', 'g'); \
+  RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopran\\1', 'g'); \
+  RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraner \\1', 'g'); \
+  RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopran\\1', 'g'); \
+  RegReplace('\\bA\\s*(\\(\\d+)', 'altar \\1', 'g'); \
+  RegReplace('\\bA(,|\\s|/|\\)|\$)', 'alt\\1', 'g'); \
+  RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorer \\1', 'g'); \
+  RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenor\\1', 'g'); \
+  RegReplace('\\bT\\s*(\\(\\d+)', 'tenorer \\1', 'g'); \
+  RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenor\\1', 'g'); \
+  RegReplace('\\bBar\\s*(\\(\\d+)', 'barytoner \\1', 'g'); \
+  RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baryton\\1', 'g'); \
+  RegReplace('\\bB\\s*(\\(\\d+)', 'basar \\1', 'g'); \
+  RegReplace('\\bB(,|\\s|/|\\)|\$)', 'bas\\1', 'g');
+
+
+
+#define macro TRIOT            | RegReplace('^piano, jouset', 'piano, viulu, sello'); \
+                                 RegReplace('^jouset', 'viulu, alttoviulu, sello')
+                                 
+#define macro KVARTETOT        | RegReplace('^piano, jouset', 'piano, viulu, alttoviulu, sello');\
+                                 RegReplace('^jouset', 'viulut (2), alttoviulu, sello'); \
+                                 RegReplace('^puupuhaltimet', 'huilu, oboe, klarinetti, fagotti')
+                              
+#define macro KVINTETOT        | RegReplace('^jouset', 'viulut (2), alttoviulut (2), sello'); \
+                                 RegReplace('^piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
+                                 RegReplace('^puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+
+// Term name seen in auth 400$q (Arranged statement of music)
+#define macro SOVITUSMERKINTO_FI | RegReplace('sov\\.', 'sovitettu', 'g')
+
+#define macro SOVITUSMERKINTO_SV | RegReplace('sov\\.', 'sovitettu', 'g'); \
+                                RegReplace('arr\\.', 'arrangemang', 'g')
+				
+#define macro RAAMATTU | RegReplace('\\bUT(\\b|\\.)', 'Uusi testamentti', 'g'); \
+                         RegReplace('\\bVT(\\b|\\.)', 'Vanha testamentti', 'g')
+
+
+#define macro FIKTIIVINEN_HAHMO | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiv gestalt', '(fiktiivinen hahmo)', 'g');
+
+#define macro FIKTIV_GESTALT | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiivinen hahmo', '(fiktiv gestalt)', 'g');
+
+#define macro FIKTIIVINEN_YHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
+
+#define macro FIKTIV_INSTITUTION | RegReplace('fikt\\.', '(fiktiv institution)')
+
+// TODO: samma på svenska, t.ex.: f. => föddes?
+
+#define macro AIKAMAAREET | RegReplace('\\bs\\.', 'syntynyt', 'g'); \
+                            RegReplace('\\bk\\.', 'kuollut', 'g'); \
+                            RegReplace('\\bn\\.', 'noin', 'g'); \
+                            RegReplace('\\bvs\\.', 'vuosisata', 'g')
+
+#define macro SIDOSASUT |  RegReplace('\\b(sid|Sid|SID)\\.', 'sidottu', 'g'); \
+	      		   RegReplace('\\b(sid|Sid|SID)\\b', 'sidottu', 'g'); \
+			   RegReplace('\\bsidottu\\b', 'kovakantinen', 'g'); \
+			   RegReplace('\\b(nid|Nid|NID)\\.', 'nidottu', 'g'); \
+			   RegReplace('\\b(nid|Nid|NID)\\b', 'nidottu', 'g'); \
+			   RegReplace('\\bnidottu\\b', 'pehmeäkantinen', 'g'); \
+			   RegReplace('\\b(inb|Inb|INB)\\.', 'inbunden', 'g'); \
+			   RegReplace('\\b(inb|Inb|INB)\\b', 'inbunden', 'g'); \
+			   RegReplace('\\binbunden\\b', 'hårda pärmar', 'g'); \
+			   RegReplace('\\b(hft|Hft|HFT)\\.', 'häftad', 'g'); \
+			   RegReplace('\\b(hft|Hft|HFT)\\b', 'häftad', 'g'); \
+			   RegReplace('\\bhäftad\\b', 'mjuka pärmar', 'g'); \
+                           RegReplace('\\bvirh\\b|\\bvirh\\.', 'virheellinen', 'g'); \
+                          RegReplace('\\bpbk\\.', 'paperback', 'g'); \
+                          RegReplace('\\bpbk\\b', 'paperback', 'g'); \
+                          RegReplace('\\bhbk\\.', 'hardback', 'g'); \
+                          RegReplace('\\bhbk\\b', 'hardback', 'g'); \
+                          RegReplace('\\balk\\.', 'alkaline', 'g'); \
+                          RegReplace('\\balk\\b', 'alkaline', 'g'); \
+			  RegReplace('\\bbk\\.', 'book', 'g'); \
+                          RegReplace('\\bbkk\\b', 'book', 'g'); \
+			  RegReplace('\\bverkkojulk\\.', 'verkkojulkaisu', 'g'); \
+			  RegReplace('\\bverkkojulkaisu', 'verkkoaineisto', 'g')
+
+
+
+#define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna', 'g'); \
+                               RegReplace('[Pp]aperisena', 'painettuna', 'g'); \
+                               RegReplace('Verkkokirja', '1 verkkoaineisto', 'g'); \
+                               RegReplace('[Ii]nternet-julkaisu\\b', 'verkkoaineisto', 'g'); \
+                               RegReplace('[Ee]lektroninen aineisto', 'Verkkoaineisto', 'g'); \
+                               RegReplace('erkkojulkaisu', 'erkkoaineisto'); \
+                               RegReplace('Elektroninen julkaisu|Verkkojulkaisuun', 'Linkki verkkoaineistoon')
+
+#define macro FUNKTIOVALIMERKIT | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$e)', '\\1,\\2', 'g'); \
+                                  RegReplace(',,', ',')
+                                  
+
+
+// Lisää loppupisteen kenttään, jos se ei lopu johonkin seuraavista merkeistä: ), ], ?, !, -, .
+// NV 20230201: added rule that does not add a dot after a control subfield
+#define macro LOPPUPISTE_X30 | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0) And (RegFind('$[0-9][^$]+\$') <0) ) Then S + '.' Else S 
+
+#define macro COMMA2DOT_BEFORE_L | RegReplace(',$l', '.$l');
+
+
+
+
+// These are language-independent expansions. Translations should be applied on a different stage
+#define macro FINNISHRELATORABBRS | \
+	RegReplace('^esitt\\.?((,.*)?)\$', 'esittäjä\\1'); \
+	RegReplace('^san\\.?((,.*)?)\$', 'sanoittaja\\1'); \
+	RegReplace('^sov\\.?((,.*)?)\$', 'sovittaja\\1'); \
+	RegReplace('^säv\\.?((,.*)?)\$', 'säveltäjä\\1')
+
+#define macro SWEDISHRELATORABBRS | \
+	RegReplace('^arr\\.?((,.*)?)\$', 'arrangör\\1'); \
+	RegReplace('^art\\.?((,.*)?)\$', 'artist\\1'); \
+	RegReplace('^exek\\.?((,.*)?)\$', 'exekutör\\1'); \
+	RegReplace('^ill\\.?((,.*)?)\$', 'illustratör\\1'); \
+	RegReplace('^komp\\.?((,.*)?)\$', 'kompositör\\1'); \
+	RegReplace('^red\\.?((,.*)?)\$', 'redaktör\\1'); \
+	RegReplace('^reg\\.?((,.*)?)\$', 'regissör\\1'); \
+	RegReplace('^tons\\.?((,.*)?)\$', 'tonsättare\\1'); \
+	RegReplace('^övers\\.?((,.*)?)\$', 'översättare\\1') 
+
+
+
+
+#define macro ENTRY_FIELD_PUNCTUATION | RegReplace(',\$', ''); \
+	RegReplace ('($a[^$]+),$c\\(', '\\1$c('); \
+	RegReplace ('($[a-z][^$]+([A-Za-z0-9]|å|ä|ö))$e', '\\1,$e', 'g'); \
+	RegReplace ('($[a-z][^$]*[^$ ]) *[,;:](($[059][^$]+)*)\$', '\\1.\\2'); \
+	RegReplace ('($e[^$]+[^.])(($[059][^$]+)*)\$', '\\1.\\2'); \
+	RegReplace ('($[abcde][^$]+([a-z0-9]|å|ö|ö))[ ,;:]?$t', '\\1.$t', 'g'); \
+	RegReplace(',$l', '.$l')
+
+
+#define macro REMOVEPARENTHESES | RegReplace('\\(([^\\)]*)\\)', '\\1')
+
+
+// grep "[       ]\|" ../sv_Funktiokoodit.tbl  | perl -pe 's/ 0xC3 0xB6/ ö/gi; s/ 0xC3 0xA5/ å/gi; s/ 0xC3 0xA4/ ä/gi; s/\s//g; s/0x20/ /g; s/^/\tRegReplace('\''\$4/; s/\|/(\$.*)?'\'', '\''\$e/; s/$/\\\\1'\''); \\\n/;'
+
+
+// $E becomes $e or $j (111)
+
+#define macro RELATORCODES2FIN | \
+	RegReplace('$4abr($.*)?', '$Elyhentäjä\\1'); \
+	RegReplace('$4act($.*)?', '$Enäyttelijä\\1'); \
+	RegReplace('$4aft($.*)?', '$Eloppusanojen kirjoittaja\\1'); \
+	RegReplace('$4anm($.*)?', '$Eanimaattori\\1'); \
+	RegReplace('$4ann($.*)?', '$Ehuomautusten kirjoittaja\\1'); \
+	RegReplace('$4app($.*)?', '$Emuutoksenhakija\\1'); \
+	RegReplace('$4aqt($.*)?', '$Eoheistekstin kirjoittaja\\1'); \
+	RegReplace('$4arc($.*)?', '$Earkkitehti\\1'); \
+	RegReplace('$4ard($.*)?', '$Elavastaja\\1'); \
+	RegReplace('$4arr($.*)?', '$Esovittaja\\1'); \
+	RegReplace('$4art($.*)?', '$Etaiteilija\\1'); \
+	RegReplace('$4ato($.*)?', '$Enimikirjoituksen kirjoittaja\\1'); \
+	RegReplace('$4att($.*)?', '$Ekirjoittaja\\1'); \
+	RegReplace('$4aui($.*)?', '$Eesipuheen kirjoittaja\\1'); \
+	RegReplace('$4aus($.*)?', '$Ekäsikirjoittaja\\1'); \
+	RegReplace('$4aut($.*)?', '$Ekirjoittaja\\1'); \
+	RegReplace('$4bnd($.*)?', '$Esitoja\\1'); \
+	RegReplace('$4brd($.*)?', '$Elähetyksestä vastaava\\1'); \
+	RegReplace('$4brl($.*)?', '$Epistekirjoituksen valmistaja\\1'); \
+	RegReplace('$4cas($.*)?', '$Evalaja\\1'); \
+	RegReplace('$4chr($.*)?', '$Ekoreografi\\1'); \
+	RegReplace('$4clt($.*)?', '$Ekollotypian valmistaja\\1'); \
+	RegReplace('$4cmm($.*)?', '$Eselostaja\\1'); \
+	RegReplace('$4cmp($.*)?', '$Esäveltäjä\\1'); \
+	RegReplace('$4cnd($.*)?', '$Ejohtaja\\1'); \
+	RegReplace('$4cng($.*)?', '$Ekuvaaja\\1'); \
+	RegReplace('$4col($.*)?', '$Ekokoelman muodostaja\\1'); \
+	RegReplace('$4com($.*)?', '$Ekokoaja\\1'); \
+	RegReplace('$4cor($.*)?', '$Ekokoelman luetteloija\\1'); \
+	RegReplace('$4cou($.*)?', '$Etuomioistuimessa voimassa\\1'); \
+	RegReplace('$4cph($.*)?', '$Etekijänoikeuden omistaja\\1'); \
+	RegReplace('$4crt($.*)?', '$Etuomioistuimen kirjuri\\1'); \
+	RegReplace('$4csl($.*)?', '$Easiantuntija\\1'); \
+	RegReplace('$4cst($.*)?', '$Epuvustaja\\1'); \
+	RegReplace('$4ctb($.*)?', '$Eavustaja\\1'); \
+	RegReplace('$4ctg($.*)?', '$Ekartantekijä\\1'); \
+	RegReplace('$4cur($.*)?', '$Ekuraattori\\1'); \
+	RegReplace('$4cwt($.*)?', '$Ekommentaattori\\1'); \
+	RegReplace('$4dfd($.*)?', '$Evastaaja oikeudenkäynnissä\\1'); \
+	RegReplace('$4dgg($.*)?', '$Eoppiarvon myöntänyt laitos\\1'); \
+	RegReplace('$4dis($.*)?', '$Erespondentti\\1'); \
+	RegReplace('$4dnc($.*)?', '$Etanssija\\1'); \
+	RegReplace('$4dnr($.*)?', '$Elahjoittaja\\1'); \
+	RegReplace('$4dpt($.*)?', '$Eaineiston tallettaja\\1'); \
+	RegReplace('$4drm($.*)?', '$Epiirtäjä\\1'); \
+	RegReplace('$4drt($.*)?', '$Eohjaaja\\1'); \
+	RegReplace('$4dsr($.*)?', '$Esuunnittelija\\1'); \
+	RegReplace('$4dst($.*)?', '$Ejakaja\\1'); \
+	RegReplace('$4dte($.*)?', '$Eteos omistettu\\1'); \
+	RegReplace('$4dto($.*)?', '$Eteoksen omistuskirjoituksen tekijä\\1'); \
+	RegReplace('$4dub($.*)?', '$Ekirjoittaja\\1'); \
+	RegReplace('$4edc($.*)?', '$Etoimittaja\\1'); \
+	RegReplace('$4edm($.*)?', '$Eleikkaaja\\1'); \
+	RegReplace('$4edt($.*)?', '$Etoimittaja\\1'); \
+	RegReplace('$4egr($.*)?', '$Ekaivertaja\\1'); \
+	RegReplace('$4etr($.*)?', '$Eetsaaja\\1'); \
+	RegReplace('$4fac($.*)?', '$Ejäljenteen toteuttaja\\1'); \
+	RegReplace('$4fds($.*)?', '$Eelokuvan jakelija\\1'); \
+	RegReplace('$4flm($.*)?', '$Eleikkaaja\\1'); \
+	RegReplace('$4fmd($.*)?', '$Eelokuvaohjaaja\\1'); \
+	RegReplace('$4fmk($.*)?', '$Eelokuvantekijä\\1'); \
+	RegReplace('$4fmo($.*)?', '$Eaikaisempi omistaja\\1'); \
+	RegReplace('$4fmp($.*)?', '$Eelokuvatuottaja\\1'); \
+	RegReplace('$4his($.*)?', '$Eisäntäorganisaatio\\1'); \
+	RegReplace('$4hnr($.*)?', '$Eteoksella kunnioitettu\\1'); \
+	RegReplace('$4hst($.*)?', '$Ejuontaja\\1'); \
+	RegReplace('$4ill($.*)?', '$Ekuvittaja\\1'); \
+	RegReplace('$4ilu($.*)?', '$Eilluminoinnin tekijä\\1'); \
+	RegReplace('$4ins($.*)?', '$Eomistuskirjoituksen kirjoittaja\\1'); \
+	RegReplace('$4inv($.*)?', '$Ekeksijä\\1'); \
+	RegReplace('$4isb($.*)?', '$Ejulkaisija\\1'); \
+	RegReplace('$4itr($.*)?', '$Esoittaja\\1'); \
+	RegReplace('$4ive($.*)?', '$Ehaastateltava\\1'); \
+	RegReplace('$4ivr($.*)?', '$Ehaastattelija\\1'); \
+	RegReplace('$4jud($.*)?', '$Etuomari\\1'); \
+	RegReplace('$4lbt($.*)?', '$Elibretisti\\1'); \
+	RegReplace('$4ltg($.*)?', '$Elitografi\\1'); \
+	RegReplace('$4lyr($.*)?', '$Esanoittaja\\1'); \
+	RegReplace('$4msd($.*)?', '$Emusiikkijohtaja\\1'); \
+	RegReplace('$4mus($.*)?', '$Eesittäjä\\1'); \
+	RegReplace('$4nrt($.*)?', '$Ekertoja\\1'); \
+	RegReplace('$4oth($.*)?', '$Emuu\\1'); \
+	RegReplace('$4own($.*)?', '$Enykyinen omistaja\\1'); \
+	RegReplace('$4pan($.*)?', '$Epanelisti\\1'); \
+	RegReplace('$4pbd($.*)?', '$Etoimittaja\\1'); \
+	RegReplace('$4pbl($.*)?', '$Ejulkaisija\\1'); \
+	RegReplace('$4pht($.*)?', '$Evalokuvaaja\\1'); \
+	RegReplace('$4plt($.*)?', '$Epainolaatan valmistaja\\1'); \
+	RegReplace('$4ppt($.*)?', '$Enukettaja\\1'); \
+	RegReplace('$4pra($.*)?', '$Epreeses\\1'); \
+	RegReplace('$4prd($.*)?', '$Etuottaja\\1'); \
+	RegReplace('$4pre($.*)?', '$Eesittämisestä vastaava\\1'); \
+	RegReplace('$4prf($.*)?', '$Eesittäjä\\1'); \
+	RegReplace('$4prg($.*)?', '$Eohjelmoija\\1'); \
+	RegReplace('$4prm($.*)?', '$Ekuvalaatan valmistaja\\1'); \
+	RegReplace('$4prn($.*)?', '$Etuotantoyhtiö\\1'); \
+	RegReplace('$4pro($.*)?', '$Etuottaja\\1'); \
+	RegReplace('$4prs($.*)?', '$Etuotantosuunnittelija\\1'); \
+	RegReplace('$4prt($.*)?', '$Ekirjanpainaja\\1'); \
+	RegReplace('$4ptf($.*)?', '$Ekantaja oikeudenkäynnissä\\1'); \
+	RegReplace('$4rce($.*)?', '$E0xc30x84änittäjä\\1'); \
+	RegReplace('$4rcp($.*)?', '$Evastaanottaja\\1'); \
+	RegReplace('$4rdd($.*)?', '$Eradio-ohjelman ohjaaja\\1'); \
+	RegReplace('$4rev($.*)?', '$Ekriitikko\\1'); \
+	RegReplace('$4rpc($.*)?', '$Eradiotuottaja\\1'); \
+	RegReplace('$4rpy($.*)?', '$Etoimittaja\\1'); \
+	RegReplace('$4rsp($.*)?', '$Erespondentti\\1'); \
+	RegReplace('$4rsr($.*)?', '$Eentisöijä\\1'); \
+	RegReplace('$4scl($.*)?', '$Ekuvanveistäjä\\1'); \
+	RegReplace('$4sgd($.*)?', '$Enäyttämöohjaaja\\1'); \
+	RegReplace('$4sll($.*)?', '$Emyyjä\\1'); \
+	RegReplace('$4sng($.*)?', '$Elaulaja\\1'); \
+	RegReplace('$4spn($.*)?', '$Esponsori\\1'); \
+	RegReplace('$4spk($.*)?', '$Epuhuja\\1'); \
+	RegReplace('$4srv($.*)?', '$Emaanmittari\\1'); \
+	RegReplace('$4stl($.*)?', '$Etarinankertoja\\1'); \
+	RegReplace('$4std($.*)?', '$Elavastaja\\1'); \
+	RegReplace('$4tch($.*)?', '$Eopettaja\\1'); \
+	RegReplace('$4tld($.*)?', '$Etelevisio-ohjaaja\\1'); \
+	RegReplace('$4tlp($.*)?', '$Etelevisiotuottaja\\1'); \
+	RegReplace('$4trc($.*)?', '$Etranskriboija\\1'); \
+	RegReplace('$4trl($.*)?', '$Ekääntäjä\\1'); \
+	RegReplace('$4voc($.*)?', '$Elaulaja\\1'); \
+	RegReplace('$4wac($.*)?', '$Ekommentaarin kirjoittaja\\1'); \
+	RegReplace('$4wal($.*)?', '$Elisätyn sanoituksen kirjoittaja\\1'); \
+	RegReplace('$4wam($.*)?', '$Eliiteaineiston tekijä\\1'); \
+	RegReplace('$4wat($.*)?', '$Elisätyn tekstin kirjoittaja\\1')
+
+#define macro RELATORCODES2SWE | \
+	RegReplace('$4abr($.*)?', '$Eförkortad utgåva\\1'); \
+	RegReplace('$4act($.*)?', '$Eskådespelare\\1'); \
+	RegReplace('$4anm($.*)?', '$Eanimatör\\1'); \
+	RegReplace('$4ann($.*)?', '$Eförfattare till annotation\\1'); \
+	RegReplace('$4aqt($.*)?', '$Eförfattare till förord, introducerande material, etc.\\1'); \
+	RegReplace('$4arc($.*)?', '$Earkitekt\\1'); \
+	RegReplace('$4ard($.*)?', '$Escenograf\\1'); \
+	RegReplace('$4arr($.*)?', '$Earrangör\\1'); \
+	RegReplace('$4art($.*)?', '$Ekonstnär\\1'); \
+	RegReplace('$4ato($.*)?', '$Esignatur\\1'); \
+	RegReplace('$4att($.*)?', '$Eförfattare\\1'); \
+	RegReplace('$4aui($.*)?', '$Eförfattare till förord\\1'); \
+	RegReplace('$4aus($.*)?', '$Emanusförfattare\\1'); \
+	RegReplace('$4aut($.*)?', '$Eförfattare\\1'); \
+	RegReplace('$4bnd($.*)?', '$Ebokbindare\\1'); \
+	RegReplace('$4brd($.*)?', '$Esändningsansvarig\\1'); \
+	RegReplace('$4brl($.*)?', '$Epunktskriftspräglare\\1'); \
+	RegReplace('$4cas($.*)?', '$Egjutare\\1'); \
+	RegReplace('$4chr($.*)?', '$Ekoreograf\\1'); \
+	RegReplace('$4clt($.*)?', '$Eframställare av ljustryck\\1'); \
+	RegReplace('$4cmm($.*)?', '$Ekommentator\\1'); \
+	RegReplace('$4cmp($.*)?', '$Ekompositör\\1'); \
+	RegReplace('$4cnd($.*)?', '$Edirigent\\1'); \
+	RegReplace('$4cng($.*)?', '$Efilmfotograf\\1'); \
+	RegReplace('$4col($.*)?', '$Esamlare\\1'); \
+	RegReplace('$4com($.*)?', '$Esammanställare\\1'); \
+	RegReplace('$4cor($.*)?', '$Esamlingsregistrator\\1'); \
+	RegReplace('$4cou($.*)?', '$Edomstols regelverk\\1'); \
+	RegReplace('$4crt($.*)?', '$Edomstolssekreterare\\1'); \
+	RegReplace('$4csl($.*)?', '$Eexpert\\1'); \
+	RegReplace('$4cst($.*)?', '$Ekostymör\\1'); \
+	RegReplace('$4ctg($.*)?', '$Ekartograf\\1'); \
+	RegReplace('$4cur($.*)?', '$Ekurator\\1'); \
+	RegReplace('$4cwt($.*)?', '$Ekommentator\\1'); \
+	RegReplace('$4dfd($.*)?', '$Esvarande part i rättegång\\1'); \
+	RegReplace('$4dgg($.*)?', '$Einstitution som beviljar lärdomsgrad\\1'); \
+	RegReplace('$4dis($.*)?', '$Erespondent\\1'); \
+	RegReplace('$4dnc($.*)?', '$Edansare\\1'); \
+	RegReplace('$4dnr($.*)?', '$Edonator\\1'); \
+	RegReplace('$4dpt($.*)?', '$Edeponerat av\\1'); \
+	RegReplace('$4drm($.*)?', '$Eritare\\1'); \
+	RegReplace('$4drt($.*)?', '$Eregissör\\1'); \
+	RegReplace('$4dsr($.*)?', '$Eformgivare\\1'); \
+	RegReplace('$4dst($.*)?', '$Edistributör\\1'); \
+	RegReplace('$4dte($.*)?', '$Everk tillägnat\\1'); \
+	RegReplace('$4dto($.*)?', '$Everk tillägnat av\\1'); \
+	RegReplace('$4dub($.*)?', '$Eförfattare\\1'); \
+	RegReplace('$4edc($.*)?', '$Eredaktör för samlingsverk\\1'); \
+	RegReplace('$4edm($.*)?', '$Eredigerare\\1'); \
+	RegReplace('$4edt($.*)?', '$Eredaktör\\1'); \
+	RegReplace('$4egr($.*)?', '$Egravör\\1'); \
+	RegReplace('$4etr($.*)?', '$Eetsare\\1'); \
+	RegReplace('$4fds($.*)?', '$Efilmdistributör\\1'); \
+	RegReplace('$4flm($.*)?', '$Eredigerare\\1'); \
+	RegReplace('$4fmd($.*)?', '$Efilmregissör\\1'); \
+	RegReplace('$4fmk($.*)?', '$Efilmskapare\\1'); \
+	RegReplace('$4fmo($.*)?', '$Etidigare ägare\\1'); \
+	RegReplace('$4fmp($.*)?', '$Efilmproducent\\1'); \
+	RegReplace('$4his($.*)?', '$Evärdorganisation\\1'); \
+	RegReplace('$4hnr($.*)?', '$Efestskriftsföremål\\1'); \
+	RegReplace('$4hst($.*)?', '$Eprogramledare\\1'); \
+	RegReplace('$4ill($.*)?', '$Eillustratör\\1'); \
+	RegReplace('$4ilu($.*)?', '$Eilluminator\\1'); \
+	RegReplace('$4ins($.*)?', '$Eförfattare till dedikation\\1'); \
+	RegReplace('$4inv($.*)?', '$Euppfinnare\\1'); \
+	RegReplace('$4isb($.*)?', '$Eutgivare\\1'); \
+	RegReplace('$4itr($.*)?', '$Einstrumentalist\\1'); \
+	RegReplace('$4ive($.*)?', '$E|författare till dedikation\\1'); \
+	RegReplace('$4ivr($.*)?', '$Eintervjuare\\1'); \
+	RegReplace('$4jud($.*)?', '$Edomare\\1'); \
+	RegReplace('$4lbt($.*)?', '$Elibrettist\\1'); \
+	RegReplace('$4ltg($.*)?', '$Elitograf\\1'); \
+	RegReplace('$4lyr($.*)?', '$Esångtextförfattare\\1'); \
+	RegReplace('$4msd($.*)?', '$Emusikalisk ledare\\1'); \
+	RegReplace('$4mus($.*)?', '$Eexekutör\\1'); \
+	RegReplace('$4nrt($.*)?', '$Eberättare\\1'); \
+	RegReplace('$4oth($.*)?', '$Eövrig\\1'); \
+	RegReplace('$4own($.*)?', '$Enuvarande ägare\\1'); \
+	RegReplace('$4pan($.*)?', '$Edeltagare i paneldiskussion\\1'); \
+	RegReplace('$4pbd($.*)?', '$Eredaktör\\1'); \
+	RegReplace('$4pbl($.*)?', '$Eutgivare\\1'); \
+	RegReplace('$4pht($.*)?', '$Efotograf\\1'); \
+	RegReplace('$4plt($.*)?', '$Etryckplåtstillverkare\\1'); \
+	RegReplace('$4ppt($.*)?', '$Emarionettspelare\\1'); \
+	RegReplace('$4pra($.*)?', '$Epreses\\1'); \
+	RegReplace('$4prd($.*)?', '$Eproducent\\1'); \
+	RegReplace('$4pre($.*)?', '$Efilmpresentatör\\1'); \
+	RegReplace('$4prf($.*)?', '$Eexekutör\\1'); \
+	RegReplace('$4prg($.*)?', '$Eprogrammerare\\1'); \
+	RegReplace('$4prm($.*)?', '$Eklichetillverkare\\1'); \
+	RegReplace('$4prn($.*)?', '$Eproduktionsbolag\\1'); \
+	RegReplace('$4pro($.*)?', '$Eproducent\\1'); \
+	RegReplace('$4prs($.*)?', '$Eproduktionsdesigner\\1'); \
+	RegReplace('$4prt($.*)?', '$Eboktryckare\\1'); \
+	RegReplace('$4ptf($.*)?', '$Ekärande\\1'); \
+	RegReplace('$4rce($.*)?', '$Eljudtekniker\\1'); \
+	RegReplace('$4rcp($.*)?', '$Emottagare\\1'); \
+	RegReplace('$4rdd($.*)?', '$Eradioregissör\\1'); \
+	RegReplace('$4rpc($.*)?', '$Eradioproducent\\1'); \
+	RegReplace('$4rpy($.*)?', '$Eredaktör\\1'); \
+	RegReplace('$4rsp($.*)?', '$Erespondent\\1'); \
+	RegReplace('$4rsr($.*)?', '$Ekonservator\\1'); \
+	RegReplace('$4scl($.*)?', '$Eskulptör\\1'); \
+	RegReplace('$4sgd($.*)?', '$Escenregissör\\1'); \
+	RegReplace('$4sll($.*)?', '$Eförsäljare\\1'); \
+	RegReplace('$4sng($.*)?', '$Esångare\\1'); \
+	RegReplace('$4spn($.*)?', '$Esponsor\\1'); \
+	RegReplace('$4spk($.*)?', '$Etalare\\1'); \
+	RegReplace('$4srv($.*)?', '$Elantmätare\\1'); \
+	RegReplace('$4stl($.*)?', '$Ehistorieberättare\\1'); \
+	RegReplace('$4std($.*)?', '$Escenograf\\1'); \
+	RegReplace('$4tch($.*)?', '$Elärare\\1'); \
+	RegReplace('$4tld($.*)?', '$ETV-regissör\\1'); \
+	RegReplace('$4tlp($.*)?', '$ETV-producent\\1'); \
+	RegReplace('$4trc($.*)?', '$Etranslittererare\\1'); \
+	RegReplace('$4trl($.*)?', '$Eöversättare\\1'); \
+	RegReplace('$4voc($.*)?', '$Esångare\\1'); \
+	RegReplace('$4wac($.*)?', '$Eförfattare till textkommentar\\1'); \
+	RegReplace('$4wal($.*)?', '$Ekompletterande text till musikverk\\1'); \
+	RegReplace('$4wat($.*)?', '$Ekompletterande text till icke-språkliga resurser\\1')
