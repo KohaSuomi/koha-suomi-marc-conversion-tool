@@ -215,7 +215,7 @@ sub revertRecords {
 sub findImportedBatchByFileName {
     my ($self, $file_name) = @_;
 
-    my $sth = $self->dbh->prepare("SELECT import_batch_id FROM import_batches WHERE file_name = ?");
+    my $sth = $self->dbh->prepare("SELECT import_batch_id FROM import_batches WHERE file_name = ? and import_status = 'staged'");
     $sth->execute($file_name);
     my ($batch_id) = $sth->fetchrow_array();
     $sth->finish();
