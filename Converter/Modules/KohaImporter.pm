@@ -8,6 +8,8 @@ use C4::ImportBatch qw(
     RecordsFromISO2709File
     RecordsFromMarcPlugin
     BatchStageMarcRecords
+    BatchCommitRecords
+    BatchRevertRecords
     BatchFindDuplicates
     SetImportBatchMatcher
     SetImportBatchOverlayAction
@@ -103,18 +105,19 @@ sub importRecords {
         my $num_with_matches = $self->matchRecords($batch_id, $self->matcher_id);
 
         print "Records with matches: $num_with_matches\n" if $self->verbose;
-    } else {
-        return 0;
-    }
+    } 
 
     if ($self->commit) {
         # Import staged records into catalog
-        $self->commitRecords($batch_id);
+        print "Committing records...\n";
+        my $committed = $self->commitRecords($batch_id);
+        return 0 unless $committed;
     }
 
     if ($self->revert) {
         # Revert staged records from catalog
-        $self->revertRecords($batch_id);
+        my $reverted = $self->revertRecords($batch_id);
+        return 0 unless $reverted;
     }
 
     if ($self->verbose) {
@@ -122,7 +125,7 @@ sub importRecords {
         print "Number of valid records: $num_valid\n";
         print "Number of items: $num_items\n";
         print "Number of errors: ".Data::Dumper::Dumper($errors)."\n";
-        print "Errors: ".Data::Dumper::Dumper(@import_errors)."\n";
+        print "Errors: ".Data::Dumper::Dumper(@import_errors)."\n\n";
     }
 
     return $batch_id;
@@ -154,7 +157,12 @@ sub commitRecords {
 
     # Import staged records into catalog
     my ($num_added, $num_updated, $num_items_added, $num_items_updated, $num_ignored)
-        = BatchCommitRecords($batch_id, undef, 100, \&print_progress);
+        = BatchCommitRecords({
+            batch_id => $batch_id,
+            framework => '',
+            progress_interval => 100,
+            progress_callback => \&print_progress
+        });
 
     # Print verbose information
     print "Records imported: $num_added\n" if $self->verbose;
@@ -162,6 +170,12 @@ sub commitRecords {
     print "Items added: $num_items_added\n" if $self->verbose;
     print "Items updated: $num_items_updated\n" if $self->verbose;
     print "Records ignored: $num_ignored\n" if $self->verbose;
+    unless ($num_added || $num_updated) {
+        print "No records imported or updated\n";
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
 sub revertRecords {
@@ -178,13 +192,19 @@ sub revertRecords {
         print "Number of items deleted: $num_items_deleted\n";
         print "Number of ignored records: $num_ignored\n";
     }
+    unless ($num_reverted) {
+        print "No records reverted\n";
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
 
 sub findImportedBatchByFileName {
     my ($self, $file_name) = @_;
 
-    my $sth = $self->dbh->prepare("SELECT import_batch_id FROM import_batches WHERE file_name = ? AND import_status = 'staged'");
+    my $sth = $self->dbh->prepare("SELECT import_batch_id FROM import_batches WHERE file_name = ?");
     $sth->execute($file_name);
     my ($batch_id) = $sth->fetchrow_array();
     $sth->finish();
