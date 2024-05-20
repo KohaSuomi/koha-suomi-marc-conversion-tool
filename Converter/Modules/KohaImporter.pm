@@ -89,6 +89,7 @@ sub importRecords {
     my ( $batch_id, @import_errors, $marcrecords );
     $batch_id = $self->findImportedBatchByFileName($input_file);
     unless ($batch_id) {
+        print "Staging records...\n";
         ( $errors, $marcrecords ) =
                 C4::ImportBatch::RecordsFromMARCXMLFile( $input_file, $self->encoding );
         
@@ -116,6 +117,7 @@ sub importRecords {
 
     if ($self->revert) {
         # Revert staged records from catalog
+        print "Reverting records...\n";
         my $reverted = $self->revertRecords($batch_id);
         return 0 unless $reverted;
     }
