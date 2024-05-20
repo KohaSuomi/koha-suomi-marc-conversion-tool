@@ -71,22 +71,23 @@ opendir(my $dh, $dir) or die "Cannot open directory: $!";
 
 my $count = 0;
 
-# Read files
-while (my $filename = readdir $dh) {
+# Read files in timestamp order
+my @files = sort { (stat("$dir/$a"))[9] <=> (stat("$dir/$b"))[9] } readdir $dh;
+
+# Process files in timestamp order
+foreach my $filename (@files) {
     # Skip if not a file
     next if -d "$dir/$filename";
-
     print "Processing file: $filename\n";
-
     # Full path to the file
     my $file_path = "$dir/$filename";
-
     # Import the file
     my $batch_id = $koha_importer->importRecords($file_path);
     next unless $batch_id;
     $count++;
     last if $count == $batch_size && $batch_size > 0;
 }
+
 # Close the directory
 closedir $dh;
 
