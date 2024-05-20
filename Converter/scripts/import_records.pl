@@ -91,4 +91,4 @@ foreach my $filename (@files) {
 # Close the directory
 closedir $dh;
 
-print "Imported $count files\n";
+print "Processed $count files\n";
