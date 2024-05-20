@@ -6,117 +6,159 @@ versio 30.3.2012 / Kansalliskirjasto
 000/19/		| 000/19/	| 'i'
 000/20-24/	| 000/20-24/	| S
 
+// NV: I disabled the LDR/06 (aka 000/7/) changes, since 008/18-34 should
+// be processed as well. The cons were way greater than the pros.
+
+
+//#if ((@000/7/ = 'a' Or @000/7/ = 't') And Exists(@245$h) And Exists (@007))
+//000/7/          | 000/7/          | If (RegFind(@245$h, 'nite') >=0) Then 'i'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Nn]uottijulkaisu') >=0) Then 'c'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Vv]ideo') >=0) Or (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'g'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'e'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Mm]oniviestin') >=0) Then 'o'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'k'
+////KYSYMYS: voiko leaderin aineistokoodia muuttaa noin, miten vaikuttaa 008:aan?
+////Esim. tekstin 008/33 = kirjallisuuslaji, videon 008/33 = visuaalisen aineiston tyyppi ->
+////moniviestimen (kirja + cd) koodi p = runo muuttuu mikroskoopin preparaatiksi
+//#endif
+
+//#if ((@000/7/ = 'a' Or @000/7/ = 't') And Exists(@245$h) And Not Exists (@007))
+//000/7/          | 000/7/          | If (RegFind(@245$h, 'nite') >=0) Then 'i'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Nn]uottijulkaisu') >=0) Then 'c'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Vv]ideo') >=0) Or (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'g'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'e'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '[Mm]oniviestin') >=0) Then 'o'
+//000/7/          | 000/7/          | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'k'
+//#endif
+
 
 001		| 001		| S
 005		| 005		| S
 006		| 006		| S
-008		| 008		| S
 
 //007 poistetaan tekstiaineistosta
+// NV: T√§√§ implementaatio ep√§iltytt√§√§: aineistotyyppitarkistuksia vois
+// k√§ytt√§√§, mutta ei ole rahkeita mietti√§ oikeaa tapaa juuri nyt.
+// (Ent√§s 't|' etc.? Tehd√§√§nk√∂ my√∂s ei-kirjoille?)
 #if (@007/1-2/ != 'tu')
 007        | 007        | S
 #endif
 
+// Jos 007 puuttuu, yritet√§√§n sellainen kyh√§t√§ 245$h:n perusteella:
+#if ((@000/7/ = 'a' Or @000/7/ = 't') And Exists(@245$h) And Not Exists (@007))
+000           | 007/1-14/       | If (RegFind(@245$h, 'nite') >=0) Then 'su||||||||||||'
+000           | 007/1-2/        | If (RegFind(@245$h, '[Nn]uottijulkaisu') >=0) Then 'qu'
+000           | 007/1-9/        | If (RegFind(@245$h, '[Vv]ideo') >=0) Then 'vu|||||||'
+000           | 007/1-9/        | If (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'gu|||||||'
+000           | 007/1-8/        | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'au||||||'
+000           | 007/1-2/        | If (RegFind(@245$h, '[Mm]oniviestin') >=0) Then 'ou'
+000           | 007/1-13/       | If (RegFind(@245$h, '[Mm]ikro') >=0) Then 'hu|||||||||||'
+000           | 007/1-14/       | If (RegFind(@245$h, '[Ee]lektroninen') >=0) Then 'cu||||||||||||'
+000           | 007/1-6/        | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'ku||||'
+#endif
+
+
+
+008		| 008		| S
+
+
+
 // TEKSTIAINEISTO JA TEKSTIK√ÑSIKIRJOITUS
 
-#if ((@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h)))
-008/24/         | 008/24/         | S
-008/24/         | 336(new)$a      | If (S = 'f') Then 'Teksti (kosketeltava)' Else 'Teksti'
-008/24/         | 337(new)$a      | If (S = ' ' or S = '|' or S = 'd' or S = 'f' or S = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
-008/24/         | 337(new)$a      | If (S = 'a' or S = 'b' or S = 'c') Then 'mikromuoto'
-008/24/         | 337(new)$a      | If (S = 'o' or S = 'q' or S = 's') Then 'elektroninen'
+
+// Guess based on form of item:
+#if (Not Exists(%336)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h))
+000         | 336(new)$a      | If (@008/24/ = 'f') Then 'Teksti (kosketeltava)' Else 'Teksti'
+#endif
+
+// Guess based on form of item:
+#if (Not Exists(%337)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h))
+// No longer make decisions based on form of item '|':
+// 000         | 337(new)$a      | If (@008/24/ = ' ' or @008/24/ = '|' or @008/24/ = 'd' or @008/24/ = 'f' or @008/24/ = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
+000         | 337(new)$a      | If (@008/24/ = ' ' or @008/24/ = 'd' or @008/24/ = 'f' or @008/24/ = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
+000         | 337(new)$a      | If (@008/24/ = 'a' or @008/24/ = 'b' or @008/24/ = 'c') Then 'mikromuoto'
+000         | 337(new)$a      | If (@008/24/ = 'o' or @008/24/ = 'q' or @008/24/ = 's') Then 'elektroninen'
+#endif
+
+
+// NV: base decision on field 300:
+#if (Not Exists(%337)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h)) And (RegFind(@300$a, '^([0-9]+ )mikrofilmi') >= 0)
+000         | 337(new)$a      | 'mikromuoto'
+#endif
+
+// Fallback (form of item is '|' etc):
+#if (Not Exists(%337)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h))
+000         | 337(new)$a      | If (@008/24/ = ' ' or @008/24/ = 'd' or @008/24/ = 'f' or @008/24/ = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
 #endif
 
 #if ((@000/7/ = 'a' Or @000/7/ = 't') And (RegFind (@245$h, '[Pp]istekirjoitus') >=0))
-000/            | 336(new)$a      | 'Teksti (kosketeltava)'
-000/            | 337(new)$a      | 'ei v√§litt√§v√§√§ laitetta'
+000            | 336(new)$a      | 'Teksti (kosketeltava)'
+000            | 337(new)$a      | 'ei v√§litt√§v√§√§ laitetta'
 #endif
+
 
 #if ((@000/7/ = 'a' Or @000/7/ = 't') And Exists(@245$h) And Exists (@007))
-000/7/          | 000/7/          | If (RegFind(@245$h, 'nite') >=0) Then 'i'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Nn]uottijulkaisu') >=0) Then 'c'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Vv]ideo') >=0) Or (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'g'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'e'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Mm]oniviestin') >=0) Then 'o'
-000/7/          | 000/7/          | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'k'
-//KYSYMYS: voiko leaderin aineistokoodia muuttaa n‰in, miten vaikuttaa 008-kentt‰‰n?
-//Esim. tekstin 008/33 = kirjallisuuslaji, videon 008/33 = visuaalisen aineiston tyyppi ->
-//moniviestimen (kirja + cd) koodi p = runo muuttuu mikroskoopin preparaatiksi
-007/1/          | 007/1/          | S
-007/1/          | 336(new)$a      | If ((S = 'c' or S = 'h') And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Teksti'
-007/1/          | 337(new)$a      | If (S = 'c' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'elektroninen'
-007/1/          | 337(new)$a      | If (S = 'h' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'mikromuoto'
-007/1/          | 336(new)$a      | If (S = 's' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Puhe' //Oletus: musiikkia ei ole tehty tekstipohjalla (?)
-007/1/          | 337(new)$a      | If (S = 's' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'audio'
-007/1/          | 336(new)$a      | If (S = 'q' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Musiikki (notatoitu)'
-007/1/          | 337(new)$a      | If (S = 'q' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'ei v√§litt√§v√§√§ laitetta'
-007/1/          | 336(new)$a      | If (S = 'v' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (liikkuva ; kaksiulotteinen)'
-007/1/          | 337(new)$a      | If (S = 'v' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'video'
-007/1/          | 336(new)$a      | If (S = 'a' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (kartografinen)'
-007/1/          | 337(new)$a      | If (S = 'a' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'ei v√§litt√§v√§√§ laitetta'
-007/1/          | 336(new)$a      | If (S = 'k' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (still)'
-007/1/          | 337(new)$a      | If (S = 'k' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'ei v√§litt√§v√§√§ laitetta'
-007/1/          | 336(new)$a      | If (S = 'g' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (still)'
-007/1/          | 337(new)$a      | If (S = 'g' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'heijastettava'
+000          | 336(new)$a      | If ((@007/1/ = 'c' or @007/1/ = 'h') And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Teksti'
+000          | 337(new)$a      | If (@007/1/ = 'c' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'elektroninen'
+000          | 337(new)$a      | If (@007/1/ = 'h' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'mikromuoto'
+000          | 336(new)$a      | If (@007/1/ = 's' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Puhe' //Oletus: musiikkia ei ole tehty tekstipohjalla (?)
+000          | 337(new)$a      | If (@007/1/ = 's' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'audio'
+000          | 336(new)$a      | If (@007/1/ = 'q' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Musiikki (notatoitu)'
+000          | 337(new)$a      | If (@007/1/ = 'q' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'ei v√§litt√§v√§√§ laitetta'
+000          | 336(new)$a      | If (@007/1/ = 'v' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (liikkuva ; kaksiulotteinen)'
+000          | 337(new)$a      | If (@007/1/ = 'v' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'video'
+000          | 336(new)$a      | If (@007/1/ = 'a' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (kartografinen)'
+000          | 337(new)$a      | If (@007/1/ = 'a' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'ei v√§litt√§v√§√§ laitetta'
+000          | 336(new)$a      | If (@007/1/ = 'k' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (still)'
+000          | 337(new)$a      | If (@007/1/ = 'k' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'ei v√§litt√§v√§√§ laitetta'
+000          | 336(new)$a      | If (@007/1/ = 'g' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'Kuva (still)'
+000          | 337(new)$a      | If (@007/1/ = 'g' And RegFind(@245$h, '[Mm]oniviestin') <0) Then 'heijastettava'
 #endif
 
+
 #if ((@000/7/ = 'a' Or @000/7/ = 't') And Exists(@245$h) And Not Exists (@007))
-000/7/          | 000/7/          | If (RegFind(@245$h, 'nite') >=0) Then 'i'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Nn]uottijulkaisu') >=0) Then 'c'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Vv]ideo') >=0) Or (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'g'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'e'
-000/7/          | 000/7/          | If (RegFind(@245$h, '[Mm]oniviestin') >=0) Then 'o'
-000/7/          | 000/7/          | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'k'
-245$h           | 007/1-14/       | If (RegFind ('nite') >=0) Then 'su||||||||||||'
-245$h           | 007/1-2/        | If (RegFind ('[Nn]uottijulkaisu') >=0) Then 'qu'
-245$h           | 007/1-9/        | If (RegFind ('[Vv]ideo') >=0) Then 'vu|||||||'
-245$h           | 007/1-9/        | If (RegFind ('[Hh]eijastuskuva') >=0) Then 'gu|||||||'
-245$h           | 007/1-8/        | If (RegFind ('[Kk]artta-aineisto') >=0) Then 'au||||||'
-245$h           | 007/1-2/        | If (RegFind ('[Mm]oniviestin') >=0) Then 'ou'
-245$h           | 007/1-13/       | If (RegFind ('[Mm]ikro') >=0) Then 'hu|||||||||||'
-245$h           | 007/1-14/       | If (RegFind ('[Ee]lektroninen') >=0) Then 'cu||||||||||||'
-245$h           | 007/1-6/        | If (RegFind ('\\b[Kk]uva') >=0) Then 'ku||||'
-245$h           | 336(new)$a      | If (RegFind ('nite') >=0) Then 'Puhe' //Oletus: musiikkia ei ole tehty tekstipohjalla (?)
-245$h           | 337(new)$a      | If (RegFind ('nite') >=0) Then 'audio'
-245$h           | 336(new)$a      | If (RegFind ('[Nn]uottijulkaisu') >=0) Then 'Musiikki (notatoitu)'
-245$h           | 337(new)$a      | If (RegFind ('[Nn]uottijulkaisu') >=0) Then 'ei v√§litt√§v√§√§ laitetta'
-245$h           | 336(new)$a      | If (RegFind ('[Vv]ideo') >=0) Then 'Kuva (liikkuva ; kaksiulotteinen)'
-245$h           | 337(new)$a      | If (RegFind ('[Vv]ideo') >=0) Then 'video'
-245$h           | 336(new)$a      | If (RegFind ('[Hh]eijastuskuva') >=0) Then 'Kuva (still)'
-245$h           | 337(new)$a      | If (RegFind ('[Hh]eijastuskuva') >=0) Then 'heijastettava'
-245$h           | 336(new)$a      | If (RegFind ('[Kk]artta-aineisto') >=0) Then 'Kuva (kartografinen)'
-245$h           | 337(new)$a      | If (RegFind ('[Kk]artta-aineisto') >=0) Then 'ei v√§litt√§v√§√§ laitetta'
-245$h           | 336(new)$a      | If (RegFind ('[Mm]ikro') >=0) Then 'Teksti'
-245$h           | 337(new)$a      | If (RegFind ('[Mm]ikro') >=0) Then 'mikromuoto'
-245$h           | 336(new)$a      | If (RegFind ('[Ee]lektroninen') >=0) Then 'Teksti'
-245$h           | 337(new)$a      | If (RegFind ('[Ee]lektroninen') >=0) Then 'elektroninen'
-245$h           | 336(new)$a      | If (RegFind ('\\b[Kk]uva') >=0) Then 'Kuva (still)'
-245$h           | 337(new)$a      | If (RegFind ('\\b[Kk]uva') >=0) Then 'ei v√§litt√§v√§√§ laitetta'
+000           | 336(new)$a      | If (RegFind(@245$h, 'nite') >=0) Then 'Puhe' //Oletus: musiikkia ei ole tehty tekstipohjalla (?)
+000           | 337(new)$a      | If (RegFind(@245$h, 'nite') >=0) Then 'audio'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Nn]uottijulkaisu') >=0) Then 'Musiikki (notatoitu)'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Nn]uottijulkaisu') >=0) Then 'ei v√§litt√§v√§√§ laitetta'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Vv]ideo') >=0) Then 'Kuva (liikkuva ; kaksiulotteinen)'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Vv]ideo') >=0) Then 'video'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'Kuva (still)'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'heijastettava'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'Kuva (kartografinen)'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'ei v√§litt√§v√§√§ laitetta'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Mm]ikro') >=0) Then 'Teksti'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Mm]ikro') >=0) Then 'mikromuoto'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Ee]lektroninen') >=0) Then 'Teksti'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Ee]lektroninen') >=0) Then 'elektroninen'
+000           | 336(new)$a      | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'Kuva (still)'
+000           | 337(new)$a      | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'ei v√§litt√§v√§√§ laitetta'
 #endif
 
 
 // NUOTTIJULKAISU JA NUOTTIK√ÑSIKIRJOITUS
 
 #if (@000/7/ = 'c' Or @000/7/ = 'd')
-008/24/         | 008/24/         | S
-008/24/         | 336(new)$a      | If (S != 'f') Then 'Musiikki (notatoitu)'
-008/24          | 336(new)$a      | If (S = 'f') Then 'Musiikki (notatoitu ; kosketeltava)'
-008/24/         | 337(new)$a      | If (S = ' ' or S = '|' or S = 'd' or S = 'f' or S = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
-008/24/         | 337(new)$a      | If (S = 'a' or S = 'b' or S = 'c') Then 'mikromuoto'
-008/24/         | 337(new)$a      | If (S = 'o' or S = 'q' or S = 's') Then 'elektroninen'
+//008/24/         | 008/24/         | S
+000         | 336(new)$a      | If (@008/24/ != 'f') Then 'Musiikki (notatoitu)'
+000         | 336(new)$a      | If (@008/24/ = 'f') Then 'Musiikki (notatoitu ; kosketeltava)'
+000         | 337(new)$a      | If (@008/24/ = ' ' or @008/24/ = '|' or @008/24/ = 'd' or @008/24/ = 'f' or @008/24/ = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
+000         | 337(new)$a      | If (@008/24/ = 'a' or @008/24/ = 'b' or @008/24/ = 'c') Then 'mikromuoto'
+000         | 337(new)$a      | If (@008/24/ = 'o' or @008/24/ = 'q' or @008/24/ = 's') Then 'elektroninen'
 #endif
 
 // KARTTA-AINEISTO JA KARTTAK√ÑSIKIRJOITUS
 
 #if (@000/7/ = 'e' Or @000/7/ = 'f')
 007/1-2		| 007/1-2/	  | S
-007/1/		| 336(new)$a	  | If (S = 'a' and @007/2/ != 'q' and @008/30/ = 'f') Then 'Kuva (kartografinen ; kosketeltava)'
+000		| 336(new)$a	  | If (@007/1/ = 'a' and @007/2/ != 'q' and @008/30/ = 'f') Then 'Kuva (kartografinen ; kosketeltava)'
 008/26/         | 008/26/         | S
-008/26/         | 336(new)$a      | If (S != 'd') Then 'Kuva (kartografinen)'
-008/26/         | 336(new)$a      | If (S = 'd') Then 'Esine (kartografinen)'
+000         | 336(new)$a      | If (@008/26/ != 'd') Then 'Kuva (kartografinen)'
+000         | 336(new)$a      | If (@008/26/ = 'd') Then 'Esine (kartografinen)'
 008/30/         | 008/30/         | S
-008/30/         | 337(new)$a      | If (S = 'a' or S = 'b' or S = 'c') Then 'mikromuoto'
-008/30/         | 337(new)$a      | If (S = 'o' or S = 'q' or S = 's') or (RegFind(@245$h, '[Ee]lektr') >=0) Then 'elektroninen'
+000         | 337(new)$a      | If (@008/30/ = 'a' or @008/30/ = 'b' or @008/30/ = 'c') Then 'mikromuoto'
+000         | 337(new)$a      | If (@008/30/ = 'o' or @008/30/ = 'q' or @008/30/ = 's') or (RegFind(@245$h, '[Ee]lektr') >=0) Then 'elektroninen'
+000         | 337(new)$a      | If (@008/30/ = '|' or @008/30/ = 'r' or @008/30/ = 'd') and (Not Exists(%337)) Then 'ei v√§litt√§v√§√§ laitetta''
 #endif
 
 
@@ -124,20 +166,20 @@ versio 30.3.2012 / Kansalliskirjasto
 
 #if (@000/7/ = 'g') And (@007/1/ = 'g' Or @007/1/ = 'm' Or @007/1/ = 'v' Or @007/1/ = 'c')
 007/1/          | 007/1/          | S
-007/1/          | 336(new)$a      | If (S = 'g') Then 'Kuva (still)'
-007/1/          | 336(new)$a      | If (S = 'm' or S = 'v' or S = 'c') Then 'Kuva (liikkuva ; kaksiulotteinen)'
-007/1/          | 337(new)$a      | If (S = 'g' or S = 'm') Then 'heijastettava'
-007/1/          | 337(new)$a      | If (S = 'c') Then 'elektroninen'
-007/1/          | 337(new)$a      | If (S = 'v') Then 'video'
+000          | 336(new)$a      | If (@007/1/ = 'g') Then 'Kuva (still)'
+000          | 336(new)$a      | If (@007/1/ = 'm' or @007/1/ = 'v' or @007/1/ = 'c') Then 'Kuva (liikkuva ; kaksiulotteinen)'
+000          | 337(new)$a      | If (@007/1/ = 'g' or @007/1/ = 'm') Then 'heijastettava'
+000          | 337(new)$a      | If (@007/1/ = 'c') Then 'elektroninen'
+000          | 337(new)$a      | If (@007/1/ = 'v') Then 'video'
 #endif
 
 #if (@000/7/ = 'g' And (Not Exists (@007)))
-245$h           | 007/1-9/        | If (RegFind ('[Vv]ideo') >=0) Then 'vu|||||||'
-245$h           | 007/1-9/        | If (RegFind ('[Hh]eijastuskuva') >=0) Then 'gu|||||||'
-245$h           | 336(new)$a      | If (RegFind ('[Vv]ideo') >=0) Then 'Kuva (liikkuva ; kaksiulotteinen)'
-245$h           | 336(new)$a      | If (RegFind ('[Hh]eijastuskuva') >=0) Then 'Kuva (still)'
-245$h           | 337(new)$a      | If (RegFind ('[Vv]ideo') >=0) Then 'video'
-245$h           | 337(new)$a      | If (RegFind ('[Hh]eijastuskuva') >=0) Then 'heijastettava'
+000           | 007/1-9/        | If (RegFind(@245$h, '[Vv]ideo') >=0) Then 'vu|||||||'
+000           | 007/1-9/        | If (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'gu|||||||'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Vv]ideo') >=0) Then 'Kuva (liikkuva ; kaksiulotteinen)'
+000           | 336(new)$a      | If (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'Kuva (still)'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Vv]ideo') >=0) Then 'video'
+000           | 337(new)$a      | If (RegFind(@245$h, '[Hh]eijastuskuva') >=0) Then 'heijastettava'
 #endif
 
 
@@ -147,16 +189,16 @@ versio 30.3.2012 / Kansalliskirjasto
 #if (@000/7/ = 'i' And Exists(@007))
 000             | 336(new)$a      | 'Puhe'
 007/1/          | 007/1/          | S
-//007/1/          | 336(new)$a      | If (S = 's' and @008/31/ != 's') Then 'Puhe'
-//007/1/          | 336(new)$a      | If (S = 's' and @008/31/ = 's') Then '√Ñ√§ni'
+//000          | 336(new)$a      | If (@007/1/ = 's' and @008/31/ != 's') Then 'Puhe'
+//000          | 336(new)$a      | If (@007/1/ = 's' and @008/31/ = 's') Then '√Ñ√§ni'
 //onko tuota 008-koodia k√§ytetty koskaan- erotetaan luonnon√§√§net ja ihmispuhe?
-007/1/          | 337(new)$a      | If (S = 's') Then 'audio'
-007/1/          | 337(new)$a      | If (S = 'c') Then 'elektroninen'
+000          | 337(new)$a      | If (@007/1/ = 's') Then 'audio'
+000          | 337(new)$a      | If (@007/1/ = 'c') Then 'elektroninen'
 #endif
 
 #if (@000/7/ = 'i' And (Not Exists (@007)))
-000             | 336(new)$a      | 'Puhe'
-245$h           | 337(new)$a      | If (RegFind ('nite') >=0) Then 'audio'
+000           | 336(new)$a      | 'Puhe'
+000           | 337(new)$a      | If (RegFind(@007/1/, 'nite') >=0) Then 'audio'
 #endif
 
 
@@ -165,13 +207,13 @@ versio 30.3.2012 / Kansalliskirjasto
 #if (@000/7/ = 'j') And Exists(@007))
 000             | 336(new)$a      | 'Musiikki (esitetty)'
 007/1/          | 007/1/          | S
-007/1/          | 337(new)$a      | If (S = 's') Then 'audio'
-007/1/          | 337(new)$a      | If (S = 'c') Then 'elektroninen'
+000          | 337(new)$a      | If (@007/1/ = 's') Then 'audio'
+000          | 337(new)$a      | If (@007/1/ = 'c') Then 'elektroninen'
 #endif
 
 #if (@000/7/ = 'j' And (Not Exists (@007)))
-000             | 336(new)$a      | 'Musiikki (esitetty)'
-245$h           | 337(new)$a      | If (RegFind ('nite') >=0) Then 'audio'
+000           | 336(new)$a      | 'Musiikki (esitetty)'
+000           | 337(new)$a      | If (RegFind(@245$h, 'nite') >=0) Then 'audio'
 #endif
 
 
@@ -179,49 +221,75 @@ versio 30.3.2012 / Kansalliskirjasto
 
 #if (@000/7/ = 'k')
 007/1/          | 007/1/          | S
-007/1/          | 336(new)$a      | If (S = 'k' and @008 != 'f') Then 'Kuva (still)'
-007/1/          | 336(new)$a      | If (S = 'k' and @008 = 'f') Then 'Kuva (still ; kosketeltava)'
+000          | 336(new)$a      | If (@007/1/ = 'k' and @008 != 'f') Then 'Kuva (still)'
+000          | 336(new)$a      | If (@007/1/ = 'k' and @008 = 'f') Then 'Kuva (still ; kosketeltava)'
 008/30/         | 008/30/         | S
-008/30/         | 337(new)$a      | If (S = ' ' or S = '|' or S = 'f' or S = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
-008/30/         | 337(new)$a      | If (S = 'a' or S = 'b' or S = 'c') Then 'mikromuoto'
-008/30/         | 337(new)$a      | If (S = 'o' or S = 'q' or S = 's') Then 'elektroninen'
+000         | 337(new)$a      | If (@008/30/ = ' ' or @008/30/ = '|' or @008/30/ = 'f' or @008/30/ = 'r') Then 'ei v√§litt√§v√§√§ laitetta'
+000         | 337(new)$a      | If (@008/30/ = 'a' or @008/30/ = 'b' or @008/30/ = 'c') Then 'mikromuoto'
+000         | 337(new)$a      | If (@008/30/ = 'o' or @008/30/ = 'q' or @008/30/ = 's') Then 'elektroninen'
 #endif
 
 // ELEKTRONINEN AINEISTO
-
-#if (@000/7/ = 'm')
-008/27/         | 008/27/         | S
-008/27/         | 336(new)$a      | If (S = 'a' or S = 'c') Then 'Data'
-008/27/         | 336(new)$a      | If (S = 'b' or S = 'f' or S = 'g') Then 'Tietokoneohjelma'
-008/27/         | 336(new)$a      | If (S = 'd' or S = 'e') Then 'Teksti'
-008/27/         | 336(new)$a      | If (S = 'h') Then '√Ñ√§ni'
-008/27/         | 336(new)$a      | If (S = 'i' or S = 'j' or S = 'm') Then 'Useita sis√§lt√∂tyyppej√§'
-008/27/         | 336(new)$a      | If (S = 'u' or S = 'z' or S = '|') Then 'M√§√§rittelem√§t√∂n sis√§lt√∂tyyppi'
-008/27/         | 337(new)$a      | 'elektroninen'
+#if (Not Exists(%336)) And (@000/7/ = 'm')
+// 008/27/         | 008/27/         | S
+000         | 336(new)$a      | If (@008/27/ = 'a' or @008/27/ = 'c') Then 'Data'
+// NB! tietokonepeli oletaan 2D:ksi ja se saa kaksi 336 kentt√§√§. Huomaa "nerokkuus", jolla laitan kaksi $a-osakentt√§√§ kerralla:
+000         | 336(new)$a      | If (@008/27/ = 'g') Then 'Kuva (liikkuva ; kaksiulotteinen).$aTietokoneohjelma'
+000         | 336(new)$a      | If (@008/27/ = 'b' or @008/27/ = 'f') Then 'Tietokoneohjelma'
+000         | 336(new)$a      | If (@008/27/ = 'd' or @008/27/ = 'e') Then 'Teksti'
+000         | 336(new)$a      | If (@008/27/ = 'h') Then '√Ñ√§ni'
+000         | 336(new)$a      | If (@008/27/ = 'i' or @008/27/ = 'j' or @008/27/ = 'm') Then 'Useita sis√§lt√∂tyyppej√§'
+000         | 336(new)$a      | If (@008/27/ = 'u' or @008/27/ = 'z' or @008/27/ = '|') Then 'M√§√§rittelem√§t√∂n sis√§lt√∂tyyppi'
 #endif
+
+#if (Not Exists(%337)) And (@000/7/ = 'm')
+000         | 337(new)$a      | 'elektroninen'
+#endif
+
+
+// NEW: KIT/MONIVIESTIN
+#if (Not Exists(%336)) And (@000/7/ = 'o')
+000          | 336(new)$a      | 'Useita sis√§lt√∂tyyppej√§'
+#endif
+#if (Not Exists(%337)) And (@000/7/ = 'o')
+000          | 337(new)$a      | 'useita mediatyyppej√§'
+#endif
+
 
 // MONIVIESTIN JA SEKALAINEN AINEISTO
-
-#if (@000/7/ = 'p')
-000/7/          | 000/7/          | S
-000/7/          | 336(new)$a      | 'Useita sis√§lt√∂tyyppej√§'
-000/7/          | 337(new)$a      | 'useita mediatyyppej√§'
+#if (Not Exists(%336)) And (@000/7/ = 'p')
+000          | 336(new)$a      | 'Useita sis√§lt√∂tyyppej√§'
 #endif
-
-#if (RegFind(@245$h, '[Mm]oniviestin') >=0) Or (RegFind(@245$h, '[Kk]ooste') >=0)
-000/7/          | 000/7/          | 'o'
-000/7/          | 336(new)$a      | 'Useita sis√§lt√∂tyyppej√§'
-000/7/          | 337(new)$a      | 'useita mediatyyppej√§'
+#if (Not Exists(%337)) And (@000/7/ = 'p')
+000          | 337(new)$a      | 'useita mediatyyppej√§'
 #endif
-
 
 // ESINE
+#if (Not Exists(%336)) And (@000/7/ = 'r')
+000         | 337(new)$a      | If (@008/34/ != 'p') 'ei v√§litt√§v√§√§ laitetta'
+#endif
 
-#if (@000/7/ = 'r')
-008/34/         | 008/34/         | S
-008/34/         | 336(new)$a      | 'Esine'
-008/34/         | 337(new)$a      | 'ei v√§litt√§v√§√§ laitetta'
-008/34/         | 337(new)$a      | If (S = 'p') Then 'mikroskooppinen'
+#if (Not Exists(%337)) And (@000/7/ = 'r')
+000         | 337(new)$a      | If (@008/34/ = 'p') Then 'mikroskooppinen'
+#endif
+
+#if (Not Exists(%336)) And (RegFind(@245$h, '[Kk]ooste|[Mm]oniviestin') >=0)
+// 000/7/          | 000/7/          | 'o'
+000          | 336(new)$a      | 'Useita sis√§lt√∂tyyppej√§'
+#endif
+
+#if (Not Exists(%336)) And (RegFind(@245$h, '[Kk]ooste|[Mm]oniviestin') >=0)
+000          | 337(new)$a      | 'useita mediatyyppej√§'
+#endif
+
+
+// FALLBACKS
+#if (Not Exists(%336))
+000         | 336(new)$a      | 'M√§√§rittelem√§t√∂n sis√§lt√∂tyyppi'
+#endif
+
+#if (Not Exists(%337))
+000         | 337(new)$a      | 'M√§√§rittelem√§t√∂n v√§litt√§v√§ laite'
 #endif
 
 
@@ -238,9 +306,10 @@ versio 30.3.2012 / Kansalliskirjasto
 245$p            | <F45$p          | S
 245$6            | <F45$6          | S
 245$8            | <F45$8          | S
-F45 | 245 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+F45 | 245 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', ''); \
+	    RegReplace('($[a-z][^$]+[a-z0-9])\$', '\\1.')
 
 246I1            | 246I1           | S
 246I2            | 246I2           | S
@@ -254,9 +323,9 @@ F45 | 245 | S;
 246$p            | <G46$p          | S
 246$6            | <G46$6          | S
 246$8            | <G46$8          | S
-G46 | 246 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+G46 | 246 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 247I1            | 247I1           | S
 247I2            | 247I2           | S
@@ -270,9 +339,9 @@ G46 | 246 | S;
 247$x            | <K47$x          | S
 247$6            | <K47$6          | S
 247$8            | <K47$8          | S
-K47 | 247 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+K47 | 247 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 // 505-kentan puuttuvan 1. indikaattorin korjaus
 505I1            | 505I1           | S; Replace (' ' By '0')
@@ -293,9 +362,9 @@ K47 | 247 | S;
 740$5            | <H40$5          | S
 740$6            | <H40$6          | S
 740$8            | <H40$8          | S
-H40 | 740 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+H40 | 740 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 760I1            | 760I1           | S
 760I2            | 760I2           | S
@@ -318,9 +387,9 @@ H40 | 740 | S;
 760$6            | <L60$6          | S
 760$7            | <L60$7          | S
 760$8            | <L60$8          | S
-L60 | 760 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+L60 | 760 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 762I1            | 762I1           | S
 762I2            | 762I2           | S
@@ -343,9 +412,9 @@ L60 | 760 | S;
 762$6            | <M62$6          | S
 762$7            | <M62$7          | S
 762$8            | <M62$8          | S
-M62 | 762 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+M62 | 762 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 765I1            | 765I1           | S
 765I2            | 765I2           | S
@@ -372,9 +441,9 @@ M62 | 762 | S;
 765$6            | <N65$6          | S
 765$7            | <N65$7          | S
 765$8            | <N65$8          | S
-N65 | 765 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+N65 | 765 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 767I1            | 767I1           | S
 767I2            | 767I2           | S
@@ -401,9 +470,9 @@ N65 | 765 | S;
 767$6            | <P67$6          | S
 767$7            | <P67$7          | S
 767$8            | <P67$8          | S
-P67 | 767 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+P67 | 767 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 770I1            | 770I1           | S
 770I2            | 770I2           | S
@@ -430,9 +499,9 @@ P67 | 767 | S;
 770$6            | <Q70$6          | S
 770$7            | <Q70$7          | S
 770$8            | <Q70$8          | S
-Q70 | 770 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+Q70 | 770 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 772I1            | 772I1           | S
 772I2            | 772I2           | S
@@ -459,9 +528,9 @@ Q70 | 770 | S;
 772$6            | <R72$6          | S
 772$7            | <R72$7          | S
 772$8            | <R72$8          | S
-R72 | 772 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+R72 | 772 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 773I1            | 773I1           | S
@@ -491,9 +560,9 @@ R72 | 772 | S;
 773$6            | <J73$6          | S
 773$7            | <J73$7          | S
 773$8            | <J73$8          | S
-J73 | 773 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+J73 | 773 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 774I1            | 774I1           | S
@@ -521,9 +590,9 @@ J73 | 773 | S;
 774$6            | <S74$6          | S
 774$7            | <S74$7          | S
 774$8            | <S74$8          | S
-S74 | 774 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+S74 | 774 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 775I1            | 775I1           | S
 775I2            | 775I2           | S
@@ -552,9 +621,9 @@ S74 | 774 | S;
 775$6            | <T75$6          | S
 775$7            | <T75$7          | S
 775$8            | <T75$8          | S
-T75 | 775 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+T75 | 775 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 776I1            | 776I1           | S
 776I2            | 776I2           | S
@@ -581,10 +650,9 @@ T75 | 775 | S;
 776$6            | <U76$6          | S
 776$7            | <U76$7          | S
 776$8            | <U76$8          | S
-U76 | 776 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
-
+U76 | 776 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 777I1            | 777I1           | S
@@ -609,9 +677,9 @@ U76 | 776 | S;
 777$6            | <V77$6          | S
 777$7            | <V77$7          | S
 777$8            | <V77$8          | S
-V77 | 777 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+V77 | 777 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 
@@ -640,9 +708,9 @@ V77 | 777 | S;
 780$6            | <A80$6          | S
 780$7            | <A80$7          | S
 780$8            | <A80$8          | S
-A80 | 780 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+A80 | 780 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 785I1            | 785I1           | S
@@ -670,9 +738,9 @@ A80 | 780 | S;
 785$6            | <B85$6          | S
 785$7            | <B85$7          | S
 785$8            | <B85$8          | S
-B85 | 785 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+B85 | 785 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 786I1            | 786I1           | S
 786I2            | 786I2           | S
@@ -702,9 +770,9 @@ B85 | 785 | S;
 786$6            | <C86$6          | S
 786$7            | <C86$7          | S
 786$8            | <C86$8          | S
-C86 | 786 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+C86 | 786 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 787I1            | 787I1           | S
 787I2            | 787I2           | S
@@ -731,26 +799,12 @@ C86 | 786 | S;
 787$6            | <E87$6          | S
 787$7            | <E87$7          | S
 787$8            | <E87$8          | S
-E87 | 787 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+E87 | 787 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen.
 
 #if (TAG != 'DEL')
 ???I1           | ???I1           | S
 ???I2           | ???I2           | S
 ???             | ???             | S
 #endif
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
