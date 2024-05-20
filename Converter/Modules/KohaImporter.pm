@@ -71,6 +71,11 @@ sub revert {
     return $self->{_params}->{revert};
 }
 
+sub skip_records_from_broadcast_biblios {
+    my ($self) = @_;
+    return $self->{_params}->{skip_records_from_broadcast_biblios};
+}
+
 sub dbh {
     my ($self) = @_;
     return C4::Context->dbh;
@@ -128,6 +133,10 @@ sub importRecords {
         print "Number of items: $num_items\n";
         print "Number of errors: ".Data::Dumper::Dumper($errors)."\n";
         print "Errors: ".Data::Dumper::Dumper(@import_errors)."\n\n";
+    }
+
+    if ($self->skip_records_from_broadcast_biblios) {
+        $self->skipRecordsFromBroadcastBiblios($batch_id);
     }
 
     return $batch_id;
@@ -212,6 +221,19 @@ sub findImportedBatchByFileName {
     $sth->finish();
 
     return $batch_id;
+}
+
+sub skipRecordsFromBroadcastBiblios {
+    my ($self, $batch_id) = @_;
+    my $sth = $self->dbh->prepare("SELECT bi.matched_biblionumber FROM import_records re JOIN import_biblios bi ON re.import_record_id = bi.import_record_id WHERE re.import_batch_id = ? order by re.import_record_id desc limit 1");
+    $sth->execute($batch_id);
+    my ($biblionumber) = $sth->fetchrow_array();
+    $sth->finish();
+
+    my $sth2 = $self->dbh->prepare("INSERT INTO koha_plugin_fi_kohasuomi_broadcastbiblios_log (biblionumber, updated) VALUES (?, NOW())");
+    $sth2->execute($biblionumber);
+    $sth2->finish();
+
 }
 
 sub print_progress {

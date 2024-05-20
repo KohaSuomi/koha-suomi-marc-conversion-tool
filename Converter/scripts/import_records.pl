@@ -15,6 +15,7 @@ my $revert = 0;
 my $verbose = 0;
 my $matcher_id = 0;
 my $batch_size = 0;
+my $skip_records_from_broadcast_biblios = 0;
 
 # Get command line options
 GetOptions(
@@ -27,6 +28,7 @@ GetOptions(
     'v|verbose' => \$verbose,
     'matcher_id=i' => \$matcher_id,
     'batch_size=i' => \$batch_size,
+    'skip_bb' => \$skip_records_from_broadcast_biblios,
 );
 
 # Print help
@@ -42,6 +44,7 @@ if ($help) {
     print "  --verbose\t\t\tVerbose output\n";
     print "  --matcher_id\t\t\tMatcher ID\n";
     print "  --batch_size\t\t\tBatch size\n";
+    print "  --skip_bb\t\t\tSkip records from broadcast biblios\n";
     exit 0;
 }
 
@@ -64,6 +67,7 @@ my $koha_importer = Converter::Modules::KohaImporter->new({
     revert => $revert,
     verbose => $verbose,
     matcher_id => $matcher_id,
+    skip_records_from_broadcast_biblios => $skip_records_from_broadcast_biblios,
 });
 
 # Open the directory
