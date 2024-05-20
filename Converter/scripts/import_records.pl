@@ -4,6 +4,7 @@ use warnings;
 use Converter::Modules::KohaImporter;
 use File::Basename;
 use Getopt::Long;
+use POSIX qw(strftime);
 
 # Command line options
 my $help = 0;
@@ -16,6 +17,7 @@ my $verbose = 0;
 my $matcher_id = 0;
 my $batch_size = 0;
 my $skip_records_from_broadcast_biblios = 0;
+my $stop_time = '04:00:00';
 
 # Get command line options
 GetOptions(
@@ -81,12 +83,19 @@ my @files = sort { (stat("$dir/$a"))[9] <=> (stat("$dir/$b"))[9] } readdir $dh;
 # Process files in timestamp order
 foreach my $filename (@files) {
     # Skip if not a file
+    my $current_time = strftime "%H:%M:%S", localtime;
+    if ($current_time gt $stop_time) {
+        print "Stopping at $current_time\n";
+        last;
+    }
     next if -d "$dir/$filename";
     print "Processing file: $filename\n";
     # Full path to the file
     my $file_path = "$dir/$filename";
     # Import the file
     my $batch_id = $koha_importer->importRecords($file_path);
+    # Move the file to the processed directory
+    move_file($file_path);
     next unless $batch_id;
     $count++;
     last if $count == $batch_size && $batch_size > 0;
@@ -96,3 +105,13 @@ foreach my $filename (@files) {
 closedir $dh;
 
 print "Processed $count files\n";
+
+sub move_file {
+    my ($file) = @_;
+    my $filename = basename($file);
+    my $new_dir = "$dir/processed";
+    mkdir $new_dir unless -d $new_dir;
+    my $new_file = "$new_dir/$filename";
+    rename $file, $new_file or die "Cannot move file: $!";
+    print "Moved $file to $new_file\n";
+}
