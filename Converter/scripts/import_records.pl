@@ -5,6 +5,8 @@ use Converter::Modules::KohaImporter;
 use File::Basename;
 use Getopt::Long;
 use POSIX qw(strftime);
+use Time::Piece;
+use Time::Seconds qw( ONE_DAY ONE_HOUR );
 
 # Command line options
 my $help = 0;
@@ -17,7 +19,10 @@ my $verbose = 0;
 my $matcher_id = 0;
 my $batch_size = 0;
 my $skip_records_from_broadcast_biblios = 0;
-my $stop_time = '04:00:00';
+my $next_day = localtime;
+$next_day += ONE_DAY;
+my $stop_time = $next_day->strftime("%Y-%m-%d")." 04:00:00";
+
 
 # Get command line options
 GetOptions(
@@ -83,9 +88,8 @@ my @files = sort { (stat("$dir/$a"))[9] <=> (stat("$dir/$b"))[9] } readdir $dh;
 # Process files in timestamp order
 foreach my $filename (@files) {
     # Skip if not a file
-    my $current_time = strftime "%H:%M:%S", localtime;
+    my $current_time = strftime "%Y-%m-%d %H:%M:%S", localtime;
     if ($current_time gt $stop_time) {
-        print "Stopping at $current_time\n";
         last;
     }
     next if -d "$dir/$filename";
