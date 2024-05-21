@@ -222,33 +222,11 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
-336I1 | 336I1 | S
-336I2 | 336I2 | S
-
-// Toistuvat 336$a-osakentät pilkotaan erillisiin 336-kenttiin. Mahdollinen $8 kopioidaan $a-osakentän mukaan. 
-336   | <T36 | S
-T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
-                       Delete(',', At Ending); \
-		       If (RegFind(@040$b, 'swe') >= 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
-//#if (Exists(T36$8))
-//T36(ns)$a | 336(n)$8 | T36$8
-//#endif
-
-T36   | <DEL  | S
-
-#if Not (Exists(@336$b))
-336(ns)$a | 336(no)$b | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
-336(ns)$a | 336(no)$2 | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then 'rdacontent'
-#endif
+#include "modify336.rul"
 
 
-#if (Exists(@336$b))
-// Should we check legal 336$b values here?
-336$b | 336$b | S
-336$a | 336(no)$2 | 'rdacontent'
-#endif
 
-336(ns)$a | 336(n) | Sort('8ab2')
+
 
 
 337I1 | 337I1 | S
@@ -269,28 +247,6 @@ T36   | <DEL  | S
 #endif
 
 // 337$8 | 337$8 | S
-
-
-#if (Not Exists(@337)) And \
-    ( ( ( @000/7/ = 'o' Or @000/7/ = 'p') And (RegFind(@300$a, '\\bkirja') >= 0 ) ) \
-      Or ( (@000/7/ = 'e' Or @000/7/ = 'f') And (@008/30/ = ' ' Or @008/30/ = 'r' ) ) )
-000 | 337I1 | ' '
-000 | 337I2 | ' '
-000 | 337$a | 'käytettävissä ilman laitetta'
-000 | 337$b | 'n'
-000 | 337$2 | 'rdacontent'
-#endif
-
-#if (Not Exists(@337)) And ( @000/7/ = 'o' Or @000/7/ = 'p') \
-     And (RegFind(@300$a, '\\bCD-äänilevy') >= 0)
-// esitetty musiikki/prm vs puhe/spw vs ääni/snd...
-000 | 337I1 | ' '
-000 | 337I2 | ' '
-000 | 337$a | 'audio'
-000 | 337$b | 's'
-000 | 337$2 | 'rdacontent'
-#endif
-
 
 #include "arvaa336.rul"
 #include "arvaa337.rul"

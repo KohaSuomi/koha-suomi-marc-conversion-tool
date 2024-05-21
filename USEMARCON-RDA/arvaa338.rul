@@ -184,10 +184,9 @@
 000 | <B38$b | 'ss'  
 #endif
 
-// TIETOLEVY / DATORSKIVA (can /rom/i overgenerate? what's with the 336 check?)
+// TIETOLEVY / DATORSKIVA
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    (RegFind(@300$a,  '[Rr][Oo][Mm]') >= 0) \
-  And (InTable(@336$a, '336_a.tbl'))
+    (RegFind(@300$a,  '[Cc][Dd].*[Rr][Oo][Mm]|[Dd][Vv][Dd].*[Rr][Oo][Mm]') >= 0)
 000 | <B38$b | 'cd'
 #endif
 

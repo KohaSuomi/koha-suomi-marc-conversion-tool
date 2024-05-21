@@ -1,6 +1,4 @@
-#!/usr/bin/perl -w -I/home/nvolk/github/melinda-batchfix-perl
-use lib '/home/nvolk/github/melinda-batchfix-perl';
-use lib '/opt/nvolk';
+#!/usr/bin/perl -w -I.
 use strict;
 use nvolk_marc_record;
 
