@@ -35,6 +35,5 @@ bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-RDA/ma21RDA_
 # Run RDA conversion for sv
 bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-RDA/ma21RDA_bibliografiset_sv.ini $CONVERT_PATH/$date/isbd/ $CONVERT_PATH/$date/rda/ sv
 
-echo "Conversion completed"
 echo "Files are located in $CONVERT_PATH/$date/rda"
 echo "Import the files to Koha with the import_records.pl script"
