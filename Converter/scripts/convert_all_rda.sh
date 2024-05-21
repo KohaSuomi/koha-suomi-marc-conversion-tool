@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_DIR="$(dirname "$0")"
+SCRIPT_DIR="/home/koha/koha-suomi-marc-conversion-tool/Converter/scripts"
 CONVERT_PATH=$1
 BIBLIO_FILE=$2
 date=$(date +%Y%m%d)
