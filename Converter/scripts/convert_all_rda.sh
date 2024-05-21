@@ -2,6 +2,7 @@
 
 SCRIPT_DIR="$(dirname "$0")"
 CONVERT_PATH=$1
+BIBLIO_FILE=$2
 date=$(date +%Y%m%d)
 
 # Check if the input folder exists
@@ -17,7 +18,11 @@ mkdir -p "$CONVERT_PATH/$date"
 # Run print_marcs.pl
 echo "Running print_marcs.pl"
 mkdir -p "$CONVERT_PATH/$date/xml"
-perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv
+if [ -z "$BIBLIO_FILE" ]; then
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv
+else
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --biblionumber_file $BIBLIO_FILE
+fi
 
 # Run ISBD conversion for fi
 mkdir -p "$CONVERT_PATH/$date/isbd"
