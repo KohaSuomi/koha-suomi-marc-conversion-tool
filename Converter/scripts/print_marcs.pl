@@ -176,6 +176,9 @@ sub deleteNullFields {
                 $field->delete_subfield(code => $subfield->[0]);
             }
         }
+        if (!$field->subfields) {
+            $record->delete_field($field);
+        }
     }
     return $record;
 }
