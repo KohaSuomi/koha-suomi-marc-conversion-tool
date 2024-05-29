@@ -225,14 +225,15 @@ sub findImportedBatchByFileName {
 
 sub skipRecordsFromBroadcastBiblios {
     my ($self, $batch_id) = @_;
-    my $sth = $self->dbh->prepare("SELECT bi.matched_biblionumber FROM import_records re JOIN import_biblios bi ON re.import_record_id = bi.import_record_id WHERE re.import_batch_id = ? order by re.import_record_id desc limit 1");
+    my $sth = $self->dbh->prepare("SELECT bi.matched_biblionumber FROM import_records re JOIN import_biblios bi ON re.import_record_id = bi.import_record_id WHERE re.import_batch_id = ? && bi.matched_biblionumber is not null order by re.import_record_id desc limit 1");
     $sth->execute($batch_id);
     my ($biblionumber) = $sth->fetchrow_array();
     $sth->finish();
-
-    my $sth2 = $self->dbh->prepare("INSERT INTO koha_plugin_fi_kohasuomi_broadcastbiblios_log (biblionumber, updated) VALUES (?, NOW())");
-    $sth2->execute($biblionumber);
-    $sth2->finish();
+    if ($biblionumber) {
+        my $sth2 = $self->dbh->prepare("INSERT INTO koha_plugin_fi_kohasuomi_broadcastbiblios_log (biblionumber, updated) VALUES (?, NOW())");
+        $sth2->execute($biblionumber);
+        $sth2->finish();
+    }
 
 }
 
