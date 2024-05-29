@@ -149,8 +149,6 @@ sub primary_language {
         $primaryLanguage = substr($f008->data(), 35, 3);
     } elsif ( $record->subfield('041', 'a') && ( $record->subfield('041', 'a') =~ /(.*[a-zA-Z]){3}/ ) ) {
         $primaryLanguage = $record->subfield('041', 'a');
-    } elsif ( $record->subfield('041', 'd') && ( $record->subfield('041', 'd') =~ /(.*[a-zA-Z]){3}/ ) ) {
-        $primaryLanguage = $record->subfield('041', 'd');
     }
 
     return $primaryLanguage;
