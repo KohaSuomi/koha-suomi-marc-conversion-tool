@@ -103,7 +103,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     foreach my $record (@$records) {
         try {
             #fetch and parse records
-            $record = fix999($record);
+            $record = deleteNullFields($record);
             my $marc_xml = marc2marcxml($record, 'UTF-8', C4::Context->preference("marcflavour"));
             my $parser = XML::LibXML->new(recover => 1);
             my $doc = $parser->load_xml(string => $marc_xml);
@@ -166,15 +166,17 @@ sub leader_06 {
     return $leader_06;
 }
 
-sub fix999 {
+sub deleteNullFields {
     my ($record) = @_;
-    my $f999 = $record->field('999');
-    foreach my $subfield ($f999->subfields) {
-        if ($subfield->[0] ne 'c' && $subfield->[0] ne 'd') {
-            $f999->delete_subfield(code => $subfield->[0]);
+    my @fields = $record->fields();
+    foreach my $field (@fields) {
+        my @subfields = $field->subfields();
+        foreach my $subfield (@subfields) {
+            if ($subfield->[1] eq '') {
+                $field->delete_subfield(code => $subfield->[0]);
+            }
         }
     }
-
     return $record;
 }
 
