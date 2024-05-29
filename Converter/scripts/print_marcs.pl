@@ -109,7 +109,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
             return if $no_rda && checkRDARecord($record);
-            if ($check_sv && primary_language($record) eq 'swe') {
+            if ($check_sv && primary_language($record) eq 'swe' && leader_06($record) eq 'a'){
                 $sv_xml .= $row."\n";
                 $sv_records_count++;
             } else {
@@ -154,6 +154,18 @@ sub primary_language {
     }
 
     return $primaryLanguage;
+}
+
+sub leader_06 {
+    my ($record) = @_;
+    my $f000 = $record->field('000');
+    my $leader_06 = '';
+
+    if( $f000 && substr($f000->data(), 6, 1) && ( substr($f000->data(), 6, 1) =~ /[a-zA-Z]/ )) {
+        $leader_06 = substr($f000->data(), 6, 1);
+    }
+
+    return $leader_06;
 }
 
 sub checkRDARecord {
