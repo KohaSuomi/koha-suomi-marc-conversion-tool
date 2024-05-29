@@ -156,11 +156,10 @@ sub primary_language {
 
 sub leader_06 {
     my ($record) = @_;
-    my $f000 = $record->field('000');
     my $leader_06 = '';
 
-    if( $f000 && substr($f000->data(), 6, 1) && ( substr($f000->data(), 6, 1) =~ /[a-zA-Z]/ )) {
-        $leader_06 = substr($f000->data(), 6, 1);
+    if (substr($record->leader(), 6, 1) && ( substr($record->leader(), 6, 1) =~ /[a-zA-Z]/ )) {
+        $leader_06 = substr($record->leader(), 6, 1);
     }
 
     return $leader_06;
