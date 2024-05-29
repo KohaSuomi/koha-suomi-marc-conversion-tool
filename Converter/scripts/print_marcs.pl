@@ -170,7 +170,7 @@ sub fix999 {
     my ($record) = @_;
     my $f999 = $record->field('999');
     foreach my $subfield ($f999->subfields) {
-        if ($subfield->[0] ne 'c' || $subfield->[0] ne 'd') {
+        if ($subfield->[0] ne 'c' && $subfield->[0] ne 'd') {
             $f999->delete_subfield(code => $subfield->[0]);
         }
     }
