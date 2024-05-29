@@ -66,6 +66,11 @@ if (!-d $dir) {
     exit 1;
 }
 
+if ($skip_records_from_broadcast_biblios && !$matcher_id) {
+    print "Error: You must specify a matcher ID when skipping records from broadcast biblios\n";
+    exit 1;
+}
+
 # Create a new instance of KohaImporter
 my $koha_importer = Converter::Modules::KohaImporter->new({
     record_type => $record_type,
