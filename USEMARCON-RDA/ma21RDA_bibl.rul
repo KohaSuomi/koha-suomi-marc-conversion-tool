@@ -224,13 +224,9 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 
 #include "modify336.rul"
 
-
-
-
-
-
 337I1 | 337I1 | S
 337I2 | 337I2 | S
+337$3 | 337$b | 3
 337$a | 337$a |  Delete('.', At Ending); \
       	      	 Delete(',', At Ending); \
 		 If (InTable(S, '337_a.tbl') And (RegFind(@040$b, 'swe') >= 0)) Then Table ('337_a_svenska.tbl') Else Table ('337_a.tbl')
@@ -246,12 +242,13 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 337$2 | 337$2 | S
 #endif
 
-// 337$8 | 337$8 | S
 
 #include "arvaa336.rul"
 #include "arvaa337.rul"
 #include "arvaa338.rul"
 
+// 338 is already in RDA, so sorting it's subfields works fine:
+338   | 338   | Sort('3ab2')
 
 
 
