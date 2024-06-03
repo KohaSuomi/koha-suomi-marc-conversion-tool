@@ -26,12 +26,12 @@ fi
 
 # Run ISBD conversion for fi
 mkdir -p "$CONVERT_PATH/$date/isbd"
-bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-ISBD/ma2maisbd0.ini $CONVERT_PATH/$date/xml/ $CONVERT_PATH/$date/isbd/ fi
+bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-ISBD/ma2maisbd0-ks.ini $CONVERT_PATH/$date/xml/ $CONVERT_PATH/$date/isbd/ fi
 # Run ISBD conversion for sv
-bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-ISBD/ma2maisbd0.ini $CONVERT_PATH/$date/xml/ $CONVERT_PATH/$date/isbd/ sv
+bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-ISBD/ma2maisbd0-ks.ini $CONVERT_PATH/$date/xml/ $CONVERT_PATH/$date/isbd/ sv
 # Run RDA conversion for fi
 mkdir -p "$CONVERT_PATH/$date/rda"
-bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-RDA/ma21RDA_bibliografiset.ini $CONVERT_PATH/$date/isbd/ $CONVERT_PATH/$date/rda/ fi
+bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-RDA/ma21RDA_bibliografiset_fi.ini $CONVERT_PATH/$date/isbd/ $CONVERT_PATH/$date/rda/ fi
 # Run RDA conversion for sv
 bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-RDA/ma21RDA_bibliografiset_sv.ini $CONVERT_PATH/$date/isbd/ $CONVERT_PATH/$date/rda/ sv
 
