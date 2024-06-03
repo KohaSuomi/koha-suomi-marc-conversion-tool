@@ -73,7 +73,7 @@ versio 30.3.2012 / Kansalliskirjasto
 
 // Guess based on form of item:
 #if (Not Exists(%337)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h))
-// No longer make decisions based on form of item '|':
+// No longer make decisions based on form of item '|' (yet):
 // 000         | 337(new)$a      | If (@008/24/ = ' ' or @008/24/ = '|' or @008/24/ = 'd' or @008/24/ = 'f' or @008/24/ = 'r') Then 'ei välittävää laitetta'
 000         | 337(new)$a      | If (@008/24/ = ' ' or @008/24/ = 'd' or @008/24/ = 'f' or @008/24/ = 'r') Then 'ei välittävää laitetta'
 000         | 337(new)$a      | If (@008/24/ = 'a' or @008/24/ = 'b' or @008/24/ = 'c') Then 'mikromuoto'
@@ -286,6 +286,12 @@ versio 30.3.2012 / Kansalliskirjasto
 // FALLBACKS
 #if (Not Exists(%336))
 000         | 336(new)$a      | 'Määrittelemätön sisältötyyppi'
+#endif
+
+// Most types of record cand default to 'ei välittävää laitetta'
+// if no other value is found
+#if (Not Exists(%337)) And (RegFind(@000/7/, '[acdefoprt]') = 0)
+000         | 337(new)$a      | 'ei välittävää laitetta'
 #endif
 
 #if (Not Exists(%337))
