@@ -176,7 +176,7 @@ sub deleteNullFields {
                 $field->delete_subfield(code => $subfield->[0]);
             }
         }
-        if (!$field->controlfield() && !$field->subfields()) {
+        if (!$field->is_control_field() && !$field->subfields()) {
             $record->delete_field($field);
         }
     }
