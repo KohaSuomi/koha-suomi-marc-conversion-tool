@@ -222,9 +222,9 @@ Y30   | 300    | S
 337$8 | 337$8 | S
 
 // LUODAAN 33X-KENTÄT, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
-#include "arvaa336.rul"
-#include "arvaa337.rul"
-#include "arvaa338.rul"
+#include "sv_arvaa336.rul"
+#include "sv_arvaa337.rul"
+#include "sv_arvaa338.rul"
 
 
 490I1 | 490I1 | S

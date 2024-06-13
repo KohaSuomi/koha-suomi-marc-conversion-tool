@@ -1,0 +1,251 @@
+// LUODAAN 338-KENTÄT, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
+
+// 338-kenttiä voi olla useampia esim. moniviestimissä. Samanmuotoiset kentät luovat säännöt on ryhmitelty peräkkäin.
+// Kahta samansisältöistä kenttää ei luoda missään tilanteessa.
+
+// 2024-03-14: Modified rules so that this will always result in one field 338.
+// For LDR/06 'o' and 'p' we need to do tailor rules to begin with. (Not done.)
+// Also the we now create the 338$b and then build 338$a based on CAT lang.
+
+
+// TODO: The order should be
+// 1. multi-338 (LDR/06='o' or 'p'. TODO)
+// 2. others in order of probability (safest first)
+
+// 245$h based guesses are mostly gone...
+
+// Object/esine/
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'r' )
+000 | <B38$b | 'nr'   
+#endif
+
+// Hacks: create multi-338 based on field 300
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'o' ) And (RegFind(@300$a, 'CD-äänilevy.*kirja') >= 0)
+// FFS: C38 has to come before B38 here for this to work...
+000 | <C38$b | 'nc'
+000 | <B38$b | 'sd'
+#endif
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'o' )
+    // And (RegFind(@300$a, 'kirja.*CD-äänilevy') >= 0)
+// FFS: C38 has to come before B38 here for this to work...
+000 | <C38$b | 'sd'
+000 | <B38$b | 'nc'
+#endif
+
+
+
+
+// VERKKOAINEISTO
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+  (RegFind(@300$a, 'ROM') < 0) \
+  And (RegFind(@337, 'elektroninen') >= 0) \
+  And ( \
+    (RegFind(@300$a, '[Ff]il\b|[Vv]erkkojulkaisu|[Tt]iedosto|[Ww]ebb') >= 0) \
+    Or (RegFind(@516$a, '[Ff]il\b|[Vv]erkkoaineisto|[Ww]ebb') >= 0) \
+    Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
+    Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
+    Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
+    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+    Or (RegFind(000/8/, 's') >= 0) \
+    Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
+    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) \
+    Or (RegFind(@336, 'eksti') >= 0) \
+  )
+000 | <B38$b | 'cr'  
+#endif
+
+
+// ARKKI/ARK/SHEET
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( (RegFind(@300$a, '[Aa]rkki|\\b[Aa]rk\\b|^[0-9]+ karttaa?\b') >= 0) Or \
+      ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'ingen medietyp|laitetta') >= 0) ) )
+000 | <B38$b | 'nb'	
+#endif
+
+
+
+// NIDE
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
+    ( RegFind(@336$a, '([Kk]artografisk|[Kk]artografinen|[Nn]otatoitu|[Nn]uottikirjoitus|[Tt]eksti|[Tt]ext)') >= 0 Or RegFind(@336$b, 'txt') >= 0 ) And \
+    ( RegFind(@337$a, 'ingen medietyp|laitetta|oförmedlad|omedierad') >= 0 Or RegFind(@337$b, 'n') >= 0 )
+000 | <B38$b | 'nc'
+#endif
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
+    RegFind(@300$a, 'artbok|atlas|\\b[Bb]ok|[Tt]ekstivihko|\\b[Kk]irja|[Kk]artasto') >= 0
+000 | <B38$b | 'nc'
+#endif
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'o') And \
+   (RegFind(%336$a, 'muu') = 0) And \
+   (RegFind(%337$a, 'muu') = 0) And \
+   (RegFind(@300$a, '\bkirja|\bnide') = 0) 
+000 | <B38$b | 'nc'
+#endif
+
+
+// VIDEOKASETTI
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    RegFind(@300$a, '[Vv]ideo ?[ck]as') >= 0
+000 | <B38$b | 'vf'
+#endif
+
+// PIIRTOHEITINKALVO / TRANSPARANG
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    If (RegFind(@300$a, '[Hh]eijastuskuva|[Kk]alvo|[Tt]ransparang') >= 0) 
+000 | <B38$b | 'gt'
+#endif
+
+// DIA/DIABILD/SLIDE
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'g') And ( @007/1/ = 'g' ) And ( @007/2/ = 's' )
+000 | <B38$b | 'gs'
+#endif
+
+// DIA/DIABILD/SLIDE #2
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    (RegFind(@300$a, '([Kk]uultokuv|[Dd]iaa|\\b[Dd]ia\\b|[Dd]iabild)') >= 0)
+000 | <B38$b | 'gs'
+#endif
+
+
+
+// MIKROKORTTI
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    (Not (000/7/ = 'e') Or (000/7/ = 'f')) And \
+    ( (RegFind(@300$a, '[Ff]ilmi?kort|[Mm]ikrokort') >= 0) Or (RegFind(@500$a, 'filmi?kort') >= 0) \
+        Or (007/1-2/ = 'he') Or (008/24/ = 'b') \
+        ) 
+000 | <B38$b | 'he'
+#endif
+
+// TODO: tests for both 'he' and 'hg' (fixed a bug there)
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    (Not (000/7/ = 'e')) And (Not 000/7/ = 'f') And \
+    ( (007/1-2/ = 'hg') Or ( 008/24/ = 'c' ) )
+000 | <B38$b | 'hg'
+#endif
+
+// KORTTI/KORT/CARD
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    If (RegFind(@300$a, '(\\b[Kk]ortti|\\b[Kk]ort\\b)') >= 0)
+000 | <B38$b | 'no'
+#endif
+
+
+
+// MIKROFILMIRULLA/MIKROFILMSRULLE
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( (RegFind(@300$a, '[Mm]ikrofilmi|[Mm]icrofilm\\b|[Mm]icrofilmsrull') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a')) \
+      And (Not (000/7/ = 'e') Or (000/7/ = 'f'))
+000 | <B38$b | 'hj'
+#endif
+
+// ÄÄNIKELA / LJUDSPOLE
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    If (RegFind(@300$a, '[Ll]judspol|[Ää]änikela') >= 0)
+000 | <B38$b | 'st'
+#endif
+
+
+// MUISTIKORTTI (2024-02-06) (related: 007/00-01=cs, 008/23=q)
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    (000/7/ = 'm') And \
+    RegFind(@300$a, '[Cc]omputer card|[Dd]atorkort|[Mm]uistikortti') >= 0
+000 | <B38$b | 'ck'    
+#endif
+
+
+
+
+
+
+// ÄÄNILEVY/LJUDSKIVA
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( (RegFind(@300$a, '[Cc][Dd]-levy|[Ll][Pp]-levy|äänilevy|[Cc][Dd]-skiv|ljudskiv') >= 0) )
+000 | <B38$b | 'sd'  
+#endif
+
+// ÄÄNIKASETTI / LJUD-KASSETT
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( (RegFind(@300$a, '[Cc]-kas') >= 0) Or \
+      (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ll]judkas|[Ää]nikas|kasettia|kassetter') >= 0) )
+000 | <B38$b | 'ss'  
+#endif
+
+// TIETOLEVY / DATORSKIVA
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    (RegFind(@300$a,  '[Cc][Dd].*[Rr][Oo][Mm]|[Dd][Vv][Dd].*[Rr][Oo][Mm]') >= 0)
+000 | <B38$b | 'cd'
+#endif
+
+// VIDEOLEVY vs TIETOLEVY
+
+// Here using LDR/06 to guess 338 value. 336 and 337 might be better or at leat more human-readable (eg. 337$a video...)
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    (RegFind(@300$a, '[Dd][Vv][Dd]-(levy|skiv)|[Vv]ideo(disc|levy|skiv)|[Bb]lu-?ray') >= 0) And (Not (@000/7/ = 'm')) 
+000 | <B38$b | 'vd'
+#endif
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Oo]ptinen levy|[Oo]ptiska? skiv|[Oo]ptista levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (@000/7/ = 'm')
+000 | <B38$b | 'cd'
+#endif
+
+
+// Fallback:
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't')
+000 | <B38$b | 'nc'
+#endif
+
+// Panic button fallback:
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773))
+000 | <B38$b | 'zu'
+#endif
+
+// 338-KENTTIEN LUOMINEN LOPPUU
+
+#if (Exists(@338))
+338I1 | 338I1 | S
+338I2 | 338I2 | S
+338$a | 338$a | Table ('338_a.tbl')
+338$a | 338$b | If (InTable(S, '338_b.tbl')) Then Table ('338_b.tbl')
+338$b | 338$b | If (Not Exists(%338$b)) Then S
+338$2 | 338$2 | 'rdacarrier'
+#endif
+
+
+// Create a new 338 based on B38
+#if Exists(@B38) And (Not Exists(@338))
+000   | 338(1)I1 | ' '
+000   | 338(1)I2 | ' '
+B38$b | 338(1)$a | If (RegFind(@040$b, 'fin') >= 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
+B38$b | 338(1)$b | S
+B38$b | 338(1)$2 | 'rdacarrier'
+
+#endif
+
+// NB! Here we don't check whether 338 exists
+#if Exists(@C38)
+000   | 338(2)I1 | ' '
+000   | 338(2)I2 | ' '
+C38$b | 338(2)$a | If (RegFind(@040$b, 'fin') >= 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
+C38$b | 338(2)$b | S
+C38$b | 338(2)$2 | 'rdacarrier'
+#endif
+
+B38 | <DEL  | S
+C38 | <DEL  | S
+

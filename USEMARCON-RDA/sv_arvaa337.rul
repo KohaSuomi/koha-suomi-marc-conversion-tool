@@ -1,0 +1,131 @@
+//
+// CREATE FIELD(S) 337 IF NEEDED (= none exists) 
+//
+// If cataloging language is swedish, use swedish values in $a, otherwise
+// Finnish values.
+
+// Hacks: create multi-337 based on LDR/06 and field 300:
+#if (Not Exists(@337)) And (Not Exists(@B37)) And \
+    (000/7/ = 'p' Or 000/7/ = 'o') And \
+    (RegFind(@300$a, 'äänilevy.*\bkirja') >= 0 )
+// audio + unmediated:
+000 | <C37$b | 'n'    
+000 | <B37$b | 's'    
+#endif
+
+#if (Not Exists(@337)) And (Not Exists(@B37)) And \
+    (000/7/ = 'p' Or 000/7/ = 'o') And \
+    (RegFind(@300$a, 'kirja.*äänilevy') >= 0 )
+// unmediated + audio:
+000 | <C37$b | 's'    
+000 | <B37$b | 'n'    
+#endif
+
+//
+// The bulk below is based on our addMissingField337.js.
+//
+
+
+
+// Kit as per LDR/06.
+// Maybe we should check field 300 as well...
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'o')
+000 | <B37$b | 'x'    
+#endif
+
+// Mixed material as per LDR/06.
+// NB! We should check field 300 as well for better values
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'p')
+000 | <B37$b | 'x'    
+#endif
+
+// Computer file as per LDR/06
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'm')
+000 | <B37$b | 'c'    
+#endif
+
+// Object as per LDR/06.
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'r') 
+000 | <B37$b | If ( @008/34/ = 'p' ) Then 'p' Else 's'
+#endif
+
+
+// Computer file as per 007/00 and LDR/06.
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (007/1/ = 'c') And \
+    (000/7/ = 'g' Or 000/7/ = 'i' Or 000/7/ = 'j' )
+000 | <B37$b | 'c'
+#endif
+
+
+// Projected as per 007/00 and LDR/06.
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (007/1/ = 'g') And (000/7/ = 'g' )
+000 | <B37$b | 'g'
+#endif
+
+// Projected as per 007/00 and LDR/06.
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'g' ) And \
+    (007/1/ = 'm' Or 007/1/ = 'v')
+000 | <B37$b | 'v'
+#endif
+
+// Audio as per 007/00 and LDR/06.
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'i' Or 000/7/ = 'j' )
+000 | <B37$b | 's'
+#endif
+
+// The rest is based on form of item.
+// Note that maps and visual materials store form of item in 008/29,
+// and others in 008/23. Thus some very clumsy repetitions here
+
+
+#if (Not Exists(@337)) And (Not Exists(@B37)) And \
+    (000/7/ = 'e' Or 000/7/ = 'f' Or 000/7/ = 'g' Or 000/7/ = 'k' Or 000/7/ = 'o' Or 000/7/ = 'r' )
+// Unmediated:    
+000 | <B37$b | If ( @008/30/ = ' ' Or @008/30/ = '|' Or @008/30/ = 'd' Or @008/30/ = 'e' Or @008/30/ = 'f' Or @008/30/ = 'r' ) Then 'n'
+// Microform:
+000 | <B37$b | If ( @008/30/ = 'a' Or @008/30/ = 'b' Or @008/30/ = 'c' ) Then 'h'
+// Computer:
+000 | <B37$b | If ( @008/30/ = 'o' Or @008/30/ = 'q' Or @008/30/ = 's' ) Then 'h'
+
+//008/30/ | <B37$b  | S
+#endif
+
+#if (Not Exists(@337)) And (Not Exists(@B37)) And \
+    (000/7/ = 'a' Or 000/7/ = 'c' Or 000/7/ = 'd' Or 000/7/ = 't' )
+// Unmediated:    
+000 | <B37$b | If ( @008/24/ = ' ' Or @008/24/ = '|' Or @008/24/ = 'd' Or @008/24/ = 'e' Or @008/24/ = 'f' Or @008/24/ = 'r' ) Then 'n'
+// Microform:
+000 | <B37$b | If ( @008/24/ = 'a' Or @008/24/ = 'b' Or @008/24/ = 'c' ) Then 'h'
+// Computer:
+000 | <B37$b | If ( @008/24/ = 'o' Or @008/24/ = 'q' Or @008/24/ = 's' ) Then 'h' 
+#endif
+
+
+// Fallback rule:
+#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'p')
+000 | <B37$b | 'x'    
+#endif
+
+// Create a new 337 field based on B37
+#if Exists(@B37) And (Not Exists(@337))
+000   | 337(1)I1 | ' '
+000   | 337(1)I2 | ' '
+B37$b | 337(1)$a | If (RegFind(@040$b, 'fin') >= 0) Table('map_fin_337b_to_a') Else Table('map_swe_337b_to_a')
+B37$b | 337(1)$b | S
+B37$b | 337(1)$2 | 'rdamedia'
+
+#endif
+
+// Create *second* 337 field if needed.
+// NB! Here we don't check whether field 337 exists
+#if Exists(@C37)
+000   | 337(2)I1 | ' '
+000   | 337(2)I2 | ' '
+C37$b | 337(2)$a | If (RegFind(@040$b, 'fin') >= 0) Table('map_swe_337b_to_a') Else Table('map_swe_337b_to_a')
+C37$b | 337(2)$b | S
+C37$b | 337(2)$2 | 'rdamedia'
+#endif
+
+B37 | <DEL  | S
+C37 | <DEL  | S
+
