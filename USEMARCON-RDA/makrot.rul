@@ -116,9 +116,9 @@
                       RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
 
 
-#define macro 300C | RegReplace('\\b2:o', 'folio', 'g'); \
-	RegReplace('\\b4:o', 'kvartto', 'g'); \
-	RegReplace('\\b8:o', 'oktaavo', 'g')
+//#define macro 300C | RegReplace('\\b2:o', 'folio', 'g'); \
+//	RegReplace('\\b4:o', 'kvartto', 'g'); \
+//	RegReplace('\\b8:o', 'oktaavo', 'g')
 
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
@@ -137,9 +137,10 @@
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') < 0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
                                  If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') < 0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
                                  If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') < 0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+				 
 
 
-#define macro AANITYYPPI RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
+#define macro AANITYYPPI | RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
   RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopraano\\1', 'g'); \
   RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraanot \\1', 'g'); \
   RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopraano\\1', 'g'); \
@@ -155,7 +156,7 @@
   RegReplace('\\bB(,|\\s|/|\\)|\$)', 'basso\\1', 'g');
 
 
-#define macro ROSTTYP RegReplace('\\bS\\s*(\\(\\d+)', 'sopraner \\1', 'g'); \
+#define macro ROSTTYP | RegReplace('\\bS\\s*(\\(\\d+)', 'sopraner \\1', 'g'); \
   RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopran\\1', 'g'); \
   RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraner \\1', 'g'); \
   RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopran\\1', 'g'); \

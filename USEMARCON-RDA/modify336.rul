@@ -5,7 +5,7 @@
 336   | <T36 | S
 T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        Delete(',', At Ending); \
-		       If (RegFind(@040$b, 'swe') >= 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
+		       If (RegFind(@040$b, 'swe') = 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
 T36(ns)$a | 336(n)I1 | ' '
 T36(ns)$a | 336(n)I2 | ' '
 

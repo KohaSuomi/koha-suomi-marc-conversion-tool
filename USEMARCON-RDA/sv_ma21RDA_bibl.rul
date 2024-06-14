@@ -204,10 +204,14 @@ Y30   | 300    | S
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
 #include "modify336.rul"
+#include "modify337.rul"
 
+// As modify337.rul defaults to Finnish, do some damage control here:
+// (Check why 336 behaves slightly differently and does not need this hack...)
 337I1 | 337I1 | S
 337I2 | 337I2 | S
-337$a | 337$a | Table('337_a_svenska.tbl')
+337$a | 337$a | If (InTable(S, '337_a_svenska.tbl') And (RegFind(@040$b, 'fin') != 0)) Then Table ('337_a_svenska.tbl')
+
 
 #if Not (Exists(@337$b))
 337$a | 337$b | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')

@@ -1,0 +1,17 @@
+337I1 | 337I1 | S
+337I2 | 337I2 | S
+337$3 | 337$b | 3
+337$a | 337$a |  Delete('.', At Ending); \
+      	      	 Delete(',', At Ending); \
+		 If (InTable(S, '337_a.tbl') And (RegFind(@040$b, 'swe') = 0)) Then Table ('337_a_svenska.tbl') Else Table ('337_a.tbl')
+
+
+#if Not (Exists(@337$b))
+337$a | 337$b | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
+337$a | 337$2 | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then 'rdamedia'
+#endif
+
+#if (Exists(@337$b))
+337$b | 337$b | S
+337$2 | 337$2 | S
+#endif
