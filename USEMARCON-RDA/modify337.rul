@@ -1,17 +1,35 @@
-337I1 | 337I1 | S
-337I2 | 337I2 | S
-337$3 | 337$b | 3
+// COMMENT LINE 1
+// COMMENT LINE 2
+
+
+337I1 | 337I1 | ' '
+337I2 | 337I2 | ' '
+
+337$8 | 337$8 | S
+337$3 | 337$3 | S
+
+// It would be nice to know which ini file (= language) we use.
+// Now we default to Finnish, but it is brave and suboptimal solution...
 337$a | 337$a |  Delete('.', At Ending); \
       	      	 Delete(',', At Ending); \
 		 If (InTable(S, '337_a.tbl') And (RegFind(@040$b, 'swe') = 0)) Then Table ('337_a_svenska.tbl') Else Table ('337_a.tbl')
 
 
-#if Not (Exists(@337$b))
+#if (Exists(@337$b))
+337$b | 337$b | S
+#endif
+#if (Not Exists(@337$b))
 337$a | 337$b | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
+#endif
+
+#if (Exists(@337$2))
+337$2 | 337$2 | S
+#endif
+#if Not (Exists(@337$2))
 337$a | 337$2 | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then 'rdamedia'
 #endif
 
-#if (Exists(@337$b))
-337$b | 337$b | S
-337$2 | 337$2 | S
-#endif
+
+337$? | 337$? | S
+
+337(ns)$a | 337(n) | Sort('38ab2')

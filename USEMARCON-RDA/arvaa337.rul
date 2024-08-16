@@ -29,15 +29,15 @@
 
 // Kit as per LDR/06.
 // Maybe we should check field 300 as well...
-#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'o')
-000 | <B37$b | 'x'    
-#endif
+// #if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'o')
+// 000 | <B37$b | 'x'    
+// #endif
 
 // Mixed material as per LDR/06.
 // NB! We should check field 300 as well for better values
-#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'p')
-000 | <B37$b | 'x'    
-#endif
+// #if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'p')
+// 000 | <B37$b | 'x'    
+// #endif
 
 // Computer file as per LDR/06
 #if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'm')
@@ -80,7 +80,7 @@
 
 #if (Not Exists(@337)) And (Not Exists(@B37)) And \
     (000/7/ = 'e' Or 000/7/ = 'f' Or 000/7/ = 'g' Or 000/7/ = 'k' Or 000/7/ = 'o' Or 000/7/ = 'r' )
-// Unmediated:    
+// Unmediated 008/30 form of item is a bit iffy. We might habe some field 300 rules before it...
 000 | <B37$b | If ( @008/30/ = ' ' Or @008/30/ = '|' Or @008/30/ = 'd' Or @008/30/ = 'e' Or @008/30/ = 'f' Or @008/30/ = 'r' ) Then 'n'
 // Microform:
 000 | <B37$b | If ( @008/30/ = 'a' Or @008/30/ = 'b' Or @008/30/ = 'c' ) Then 'h'
@@ -102,8 +102,12 @@
 
 
 // Fallback rule:
-#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'p')
-000 | <B37$b | 'x'    
+//#if (Not Exists(@337)) And (Not Exists(@B37)) And (000/7/ = 'p')
+//000 | <B37$b | 'x'    
+//#endif
+
+#if (Not Exists(@337)) And (Not Exists(@B37))
+000 | <B37$b | 'z'    
 #endif
 
 // Create a new 337 field based on B37

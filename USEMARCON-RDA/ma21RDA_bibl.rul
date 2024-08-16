@@ -224,9 +224,8 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 
 #include "modify336.rul"
 #include "modify337.rul"
+#include "modify338.rul"
 
-// 338 is already in RDA (there's no ISBD-338), so sorting it's subfields works fine:
-338   | 338   | Sort('3ab2')
 
 #include "arvaa336.rul"
 #include "arvaa337.rul"

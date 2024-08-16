@@ -14,6 +14,11 @@
 
 // 245$h based guesses are mostly gone...
 
+
+#if (Exists(@338))
+338 | 338 | S
+#endif
+
 // Object/esine/
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
     ( @000/7/ = 'r' )
@@ -30,10 +35,16 @@
 #endif
 
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( @000/7/ = 'o' )
-    // And (RegFind(@300$a, 'kirja.*CD-äänilevy') >= 0)
+    ( @000/7/ = 'o' ) And (RegFind(@300$a, 'kirja.*CD-äänilevy') >= 0)
 // FFS: C38 has to come before B38 here for this to work...
 000 | <C38$b | 'sd'
+000 | <B38$b | 'nc'
+#endif
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'o' ) And (RegFind(@300$a, 'kirja.*C-kasett') >= 0)
+// FFS: C38 has to come before B38 here for this to work...
+000 | <C38$b | 'ss'
 000 | <B38$b | 'nc'
 #endif
 

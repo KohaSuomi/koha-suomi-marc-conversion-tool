@@ -1,0 +1,38 @@
+// COMMENT LINE 1
+// COMMENT LINE 2
+
+
+338I1 | 338I1 | ' '
+338I2 | 338I2 | ' '
+
+338$8 | 338$8 | S
+338$3 | 338$3 | S
+
+
+
+
+// It would be nice to know which ini file (= language) we use.
+// Now we default to Finnish, but it is brave and suboptimal solution...
+338$a | 338$a |  Delete('.', At Ending); \
+      	      	 Delete(',', At Ending); \
+		 If (InTable(S, '338_a.tbl') And (RegFind(@040$b, 'swe') = 0)) Then Table ('338_a_svenska.tbl') Else Table ('338_a.tbl')
+
+
+#if (Exists(@338$b))
+338$b | 338$b | S
+#endif
+#if (Not Exists(@338$b))
+338$a | 338$b | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '338_b.tbl')) Then Table ('338_b.tbl')
+#endif
+
+#if (Exists(@338$2))
+338$2 | 338$2 | S
+#endif
+#if Not (Exists(@338$2))
+338$a | 338$2 | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '338_b.tbl')) Then 'rdamedia'
+#endif
+
+
+338$? | 338$? | S
+
+338(ns)$a | 338(n) | Sort('38ab2')
