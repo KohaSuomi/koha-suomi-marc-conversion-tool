@@ -110,7 +110,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
             return if $no_rda && checkRDARecord($record);
-            if ($check_sv && primary_language($record) eq 'swe' && leader_06($record) eq 'a'){
+            if ($check_sv && primary_language($record) eq 'swe'){
                 $sv_xml .= $row."\n";
                 $sv_records_count++;
             } else {
