@@ -82,6 +82,8 @@ C11   | 111    | FUNKTIOT2
 130I1 | 130I1  | S
 130I2 | 130I2  | S
 
+130$l | <A30$l | UPPERCASE130L
+
 #if (RegFind(@130$a, 'Triot') >= 0)
 130$m | <A30$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
 #endif
@@ -98,7 +100,7 @@ C11   | 111    | FUNKTIOT2
 130$m | <A30$m | ESITYSKOKOONPANO; ROSTTYP
 #endif
 
-130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; ROSTTYP
+130$o | <A30$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 130$p | <A30$p | RAAMATTU
 130$? | <A30$? | S
 
@@ -111,6 +113,8 @@ A30 | 130 | LOPPUPISTE_X30
 
 240I1 | 240I1  | S
 240I2 | 240I2  | S
+
+240$l | <F40$l | UPPERCASE130L
 
 #if (RegFind(@240$t, 'Triot') >= 0) Or (RegFind(@240$a, 'Triot') >= 0)
 240$m | <F40$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -129,14 +133,16 @@ A30 | 130 | LOPPUPISTE_X30
 240$m | <F40$m | ESITYSKOKOONPANO; ROSTTYP
 #endif
                  
-240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; ROSTTYP
+240$o | <F40$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 240$p | <F40$p | RAAMATTU
 240$? | <F40$? | S
 
-F40   | 240    | S
+F40   | 240    | COMMA2DOT_BEFORE_L
 
 243I1 | 243I1  | S
 243I2 | 243I2  | S
+
+243$l | <B43$l | UPPERCASE130L
 
 #if (RegFind(@243$a, 'Triot') >= 0)
 243$m | <B43$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -154,10 +160,10 @@ F40   | 240    | S
 243$m | <B43$m | ESITYSKOKOONPANO; ROSTTYP
 #endif
 
-243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; ROSTTYP
+243$o | <B43$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 243$? | <B43$? | S
 
-B43 | 243 | S; RAAMATTU
+B43 | 243 | COMMA2DOT_BEFORE_L
 
 #include "field245.rul"
 
@@ -203,27 +209,9 @@ Y30   | 300    | S
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
-#include "modify336.rul"
-#include "modify337.rul"
-
-// As modify337.rul defaults to Finnish, do some damage control here:
-// (Check why 336 behaves slightly differently and does not need this hack...)
-337I1 | 337I1 | S
-337I2 | 337I2 | S
-337$a | 337$a | If (InTable(S, '337_a_svenska.tbl') And (RegFind(@040$b, 'fin') != 0)) Then Table ('337_a_svenska.tbl')
-
-
-#if Not (Exists(@337$b))
-337$a | 337$b | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
-337$a | 337$2 | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then 'rdamedia'
-#endif
-
-#if (Exists(@337$b))
-337$b | 337$b | S
-337$2 | 337$2 | S
-#endif
-
-337$8 | 337$8 | S
+#include "sv_modify336.rul"
+#include "sv_modify337.rul"
+#include "sv_modify338.rul"
 
 // LUODAAN 33X-KENTÄT, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
 #include "sv_arvaa336.rul"
@@ -280,6 +268,8 @@ Y30   | 300    | S
 600$d | <C60$d | AIKAMAAREET
 600$e | <C60$e | Table ('sv_Funktiotermit.tbl')
 
+600$l | <C60$l | UPPERCASE130L
+
 #if (RegFind(@600$t, 'Triot') >= 0)
 600$m | <C60$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
 #endif
@@ -312,7 +302,10 @@ C60 | 600 | RELATORCODES2SWE;  RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUAT
 #if (RegFind(@040$b, 'fin') != 0)
 610$c | <D61$c | FIKTIV_INSTITUTION
 #endif
+
 610$e | <D61$e | Table ('sv_Funktiotermit.tbl')
+
+610$l | <D61$l | UPPERCASE130L
 
 #if (RegFind(@610$t, 'Triot') >= 0)
 610$m | <D61$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -339,12 +332,17 @@ D61 | 610 | RELATORCODES2SWE; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATI
 611I1 | 611I1  | S
 611I2 | 611I2  | S
 611$j | <K61$j | Table ('sv_Funktiotermit.tbl')
+
+611$l | <K61$l | UPPERCASE130L
+
 611$? | <K61$? | RELATORCODES2SWE; RegReplace('$E', '$j', 'g'); ENTRY_FIELD_PUNCTUATION
 
-K61   | 611     | FUNKTIOT2
+K61   | 611     | FUNKTIOT2; COMMA2DOR_BEFORE_L
 
 630I1 | 630I1  | S
 630I2 | 630I2  | S
+
+630$l | <E63$l | UPPERCASE130L
 
 #if (RegFind(@630$a, 'Triot') >= 0)
 630$m | <E63$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -415,6 +413,7 @@ Z65   | 662    | S
 700$d | <G70$d | AIKAMAAREET
 700$e | <G70$e | SWEDISHRELATORABBRS; FINNISHRELATORABBRS ; Table ('sv_Funktiotermit.tbl')
 
+700$l | <G70$l | UPPERCASE130L
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -443,6 +442,8 @@ G70 | 700 | RELATORCODES2SWE; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATI
 710$c | <H71$c | S
 710$e | <H71$e | Table ('sv_Funktiotermit.tbl')
 
+710$l | <H71$l | UPPERCASE130L
+
 #if (RegFind(@710$t, 'Triot') >= 0)
 710$m | <H71$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
 #endif
@@ -459,7 +460,7 @@ G70 | 700 | RELATORCODES2SWE; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATI
 710$m | <H71$m | S
 #endif
 
-710$o | <H71$o | SOVITUSMERKINTO_SV, ESITYSKOKOONPANO; ROSTTYP
+710$o | <H71$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 710$p | <H71$p | RAAMATTU
 710$4 | <H71$e | If InTable(S, 'sv_Funktiokoodit.tbl') Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
@@ -469,7 +470,9 @@ H71 | 710 | RELATORCODES2SWE; ENTRY_FIELD_PUNCTUATION
 711I1 | 711I1  | S
 711I2 | 711I2  | S
 711$j | <U71$j | Table ('sv_Funktiotermit.tbl')
-711$4 | <U71$j | If (Not (Exists(%711$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
+
+711$l | <U71$l | UPPERCASE130L
+711$4 | <U71$j | If (Not (Exists(%711$j)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 711$? | <U71$? | S
 
 U71   | 711    | FUNKTIOT2
@@ -484,6 +487,8 @@ Y72   | 720    | S
 
 730I1 | 730I1  | S
 730I2 | 730I2  | S
+
+730$l | <J73$l | UPPERCASE130L
 
 #if (RegFind(@730$a, 'Triot') >= 0)
 730$m | <J73$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -505,7 +510,7 @@ Y72   | 720    | S
 730$p | <J73$p | RAAMATTU
 730$? | <J73$? | S
 
-J73 | 730 | LOPPUPISTE_X30
+J73 | 730 | LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 
 76?I1 | 76?I1 | S
 76?I2 | 76?I2 | S
@@ -530,6 +535,8 @@ J73 | 730 | LOPPUPISTE_X30
 800$c | <K80$c | S
 800$d | <K80$d | AIKAMAAREET
 
+800$l | <K80$l | UPPERCASE130L
+
 #if (RegFind(@800$t, 'Triot') >= 0)
 800$m | <K80$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
 #endif
@@ -546,15 +553,18 @@ J73 | 730 | LOPPUPISTE_X30
 800$m | <K80$m | ESITYSKOKOONPANO; ROSTTYP
 #endif
 
-800$o | <K80$o | SOVITUSMERKINTO_SV, ESITYSKOKOONPANO; ROSTTYP
+800$o | <K80$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 800$p | <K80$p | RAAMATTU
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
 
-K80 | 800 | S
+K80 | 800 | ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
+810$e | <L81$e | Table ('sv_Funktiotermit.tbl')
+
+810$l | <L81$l | UPPERCASE130L
 
 #if (RegFind(@810$t, 'Triot') >= 0)
 810$m | <L81$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -572,7 +582,7 @@ K80 | 800 | S
 810$m | <L81$m | S
 #endif
 
-810$o | <L81$o | SOVITUSMERKINTO_SV, ESITYSKOKOONPANO; ROSTTYP
+810$o | <L81$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 810$p | <L81$p | RAAMATTU
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('sv_Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
@@ -581,6 +591,9 @@ L81 | 810 | S
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
+
+811$l | <W81$l | UPPERCASE130L
+
 811$4 | <W81$j  | If (Not (Exists(@811$j)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 811$? | <W81$?  | S
 
@@ -588,6 +601,8 @@ W81   | 811    | FUNKTIOT2
 
 830I1 | 830I1  | S
 830I2 | 830I2  | S
+
+830$l | <M83$l | UPPERCASE130L
 
 #if (RegFind(@830$a, 'Triot') >= 0)
 830$m | <M83$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -605,7 +620,7 @@ W81   | 811    | FUNKTIOT2
 830$m | <M83$m | S
 #endif
 
-830$o | <M83$o | SOVITUSMERKINTO_SV, ESITYSKOKOONPANO; ROSTTYP
+830$o | <M83$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 830$p | <M83$p | S; If (Not Exists(@830$p(2))) Then RAAMATTU
 830$v | <M83$v | S; Delete ('.', At Ending)
 830$? | <M83$? | S
