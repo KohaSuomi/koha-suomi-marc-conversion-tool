@@ -217,21 +217,11 @@
 
 // 338-KENTTIEN LUOMINEN LOPPUU
 
-#if (Exists(@338))
-338I1 | 338I1 | S
-338I2 | 338I2 | S
-338$a | 338$a | Table ('338_a.tbl')
-338$a | 338$b | If (InTable(S, '338_b.tbl')) Then Table ('338_b.tbl')
-338$b | 338$b | If (Not Exists(%338$b)) Then S
-338$2 | 338$2 | 'rdacarrier'
-#endif
-
-
 // Create a new 338 based on B38
 #if Exists(@B38) And (Not Exists(@338))
 000   | 338(1)I1 | ' '
 000   | 338(1)I2 | ' '
-B38$b | 338(1)$a | If (RegFind(@040$b, 'fin') >= 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
+B38$b | 338(1)$a | If (RegFind(@040$b, 'fin') = 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
 B38$b | 338(1)$b | S
 B38$b | 338(1)$2 | 'rdacarrier'
 
@@ -241,7 +231,7 @@ B38$b | 338(1)$2 | 'rdacarrier'
 #if Exists(@C38)
 000   | 338(2)I1 | ' '
 000   | 338(2)I2 | ' '
-C38$b | 338(2)$a | If (RegFind(@040$b, 'fin') >= 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
+C38$b | 338(2)$a | If (RegFind(@040$b, 'fin') = 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
 C38$b | 338(2)$b | S
 C38$b | 338(2)$2 | 'rdacarrier'
 #endif

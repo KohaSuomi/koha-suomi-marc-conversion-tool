@@ -228,16 +228,6 @@
 
 // 338-KENTTIEN LUOMINEN LOPPUU
 
-#if (Exists(@338))
-338I1 | 338I1 | S
-338I2 | 338I2 | S
-338$a | 338$a | Table ('338_a.tbl')
-338$a | 338$b | If (InTable(S, '338_b.tbl')) Then Table ('338_b.tbl')
-338$b | 338$b | If (Not Exists(%338$b)) Then S
-338$2 | 338$2 | 'rdacarrier'
-#endif
-
-
 // Create a new 338 based on B38
 #if Exists(@B38) And (Not Exists(@338))
 000   | 338(1)I1 | ' '
