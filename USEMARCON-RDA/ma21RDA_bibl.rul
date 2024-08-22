@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 1.9.2016 / Kansalliskirjasto (TV)
+versio 22.8.2024 / Kansalliskirjasto (NV)
 
 #define version 317
 
@@ -250,6 +250,8 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 502   | 502   | S; RegReplace('Diss\\.', 'Väitöskirja'); \
                    RegReplace('Väitösk\\.', 'Väitöskirja'); \
                    RegReplace('Akad\\. avh.', 'Akademisk avhandling')
+
+#include "modify505.rul"
 
 510I1 | 510I1 | S
 510I2 | 510I2 | S

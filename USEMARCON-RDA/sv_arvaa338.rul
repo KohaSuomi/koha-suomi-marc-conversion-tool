@@ -221,7 +221,7 @@
 #if Exists(@B38) And (Not Exists(@338))
 000   | 338(1)I1 | ' '
 000   | 338(1)I2 | ' '
-B38$b | 338(1)$a | If (RegFind(@040$b, 'fin') = 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
+B38$b | 338(1)$a | If (RegFind(@040(1)$b, 'fin') = 0) Then Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
 B38$b | 338(1)$b | S
 B38$b | 338(1)$2 | 'rdacarrier'
 
@@ -231,7 +231,7 @@ B38$b | 338(1)$2 | 'rdacarrier'
 #if Exists(@C38)
 000   | 338(2)I1 | ' '
 000   | 338(2)I2 | ' '
-C38$b | 338(2)$a | If (RegFind(@040$b, 'fin') = 0) Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
+C38$b | 338(2)$a | If (RegFind(@040(1)$b, 'fin') = 0) Then Table('map_fin_338b_to_a') Else Table('map_swe_338b_to_a')
 C38$b | 338(2)$b | S
 C38$b | 338(2)$2 | 'rdacarrier'
 #endif

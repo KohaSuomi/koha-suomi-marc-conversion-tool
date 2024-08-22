@@ -233,6 +233,8 @@ Y30   | 300    | S
                    RegReplace('Väitösk\\.', 'Väitöskirja'); \
                    RegReplace('Akad\\. avh.', 'Akademisk avhandling')
 
+#include "modify505.rul"
+
 510I1 | 510I1 | S
 510I2 | 510I2 | S
 510   | 510   | S; RegReplace('\\[et al\\.\\]', '[och andra]')

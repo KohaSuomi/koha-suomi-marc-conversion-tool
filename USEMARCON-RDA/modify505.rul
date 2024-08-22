@@ -1,0 +1,13 @@
+// Try to handle field 505 indicators
+//
+
+505I1 | 505I1 | If (RegFind(S, '[^0128]') >= 0 ) Then '0' Else S
+
+505(n)I2 | 505(n)I2 | If (RegFind(@505(n), '$[rtg]') >= 0) Then '0' Else ' '
+
+505 | 505 | S
+
+
+
+
+

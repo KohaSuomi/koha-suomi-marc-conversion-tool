@@ -1,11 +1,15 @@
 // COMMENT LINE 1
 // COMMENT LINE 2
 
-#if (Exists(@336$b)) and (Exists(@336$2))
-336$a | 336$a | Delete('.', At Ending); \
-                Delete(',', At Ending); \
-		If (RegFind(@040$b, 'swe') = 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
-336 | 336 | S
+
+// There might be a 336 "$a foo. bar." dual value. 
+#if (Exists(@336(n)$b)) and (Exists(@336(n)$2))
+336(n)$a | 336(n)$a | Delete('.', At Ending); \
+                    Delete(',', At Ending); \
+		    If (RegFind(@040(1)$b, 'swe') = 0) \
+		    Then Table ('336_a_svenska.tbl') \
+		    Else Table ('336_a.tbl')
+336(n) | 336(n) | S
 #endif
 
 #if (Exists(@336$b)) and (Not Exists(@336$2))
@@ -26,7 +30,7 @@
 336   | <T36 | S
 T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        Delete(',', At Ending); \
-		       If (RegFind(@040$b, 'swe') = 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
+		       If (RegFind(@040(1)$b, 'swe') = 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
 T36(ns)$a | 336(n)I1 | ' '
 T36(ns)$a | 336(n)I2 | ' '
 // Mahdollinen $8 kopioidaan $a-osakentän mukaan.

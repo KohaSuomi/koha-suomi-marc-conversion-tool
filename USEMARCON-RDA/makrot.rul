@@ -215,13 +215,16 @@
 			   RegReplace('\\b(nid|Nid|NID)\\.', 'nidottu', 'g'); \
 			   RegReplace('\\b(nid|Nid|NID)\\b', 'nidottu', 'g'); \
 			   RegReplace('\\bnidottu\\b', 'pehmeäkantinen', 'g'); \
+			   RegReplace('\\binbunden med mjuka pärmar\\b', 'mjuka pärmar', 'g'); \
 			   RegReplace('\\b(inb|Inb|INB)\\.', 'inbunden', 'g'); \
 			   RegReplace('\\b(inb|Inb|INB)\\b', 'inbunden', 'g'); \
 			   RegReplace('\\binbunden\\b', 'hårda pärmar', 'g'); \
 			   RegReplace('\\b(hft|Hft|HFT)\\.', 'häftad', 'g'); \
 			   RegReplace('\\b(hft|Hft|HFT)\\b', 'häftad', 'g'); \
 			   RegReplace('\\bhäftad\\b', 'mjuka pärmar', 'g'); \
-                           RegReplace('\\bvirh\\b|\\bvirh\\.', 'virheellinen', 'g'); \
+                           RegReplace('\\brengaskirja\\b', 'kierreselkä', 'g'); \
+                           RegReplace('\\bringpärm\\b', 'spiralrygg', 'g'); \
+			   RegReplace('\\bvirh\\b|\\bvirh\\.', 'virheellinen', 'g'); \
                           RegReplace('\\bpbk\\.', 'paperback', 'g'); \
                           RegReplace('\\bpbk\\b', 'paperback', 'g'); \
                           RegReplace('\\bhbk\\.', 'hardback', 'g'); \

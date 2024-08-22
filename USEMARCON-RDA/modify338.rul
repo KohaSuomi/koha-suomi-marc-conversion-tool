@@ -13,9 +13,9 @@
 
 // It would be nice to know which ini file (= language) we use.
 // Now we default to Finnish, but it is brave and suboptimal solution...
-338$a | 338$a |  Delete('.', At Ending); \
-      	      	 Delete(',', At Ending); \
-		 If (InTable(S, '338_a.tbl') And (RegFind(@040$b, 'swe') = 0)) Then Table ('338_a_svenska.tbl') Else Table ('338_a.tbl')
+338(n)$a | 338(n)$a |  Delete('.', At Ending); \
+      	      	    Delete(',', At Ending); \
+		    If (InTable(S, '338_a.tbl') And (RegFind(@040(1)$b, 'swe') = 0)) Then Table ('338_a_svenska.tbl') Else Table ('338_a.tbl')
 
 
 #if (Exists(@338$b))
