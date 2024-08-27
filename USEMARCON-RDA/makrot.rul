@@ -27,7 +27,9 @@
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('\\bmuotokuv\\.', 'muotokuvia', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
-                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
+                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g'); \
+		      If ( @000/7/ = 'c' ) Then RegReplace ('parts', 'stemmaa') Else S; \
+		      If ( @000/7/ = 'c' ) Then RegReplace ('\\bscore\\b', 'partituuri') Else S
 
 #define macro SV300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
@@ -36,7 +38,12 @@
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
-		      
+
+
+
+
+
+	
 // Usemarcon has Mixed() but I (nv) can't get it to work
 #define macro UPPERCASE130L | RegReplace('^a', 'A'); RegReplace('^b', 'B'); \
 	RegReplace('^c', 'C'); RegReplace('^d', 'D'); RegReplace('^e', 'E'); \
@@ -194,13 +201,13 @@
                          RegReplace('\\bVT(\\b|\\.)', 'Vanha testamentti', 'g')
 
 
-#define macro FIKTIIVINEN_HAHMO | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiv gestalt', '(fiktiivinen hahmo)', 'g');
+#define macro FIKTIIVINEN_HAHMO | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiv gestalt', '(fiktiivinen hahmo)', 'g'); RegReplace('\\(\\(fiktiivinen hahmo\\)\\)', '(fiktiivinen hahmo)')
 
-#define macro FIKTIV_GESTALT | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiivinen hahmo', '(fiktiv gestalt)', 'g');
+#define macro FIKTIV_GESTALT | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiivinen hahmo', '(fiktiv gestalt)', 'g'); RegReplace('\\(\\(fiktiv gestalt\\)\\)', '(fiktiv gestalt)')
 
-#define macro FIKTIIVINEN_YHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
+#define macro FIKTIIVINEN_YHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)'); RegReplace('\\(\\(fiktiivinen yhteisö\\)\\)', '(fiktiivinen yhteisö)')
 
-#define macro FIKTIV_INSTITUTION | RegReplace('fikt\\.', '(fiktiv institution)')
+#define macro FIKTIV_INSTITUTION | RegReplace('fikt\\.', '(fiktiv institution)'); RegReplace('\\(\\(fiktiv institution\\)\\)', '(fiktiivinen institution)')
 
 // TODO: samma på svenska, t.ex.: f. => föddes?
 

@@ -38,7 +38,7 @@
 // PROJECTED (LDR/06=k, partial)
 #if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'g') And \
     (007/1/ = 'g' )
-000 | <B36$b | 'sti'    
+000 | <B36$b | 'sti'
 #endif
 
 #if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'g') And \
@@ -74,7 +74,7 @@
 #endif
 
 #if (Not Exists(@336)) And (Not Exists(@B36)) And (000/7/ = 'k')
-
+000 | <B36$b | 'sti'
 #endif
 
 

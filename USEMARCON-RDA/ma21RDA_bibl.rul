@@ -43,6 +43,7 @@ versio 22.8.2024 / Kansalliskirjasto (NV)
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
+// Should this be rewritten with (n)? Now this apparently fixes only a lone 028...
 028I1 | 028I1  | If (Not Exists(@028(2))) And (S = '0') And (@000/7/ = 'c') Then '3' Else S
 028I2 | 028I2  | S
 028$q | 028$q  | SIDOSASUT
@@ -212,7 +213,7 @@ B43 | 243 | COMMA2DOT_BEFORE_L
 300$b | <Y30$b | FI300BE; Delete('.', At Ending)
 // Don't use macro 300C
 300$c | <Y30$c | Delete('.', At Ending)
-300$e | <Y30$e | FI300BE; Delete('.', At Ending)
+300$e | <Y30$e | FI300AE; FI300BE; Delete('.', At Ending)
 300$? | <Y30$? | S
 
 Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
@@ -275,12 +276,20 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 538I1 | 538I2 | S
 538   | 538   | S
 
+
+// As per MELKEHITYS-2566
+546I1 | 546I1 | S
+546I2 | 546I2 | S
+546$b | 546$b | S; RegReplace('\\bStaff [Nn]otation\\b', 'Viivastonuottikirjoitus')	
+546$? | 546$? | S
+
+
 600I1 | 600I1  | S
 600I2 | 600I2  | S
-#if (RegFind(@040$b, 'swe') = 0)
+#if (RegFind(@040(1)$b, 'swe') = 0)
 600$c | <C60$c | FIKTIV_GESTALT
 #endif
-#if (RegFind(@040$b, 'swe') != 0)
+#if (RegFind(@040(1)$b, 'swe') != 0)
 600$c | <C60$c | FIKTIIVINEN_HAHMO
 #endif
 600$d | <C60$d | AIKAMAAREET

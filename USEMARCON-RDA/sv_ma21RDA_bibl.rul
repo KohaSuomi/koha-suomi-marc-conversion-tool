@@ -202,7 +202,7 @@ B43 | 243 | COMMA2DOT_BEFORE_L
 
 300$b | <Y30$b | SV300BE
 300$c | <Y30$c | S; Delete('.', At Ending)
-300$e | <Y30$e | SV300BE
+300$e | <Y30$e | SV300AE; SV300BE
 300$? | <Y30$? | S
 
 Y30   | 300    | S
