@@ -110,7 +110,7 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
             return if $no_rda && checkRDARecord($record);
-            if ($check_sv && primary_language($record) eq 'swe' && leader_06($record) eq 'a'){
+            if ($check_sv && svRecord($record)) {
                 $sv_xml .= $row."\n";
                 $sv_records_count++;
             } else {
@@ -155,6 +155,18 @@ sub primary_language {
     return $primaryLanguage;
 }
 
+sub cataloging_language {
+    my ($record) = @_;
+    my $f008 = $record->field('008');
+    my $catalogingLanguage = 'OTH';
+
+    if( $record->subfield('040', 'b') && ( $record->subfield('040', 'b') =~ /(.*[a-zA-Z]){3}/ ) ) {
+        $catalogingLanguage = $record->subfield('040', 'b');
+    }
+
+    return $catalogingLanguage;
+}
+
 sub leader_06 {
     my ($record) = @_;
     my $leader_06 = '';
@@ -164,6 +176,19 @@ sub leader_06 {
     }
 
     return $leader_06;
+}
+
+sub svRecord {
+    my ($record) = @_;
+    my $svRecord = 0;
+
+    if (primary_language($record) eq 'swe' && leader_06($record) eq 'a') {
+        $svRecord = 1;
+    } elsif (cataloging_language($record) eq 'swe') {
+        $svRecord = 1;
+    }
+
+    return $svRecord;
 }
 
 sub deleteNullFields {
