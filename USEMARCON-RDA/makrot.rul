@@ -555,3 +555,33 @@
 	RegReplace('$4wac($.*)?', '$Eförfattare till textkommentar\\1'); \
 	RegReplace('$4wal($.*)?', '$Ekompletterande text till musikverk\\1'); \
 	RegReplace('$4wat($.*)?', '$Ekompletterande text till icke-språkliga resurser\\1')
+
+
+#define macro FI344A | RegReplace('\\banalog\\b', 'analoginen'); \
+	RegReplace('\\bdigital\\b', 'digitaalinen')
+
+#define macro SV344A | RegReplace('\\banaloginen\\b', 'analog'); \
+	RegReplace('\\bdigitaalinen\\b', 'digital')
+
+#define macro FI344B | RegReplace('\\b(optical|optisk)\\b', 'optinen')
+
+#define macro SV344B | RegReplace('\\b(optical|optinen)\\b', 'optisk')
+
+#define macro FI344C | RegReplace('\\b(rpm|varv/min)\\b', 'kierr./min')
+
+#define macro SV344C | RegReplace('\\b(rpm|kierr\\./min)\\b', 'varv/min')
+
+
+
+#define macro FI347A | RegReplace('\\b(audio file|ljudfil)\\b', 'äänitiedosto'); \
+	 RegReplace('\\b(data file|datafil)\\b', 'datatiedosto'); \
+	 RegReplace('\\b(image file|bildfil)\\b', 'kuvatiedosto'); \
+	 RegReplace('\\b(text file|textfil)\\b', 'tekstitiedosto'); \
+	 RegReplace('\\b(video file|videofil)\\b', 'videotiedosto')
+
+#define macro SV347A | RegReplace('\\b(audio file|äänitiedosto)\\b', 'ljudtiedosto'); \
+	 RegReplace('\\b(data file|datatiedosto)\\b', 'datafil'); \
+	 RegReplace('\\b(image file|kuvatiedosto)\\b', 'bildfil'); \
+	 RegReplace('\\b(text file|tekstitiedosto)\\b', 'textfil'); \
+	 RegReplace('\\b(video file|videotiedosto)\\b', 'videofil')
+

@@ -18,6 +18,8 @@ versio 13.3.2024 / Kansalliskirjasto (NV)
 000/20/ | 000/20/ | S
 000/21-24/ | 000/21-24/ | '4500'
 
+008 | 008 | S
+
 015I1 | 015I1 | S
 015I2 | 015I2 | S
 015$? | 015$? | Replace('.,' By ','); \
@@ -49,6 +51,9 @@ versio 13.3.2024 / Kansalliskirjasto (NV)
 028I2 | 028I2  | S
 028$q | 028$q  | SIDOSASUT
 028$? | 028$?  | S
+
+
+#include "add_missing_041.rul"
 
 
 100I1 | 100I1  | S
@@ -104,7 +109,7 @@ C11   | 111    | FUNKTIOT2
 130$p | <A30$p | RAAMATTU
 130$? | <A30$? | S
 
-A30 | 130 | LOPPUPISTE_X30
+A30 | 130 | ENTRY_FIELD_PUNCTUATION ; LOPPUPISTE_X30
 
 
 222I1 | 222I1 | S
@@ -218,6 +223,33 @@ Y30   | 300    | S
 #include "sv_arvaa337.rul"
 #include "sv_arvaa338.rul"
 
+
+344I1 | 344I1 | S
+344I2 | 344I2 | S
+#if (RegFind(@040(1)$b, 'fin') = 0)
+344$a | 344$a | S; FI344A
+344$b | 344$b | S; FI344B
+344$c | 344$c | S; FI344C
+#endif
+#if (RegFind(@040(1)$b, 'fin') != 0)
+344$a | 344$a | S; SV344A
+344$b | 344$b | S; SV344B
+344$c | 344$c | S; SV344C
+#endif
+344$2 | <DEL | S
+344$? | 344$? | S
+
+
+347I1 | 347I1 | S
+347I2 | 347I2 | S
+#if (RegFind(@040(1)$b, 'fin') = 0)
+347$a | 347$a | S; FI347A
+#endif
+#if (RegFind(@040(1)$b, 'fin') != 0)
+347$a | 347$a | S; SV347A
+#endif
+// Should we handle/remove $2 and $0?
+347$? | 347$? | S
 
 490I1 | 490I1 | S
 490I2 | 490I2 | S
@@ -367,7 +399,7 @@ K61   | 611     | FUNKTIOT2; COMMA2DOR_BEFORE_L
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | LOPPUPISTE_X30
+E63 | 630 | LOPPUPISTE_X30; ENTRY_FIELD_PUNCTUATION
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
@@ -477,7 +509,7 @@ H71 | 710 | RELATORCODES2SWE; ENTRY_FIELD_PUNCTUATION
 711$4 | <U71$j | If (Not (Exists(%711$j)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 711$? | <U71$? | S
 
-U71   | 711    | FUNKTIOT2
+U71   | 711    | FUNKTIOT2 ; ENTRY_FIELD_PUNCTUATION
 
 720I1 | 720I1  | S
 720I2 | 720I2  | S
@@ -589,7 +621,7 @@ K80 | 800 | ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('sv_Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
 
-L81 | 810 | S
+L81 | 810 | ENTRY_FIELD_PUNCTUATION
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
@@ -599,7 +631,7 @@ L81 | 810 | S
 811$4 | <W81$j  | If (Not (Exists(@811$j)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 811$? | <W81$?  | S
 
-W81   | 811    | FUNKTIOT2
+W81   | 811    | FUNKTIOT2 ; ENTRY_FIELD_PUNCTUATION
 
 830I1 | 830I1  | S
 830I2 | 830I2  | S
@@ -628,7 +660,7 @@ W81   | 811    | FUNKTIOT2
 830$? | <M83$? | S
 
 M83 | 830 | RegReplace('\\b;$v| ; $v', ' ;$v'); \
-            LOPPUPISTE_X30 
+            LOPPUPISTE_X30; ENTRY_FIELD_PUNCTUATION
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S

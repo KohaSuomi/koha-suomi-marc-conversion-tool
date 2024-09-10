@@ -49,6 +49,10 @@ versio 22.8.2024 / Kansalliskirjasto (NV)
 028$q | 028$q  | SIDOSASUT
 028$? | 028$?  | S
 
+
+#include "add_missing_041.rul"
+
+
 100I1 | 100I1  | S
 100I2 | 100I2  | S
 
@@ -167,12 +171,6 @@ B43 | 243 | COMMA2DOT_BEFORE_L
 
 #include "field245.rul"
 
-#if (Not Exists(@300))
-256I1 | 300I1 | S
-256I2 | 300I2 | S
-256   | 300   | VERKKOAINEISTO; FI300AE; Delete('.', At Ending)
-#endif
-
 # 20240201: Remove remaining 256 fields. (In some cases data could theoretically go to field 516.)
 #if (Exists(@300))
 256   | <DEL | S
@@ -199,27 +197,8 @@ B43 | 243 | COMMA2DOT_BEFORE_L
 270$4 | 270$4  | S
 270$? | 270$?  | S
 
-300I1 | 300(new)I1 | S
-300I2 | 300(newest)I2 | S
-
-#if (RegFind(@041, 'eng') >= 0)
-300$a | <Y30$a | FI300AE; FI300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
-#endif
-
-#if (RegFind(@041, 'eng') < 0)
-300$a | <Y30$a | FI300AE; FI300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
-#endif
-
-300$b | <Y30$b | FI300BE; Delete('.', At Ending)
-// Don't use macro 300C
-300$c | <Y30$c | Delete('.', At Ending)
-300$e | <Y30$e | FI300AE; FI300BE; Delete('.', At Ending)
-300$? | <Y30$? | S
-
-Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
-      RegReplace('($[ab][^$]+[0-9a-z])$c', '\\1 ;$c'); \
-      RegReplace('($[abc][^$]+[0-9a-z])$e', '\\1 +$e'); \
-      S
+// field300.rul also handles 256->300 transition
+#include "field300.rul"
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
@@ -232,8 +211,32 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 #include "arvaa337.rul"
 #include "arvaa338.rul"
 
+344I1 | 344I1 | S
+344I2 | 344I2 | S
+#if (RegFind(@040(1)$b, 'swe') = 0)
+344$a | 344$a | S; SV344A
+344$b | 344$b | S; SV344B
+344$c | 344$c | S; SV344C
+#endif
+#if (RegFind(@040(1)$b, 'swe') != 0)
+344$a | 344$a | S; FI344A
+344$b | 344$b | S; FI344B
+344$c | 344$c | S; FI344C
+#endif
+344$2 | <DEL | S
+344$? | 344$? | S
 
 
+347I1 | 347I1 | S
+347I2 | 347I2 | S
+#if (RegFind(@040(1)$b, 'swe') = 0)
+347$a | 347$a | S; SV347A
+#endif
+#if (RegFind(@040(1)$b, 'swe') != 0)
+347$a | 347$a | S; FI347A
+#endif
+// Should we handle/remove $2 and $0?
+347$? | 347$? | S
 
 
 
@@ -360,7 +363,7 @@ D61 | 610 | ENTRY_FIELD_PUNCTUATION
 
 611$l | <K61$l | UPPERCASE130L
 
-611$? | <K61$? | S
+611$? | <K61$? | ENTRY_FIELD_PUNCTUATION
 
 K61   | 611     | COMMA2DOT_BEFORE_L
 
@@ -479,7 +482,7 @@ G70 | 700 | RELATORCODES2FIN; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATI
 710$p | <H71$p | RAAMATTU
 710$? | <H71$? | S
 
-H71 | 710 | ENTRY_FIELD_PUNCTUATION
+H71 | 710 | RELATORCODES2FIN; ENTRY_FIELD_PUNCTUATION
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S

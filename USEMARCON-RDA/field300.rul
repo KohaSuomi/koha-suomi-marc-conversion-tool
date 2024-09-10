@@ -1,0 +1,36 @@
+// Rules for field 300
+// 
+
+#if (Not Exists(@300))
+256I1 | 300I1 | S
+256I2 | 300I2 | S
+256   | 300   | VERKKOAINEISTO; FI300AE; Delete('.', At Ending)
+#endif
+
+# 20240201: Remove remaining 256 fields. (In some cases data could theoretically go to field 516.)
+#if (Exists(@300))
+256   | <DEL | S
+#endif
+
+300I1 | 300(new)I1 | S
+300I2 | 300(newest)I2 | S
+
+#if (RegFind(@041, 'eng') >= 0)
+300$a | <Y30$a | FI300AE; FI300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
+#endif
+
+#if (RegFind(@041, 'eng') < 0)
+300$a | <Y30$a | FI300AE; FI300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
+#endif
+
+300$b | <Y30$b | FI300BE; Delete('.', At Ending)
+// Don't use macro 300C
+300$c | <Y30$c | Delete('.', At Ending)
+300$e | <Y30$e | FI300AE; FI300BE; Delete('.', At Ending)
+300$? | <Y30$? | S
+
+Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
+      RegReplace('($[ab][^$]+[0-9a-z])$c', '\\1 ;$c'); \
+      RegReplace('($[abc][^$]+[0-9a-z])$e', '\\1 +$e'); \
+      S
+
