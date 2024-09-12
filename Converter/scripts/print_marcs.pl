@@ -98,8 +98,9 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     $count++;
     my $records_count = 0;
     my $sv_records_count = 0;
-    my $filename = "MARCrecordsChunk_".$count."_fi.xml";
-    my $svFileName = "MARCrecordsChunk_".$count."_sv.xml";
+    my $filecount = sprintf( "%05d", $count );
+    my $filename = $filecount."_MARCrecordsChunk_fi.xml";
+    my $svFileName = $filecount."_MARCrecordsChunk_sv.xml";
     foreach my $record (@$records) {
         try {
             #fetch and parse records
