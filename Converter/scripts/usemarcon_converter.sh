@@ -54,5 +54,8 @@ do
     # Run usemarcon
     $USEMARCON_PATH $USEMARCON_CONFIG $INPUT_FILE $OUTPUT_FILE
 
+    # rename the processed file
+    mv $INPUT_FILE $INPUT_FILE.processed
+
     echo "Conversion completed for $filename"
 done
