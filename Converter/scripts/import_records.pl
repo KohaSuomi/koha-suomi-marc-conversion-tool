@@ -88,7 +88,11 @@ opendir(my $dh, $dir) or die "Cannot open directory: $!";
 my $count = 0;
 
 # Read files in timestamp order
-my @files = sort { $a cmp $b } grep { /^\d{5}/ } readdir $dh;
+my @files = sort {
+    my ($a_time) = $a =~ /(\d{14})/;
+    my ($b_time) = $b =~ /(\d{14})/;
+    $a_time cmp $b_time;
+} grep { /^\d{14}/ } readdir $dh;
 
 # Process files in timestamp order
 foreach my $filename (@files) {
