@@ -98,6 +98,13 @@ foreach my $filename (@files) {
         last;
     }
     next if -d "$dir/$filename";
+
+    # Check if the file exists in the processed directory
+    if (-e "$dir/processed/$filename") {
+        print "Skipping already processed file: $filename\n";
+        next;
+    }
+
     print "Processing file: $filename\n";
     # Full path to the file
     my $file_path = "$dir/$filename";
