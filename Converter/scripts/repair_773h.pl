@@ -8,23 +8,25 @@ use C4::Context;
 use C4::Biblio qw( ModBiblio GetFrameworkCode);
 
 
-my $date = '';
+my $startdate = '';
+my $enddate = '';
 my $confirm = 0;
 my $verbose = 0;
 GetOptions(
-    'date=s' => \$date, 
+    'startdate=s' => \$startdate,
+    'enddate=s' => \$enddate,
     'confirm' => \$confirm, 
     'verbose' => \$verbose) 
-    or die "Usage: $0 --date=YYYY-MM-DD [--confirm] [--verbose]\n";
+    or die "Usage: $0 --startdate=YYYY-MM-DD --enddate=YYYY-MM-DD [--confirm] [--verbose]\n";
 
-if (!$date) {
-    die "Usage: $0 --date=YYYY-MM-DD [--confirm] [--verbose]\n";
+if (!$startdate || !$enddate) {
+    die "Usage: $0 --startdate=YYYY-MM-DD --enddate=YYYY-MM-DD [--confirm] [--verbose]\n";
 }
 
 
 my $dbh = C4::Context->dbh;
-my $sth = $dbh->prepare("SELECT marcxml, marcxml_old FROM import_records WHERE DATE(upload_timestamp) = ?") or die $dbh->errstr;
-$sth->execute($date) or die $dbh->errstr;
+my $sth = $dbh->prepare("SELECT marcxml, marcxml_old FROM import_records WHERE DATE(upload_timestamp) BETWEEN ? AND ?");
+$sth->execute($startdate, $enddate);
 my $count = 0;
 while (my $row = $sth->fetchrow_hashref) {
     next if !$row->{marcxml} || !$row->{marcxml_old};
