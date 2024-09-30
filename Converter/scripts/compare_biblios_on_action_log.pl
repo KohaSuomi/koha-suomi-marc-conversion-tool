@@ -33,9 +33,15 @@ my $count = 0;
 while (my $row = $sth->fetchrow_hashref) {
     my $biblionumber = $row->{object};
     print "Biblionumber $biblionumber has multiple MODIFY actions\n";
-    if ($confirm) {   
-        $dbh->do("update biblio_metadata set timestamp = NOW() where biblionumber = ?", undef, $biblionumber);
-        print "Updated biblionumber $biblionumber\n";
+    if ($confirm) {
+        my $biblio = Koha::Biblios->find($biblionumber);
+        my $record = $biblio->metadata->record();
+        my $success = &ModBiblio($record, $biblionumber, GetFrameworkCode($biblionumber));
+        if ($success) {
+            print "Updated biblionumber $biblionumber\n";
+        } else {
+            print "Failed to update biblionumber $biblionumber\n";
+        }
     }
     $count++;
 }
