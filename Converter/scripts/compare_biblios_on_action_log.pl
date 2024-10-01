@@ -32,6 +32,14 @@ my $count = 0;
 
 while (my $row = $sth->fetchrow_hashref) {
     my $biblionumber = $row->{object};
+    my $query = "select marcxml from import_records ir join import_biblios ib on ir.import_record_id = ib.import_record_id where upload_timestamp >= ? and upload_timestamp <= ? and matched_biblionumber = ?;";
+    my $sth2 = $dbh->prepare($query);
+    my $res2 = $sth2->execute($starttimestamp, $endtimestamp, $biblionumber);
+    my $row2 = $sth2->fetchrow_hashref;
+    if (!$row2) {
+        print "No import_records found for biblionumber $biblionumber\n";
+        next;
+    }
     print "Biblionumber $biblionumber has multiple MODIFY actions\n";
     if ($confirm) {
         my $biblio = Koha::Biblios->find($biblionumber);
