@@ -40,6 +40,13 @@ while (my $row = $sth->fetchrow_hashref) {
         print "No import_records found for biblionumber $biblionumber\n";
         next;
     }
+    my $sth3 = $dbh->prepare("select object from action_logs where module = 'CATALOGUING' and action = 'MODIFY' and info like 'biblio%' and object = ? and timestamp > ?");
+    my $res3 = $sth3->execute($biblionumber, $endtimestamp);
+    my $row3 = $sth3->fetchrow_hashref;
+    if ($row3) {
+        print "Biblionumber $biblionumber has been modified after the import\n";
+        next;
+    }
     print "Biblionumber $biblionumber has multiple MODIFY actions\n";
     if ($confirm) {
         my $biblio = Koha::Biblios->find($biblionumber);
