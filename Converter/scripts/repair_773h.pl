@@ -38,6 +38,10 @@ while (my $row = $sth->fetchrow_hashref) {
         if (!$field_773->subfield('h') && $field_773_old->subfield('h')) {
             my $biblionumber = $marcxml->field('999')->subfield('c');
             my $biblio = Koha::Biblios->find($biblionumber);
+            unless ($biblio) {
+                print "Biblionumber $biblionumber not found\n";
+                next;
+            }
             my $record = $biblio->metadata->record();
             if ($record->field('773')->subfield('h')) {
                 print "Biblionumber $biblionumber already has 773h: " . $record->field('773')->subfield('h') . "\n";
