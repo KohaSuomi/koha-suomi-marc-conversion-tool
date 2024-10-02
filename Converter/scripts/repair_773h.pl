@@ -43,7 +43,9 @@ while (my $row = $sth->fetchrow_hashref) {
                 print "Biblionumber $biblionumber already has 773h: " . $record->field('773')->subfield('h') . "\n";
                 next;
             }
-            if ($record->field('773')->subfield('w') eq $field_773_old->subfield('w')) {
+            my $subfield_w = $record->field('773')->subfield('w');
+            $subfield_w =~ s/\s.*//;
+            if ($subfield_w eq $field_773_old->subfield('w')) {
                 $record->field('773')->replace_with($field_773_old);
                 print "Appended: " . $record->as_formatted() . "\n" if $verbose;
                 if ($confirm) {
