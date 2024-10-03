@@ -92,7 +92,7 @@ sub _getChunk {
         $query .= "WHERE bm.biblionumber IN (".join(',', @{$self->{biblionumbers}}).")";
     }
     else {
-        $query .= "WHERE bm.biblionumber > ".$self->{starting_biblionumber} if $self->{starting_biblionumber};
+        $query .= "WHERE bm.biblionumber >= ".$self->{starting_biblionumber} if $self->{starting_biblionumber};
     }
 
     $query .= " LIMIT ".$self->{position}->{start}.",".$self->{pageSize};
