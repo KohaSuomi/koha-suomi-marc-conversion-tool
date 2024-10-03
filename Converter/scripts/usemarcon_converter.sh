@@ -58,8 +58,8 @@ do
     # Run usemarcon
     $USEMARCON_PATH $USEMARCON_CONFIG $INPUT_FILE $OUTPUT_FILE
 
-    # rename the processed file
-    mv $INPUT_FILE $INPUT_FILE.processed
+    # Rename the processed file
+    mv "$INPUT_FILE" "${INPUT_FILE%.xml}.processed"
 
     echo "Conversion completed for $filename"
 done

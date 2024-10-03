@@ -231,7 +231,7 @@ sub skipRecordsFromBroadcastBiblios {
     $sth->finish();
     
     if ($biblionumber) {
-        my $sth2 = $self->dbh->prepare("INSERT INTO koha_plugin_fi_kohasuomi_broadcastbiblios_log (biblionumber, updated) VALUES (?, NOW())");
+        my $sth2 = $self->dbh->prepare("INSERT INTO koha_plugin_fi_kohasuomi_broadcastbiblios_log (biblionumber, updated) VALUES (?, (NOW() + INTERVAL 10 MINUTE))");
         $sth2->execute($biblionumber);
         $sth2->finish();
     }

@@ -1,64 +1,74 @@
 #!/bin/bash
 
-SCRIPT_DIR="/home/koha/koha-suomi-marc-conversion-tool/Converter/scripts"
-# Default values
-CONVERT_PATH=""
-MATCHER_ID=""
-BIBLIO_FILE=""
-COMMIT=0
-VERBOSE=0
-
 # Function to display help
 show_help() {
-    echo "Usage: $0 [options]"
+    echo "Usage: $(basename \"$0\") [-h] [-p CONVERT_PATH] [-b BIBLIO_FILE] [-i] [-m MATCHER_ID]"
+    echo
     echo "Options:"
-    echo "  -p, --path PATH            Specify the convert path"
-    echo "  -m, --matcher-id ID        Specify the matcher ID"
-    echo "  -b, --biblio-file FILE     Specify the biblio file (optional)"
-    echo "  -c, --commit               Commit the changes to the database"
-    echo "  -v, --verbose              Enable verbose mode"
-    echo "  -h, --help                 Display this help message"
+    echo "  -h                Display this help message."
+    echo "  -p CONVERT_PATH   Path to the folder containing files to convert."
+    echo "  -b BIBLIO_FILE    Optional biblionumber file."
+    echo "  -i                Import the converted files to Koha."
+    echo "  -m                Matcher id for the import."
 }
 
-# Parse options
-while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
-  -p | --path )
-    shift; CONVERT_PATH=$1
-    ;;
-  -m | --matcher-id )
-    shift; MATCHER_ID=$1
-    ;;
-  -b | --biblio-file )
-    shift; BIBLIO_FILE=$1
-    ;;
-  -c | --commit )
-    COMMIT=1
-    ;;
-  -v | --verbose )
-    VERBOSE=1
-    ;;
-  -h | --help )
-    show_help
-    exit 0
-    ;;
-esac; shift; done
-if [[ "$1" == '--' ]]; then shift; fi
+# Default values
+CONVERT_PATH=""
+BIBLIO_FILE=""
+IMPORT=false
+MATCHER_ID=""
 
-# Check for required arguments
-if [ -z "$CONVERT_PATH" ] || [ -z "$MATCHER_ID" ]; then
+# Parse command line options
+while getopts ":hp:b:im:" opt; do
+    case ${opt} in
+        h )
+            show_help
+            exit 0
+            ;;
+        p )
+            CONVERT_PATH=$OPTARG
+            ;;
+        b )
+            BIBLIO_FILE=$OPTARG
+            ;;
+        i )
+            IMPORT=true
+            ;;
+        m )
+            MATCHER_ID=$OPTARG
+            ;;
+        \? )
+            echo "Invalid option: -$OPTARG" 1>&2
+            show_help
+            exit 1
+            ;;
+        : )
+            echo "Invalid option: -$OPTARG requires an argument" 1>&2
+            show_help
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND -1))
+
+# Check if CONVERT_PATH is set
+if [ -z "$CONVERT_PATH" ]; then
+    echo "Error: CONVERT_PATH is required."
     show_help
     exit 1
 fi
 
+# Check if IMPORT and MATCHER_ID are set
+if [ "$IMPORT" = true ] && [ -z "$MATCHER_ID" ]; then
+    echo "Error: MATCHER_ID is required when importing the files."
+    show_help
+    exit 1
+fi
+
+HOME_DIR="/home/koha/koha-suomi-marc-conversion-tool"
+SCRIPT_DIR="$HOME_DIR/Converter/scripts"
 date=$(date +%Y%m%d)
 
-# Verbose mode
-if [ $VERBOSE -eq 1 ]; then
-    echo "CONVERT_PATH: $CONVERT_PATH"
-    echo "MATCHER_ID: $MATCHER_ID"
-    echo "BIBLIO_FILE: $BIBLIO_FILE"
-    echo "Date: $date"
-fi
 
 # Create a new directory with the current date
 echo "Creating a new directory with the current date"
@@ -68,9 +78,9 @@ mkdir -p "$CONVERT_PATH/$date"
 echo "Running print_marcs.pl"
 mkdir -p "$CONVERT_PATH/$date/xml"
 if [ -z "$BIBLIO_FILE" ]; then
-    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --start_file $CONVERT_PATH/start_biblionumber.txt
+    perl -I $HOME_DIR $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv
 else
-    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --biblionumber_file $BIBLIO_FILE
+    perl -I $HOME_DIR $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --biblionumber_file $BIBLIO_FILE
 fi
 
 # Run ISBD conversion for fi
@@ -84,12 +94,12 @@ bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-RDA/ma21RDA_
 # Run RDA conversion for sv
 bash $SCRIPT_DIR/usemarcon_converter.sh $SCRIPT_DIR/../../USEMARCON-RDA/ma21RDA_bibliografiset_sv.ini $CONVERT_PATH/$date/isbd/ $CONVERT_PATH/$date/rda/ sv
 
-if [ $COMMIT -eq 1 ]; then
-    echo "Committing the changes to the database"
-    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/import_records.pl -d $CONVERT_PATH/$date/rda/  --matcher_id $MATCHER_ID --commit --skip_bb
-else
-    echo "Only add the records to the staging area"
-    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/import_records.pl -d $CONVERT_PATH/$date/rda/  --matcher_id $MATCHER_ID
-fi
 
-echo "Conversion completed"
+# Import the files to Koha
+if [ "$IMPORT" = true ]; then
+    echo "Importing the files to Koha"
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/import_records.pl -d $CONVERT_PATH/$date/rda/ --matcher_id $MATCHER_ID --commit --skip_bb
+else
+    echo "To stage the files to Koha, run the following command:"
+    echo "perl -I $HOME_DIR $SCRIPT_DIR/import_records.pl -d $CONVERT_PATH/$date/rda/ --matcher_id $MATCHER_ID <matcher_id>"
+fi
