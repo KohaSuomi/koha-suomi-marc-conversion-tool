@@ -93,10 +93,10 @@ my @files = sort { $a cmp $b } grep { /^\d{5}/ } readdir $dh;
 # Process files in timestamp order
 foreach my $filename (@files) {
     # Skip if not a file
-    my $current_time = strftime "%Y-%m-%d %H:%M:%S", localtime;
-    if ($current_time gt $stop_time) {
-        last;
-    }
+    #my $current_time = strftime "%Y-%m-%d %H:%M:%S", localtime;
+    #if ($current_time gt $stop_time) {
+    #    last;
+    #}
     next if -d "$dir/$filename";
     print "Processing file: $filename\n";
     # Full path to the file
