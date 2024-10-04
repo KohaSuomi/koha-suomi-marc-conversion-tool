@@ -14,7 +14,7 @@ my $sql = "SELECT MAX(matched_biblionumber) AS matched_biblionumber
            WHERE import_status = 'imported' 
            AND file_name LIKE '\%MARCrecordsChunk\%' 
            AND import_batches.upload_timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) 
-           ORDER BY import_batches.upload_timestamp DESC";
+           ORDER BY import_biblios.matched_biblionumber DESC";
 
 # Prepare and execute the query
 my $sth = $dbh->prepare($sql);
