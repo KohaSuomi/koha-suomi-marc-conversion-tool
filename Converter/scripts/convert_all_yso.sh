@@ -64,8 +64,8 @@ else
 fi
 
 rm -r "$CONVERT_PATH/$date/yso"
-cd $CONVERT_PATH/$date/xml/
-for file in *.xml
+cd $YSO_DIR
+for file in $CONVERT_PATH/$date/xml/*.xml
 do
     if [ ! -f "$file" ]; then
         echo "No files to process"
