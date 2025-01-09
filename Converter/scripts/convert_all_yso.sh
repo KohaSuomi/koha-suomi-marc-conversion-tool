@@ -63,13 +63,28 @@ else
     perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --biblionumber_file $BIBLIO_FILE
 fi
 
-# Run YSO conversion
 rm -r "$CONVERT_PATH/$date/yso"
-cd $YSO_DIR
-python3 $YSO_DIR/yso_converter.py -id $CONVERT_PATH/$date/xml/ -od $CONVERT_PATH/$date/yso/ -f marcxml --all_languages --field_links <<EOF
-1
+cd $CONVERT_PATH/$date/xml/
+for file in *.xml
+do
+    if [ ! -f "$file" ]; then
+        echo "No files to process"
+        exit 1
+    fi
+    # Get the filename without the path
+    filename=$(basename "$file")
+
+    # Set the input and output file paths
+    INPUT_FILE="$file"
+    python3 $YSO_DIR/yso_converter.py -i $CONVERT_PATH/$date/xml/$filename -o $CONVERT_PATH/$date/yso/$filename -f marcxml --all_languages --field_links <<EOF
+    1
 EOF
 
+    # Rename the processed file
+    mv "$INPUT_FILE" "${INPUT_FILE%.xml}.processed"
+
+    echo "Conversion completed for $filename"
+done
 
 echo "Files are located in $CONVERT_PATH/$date/yso"
 echo "Import the files to Koha with the import_records.pl script"
