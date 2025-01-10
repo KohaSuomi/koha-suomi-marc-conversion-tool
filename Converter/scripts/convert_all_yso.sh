@@ -96,6 +96,13 @@ done
 
 echo "Files are located in $CONVERT_PATH/$date/yso"
 
+# Check if the MATCHER_ID argument is provided
+if [ -z "$MATCHER_ID" ]; then
+    echo "Error: Matcher ID is required."
+    show_help
+    exit 1
+fi
+
 echo "Importing the files to Koha"
 if [ "$COMMIT" = true ]; then
     perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/import_records.pl -d $CONVERT_PATH/$date/yso/ --matcher_id $MATCHER_ID --commit --skip_bb
