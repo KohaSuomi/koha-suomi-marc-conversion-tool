@@ -119,21 +119,21 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
     foreach my $record (@$records) {
         try {
             #fetch and parse records
-            $record = deleteNullFields($record);
-            my $marc_xml = marc2marcxml($record, 'UTF-8', C4::Context->preference("marcflavour"));
+            $record->{metadata} = deleteNullFields($record->{metadata});
+            my $marc_xml = marc2marcxml($record->{metadata}, 'UTF-8', C4::Context->preference("marcflavour"));
             my $parser = XML::LibXML->new(recover => 1);
             my $doc = $parser->load_xml(string => $marc_xml);
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
-            return if $no_rda && checkRDARecord($record);
-            if ($check_sv && svRecord($record)) {
+            return if $no_rda && checkRDARecord($record->{metadata});
+            if ($check_sv && svRecord($record->{metadata})) {
                 $sv_xml .= $row."\n";
                 $sv_records_count++;
             } else {
                 $xml .= $row."\n";
                 $records_count++;
             }
-            $last_biblionumber = $record->subfield('999', 'c');
+            $last_biblionumber = $record->{biblionumber}++;
         }
         catch {
             warn $@ if $@;

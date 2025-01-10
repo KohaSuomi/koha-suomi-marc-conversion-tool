@@ -115,8 +115,11 @@ foreach my $filename (@files) {
     # Import the file
     my $batch_id = $koha_importer->importRecords($file_path);
     # Move the file to the processed directory
+    unless ($batch_id) {
+        unlink $file_path or warn "Could not delete file: $!";
+        next;
+    }
     move_file($file_path);
-    next unless $batch_id;
     $count++;
     last if $count == $batch_size && $batch_size > 0;
 }

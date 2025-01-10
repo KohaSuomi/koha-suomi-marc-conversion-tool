@@ -58,7 +58,7 @@ sub getChunkAsMARCRecord {
     for (my $i=0 ; $i<scalar(@$chunk) ; $i++) {
         my $bi = $chunk->[$i];
         my $error = "";
-        ($error, $chunk->[$i]) = C4::Record::marcxml2marc($bi->{metadata});
+        ($error, $chunk->[$i]->{metadata}) = C4::Record::marcxml2marc($bi->{metadata});
         if ($error) {
             print "ERROR: MARC::Record for biblio $bi->{biblionumber} is broken, skipping...\n";
             splice(@$chunk, $i, 1);
@@ -92,7 +92,7 @@ sub _getChunk {
         $query .= "WHERE bm.biblionumber IN (".join(',', @{$self->{biblionumbers}}).")";
     }
     else {
-        $query .= "WHERE bm.biblionumber >= ".$self->{starting_biblionumber} if $self->{starting_biblionumber};
+        $query .= "WHERE bm.biblionumber > ".$self->{starting_biblionumber} if $self->{starting_biblionumber};
     }
 
     $query .= " LIMIT ".$self->{position}->{start}.",".$self->{pageSize};

@@ -1,20 +1,24 @@
 #!/bin/bash
 
 show_help() {
-    echo "Usage: $(basename "$0") [-h] [-d DIRECTORY] [-b BIBLIO_FILE]"
+    echo "Usage: $(basename "$0") [-h] [-d DIRECTORY] [-b BIBLIO_FILE] [-m MATCHER_ID] [-c]"
     echo
     echo "Options:"
     echo "  -h                Show this help message and exit"
     echo "  -d DIRECTORY      Directory to convert"
     echo "  -b BIBLIO_FILE    Optional biblionumber file"
+    echo "  -m MATCHER_ID     Matcher id for the import"
+    echo "  -c                Commit the changes to the database"
 }
 
 # Default values
 CONVERT_PATH=""
 BIBLIO_FILE=""
+MATCHER_ID=""
+COMMIT=false
 
 # Parse command line options
-while getopts "hd:b:" opt; do
+while getopts "hd:b:m:c" opt; do
     case ${opt} in
         h )
             show_help
@@ -25,6 +29,12 @@ while getopts "hd:b:" opt; do
             ;;
         b )
             BIBLIO_FILE=$OPTARG
+            ;;
+        m )
+            MATCHER_ID=$OPTARG
+            ;;
+        c )
+            COMMIT=true
             ;;
         \? )
             echo "Invalid option: -$OPTARG" >&2
@@ -58,12 +68,12 @@ mkdir -p "$CONVERT_PATH/$date"
 echo "Running print_marcs.pl"
 mkdir -p "$CONVERT_PATH/$date/xml"
 if [ -z "$BIBLIO_FILE" ]; then
-    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --start_file $CONVERT_PATH/start_biblionumber.txt -s 500
 else
     perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --biblionumber_file $BIBLIO_FILE
 fi
 
-rm -r "$CONVERT_PATH/$date/yso"
+#rm -r "$CONVERT_PATH/$date/yso"
 cd $YSO_DIR
 for file in $CONVERT_PATH/$date/xml/*.xml
 do
@@ -76,9 +86,7 @@ do
 
     # Set the input and output file paths
     INPUT_FILE="$file"
-    python3 $YSO_DIR/yso_converter.py -i $CONVERT_PATH/$date/xml/$filename -o $CONVERT_PATH/$date/yso/$filename -f marcxml --all_languages --field_links <<EOF
-    1
-EOF
+    python3 $YSO_DIR/yso_converter.py -i $CONVERT_PATH/$date/xml/$filename -o $CONVERT_PATH/$date/yso/$filename -f marcxml --field_links
 
     # Rename the processed file
     mv "$INPUT_FILE" "${INPUT_FILE%.xml}.processed"
@@ -87,7 +95,13 @@ EOF
 done
 
 echo "Files are located in $CONVERT_PATH/$date/yso"
-echo "Import the files to Koha with the import_records.pl script"
+
+echo "Importing the files to Koha"
+if [ "$COMMIT" = true ]; then
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/import_records.pl -d $CONVERT_PATH/$date/yso/ --matcher_id $MATCHER_ID --commit --skip_bb
+else
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/import_records.pl -d $CONVERT_PATH/$date/yso/ --matcher_id $MATCHER_ID
+fi
 
 cd $USER_HOME_DIR
 exit 0
