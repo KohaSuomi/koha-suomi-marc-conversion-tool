@@ -86,7 +86,7 @@ do
 
     # Set the input and output file paths
     INPUT_FILE="$file"
-    python3 $YSO_DIR/yso_converter.py -i $CONVERT_PATH/$date/xml/$filename -o $CONVERT_PATH/$date/yso/$filename -f marcxml --field_links
+    python3 $YSO_DIR/yso_converter.py -i $CONVERT_PATH/$date/xml/$filename -o $CONVERT_PATH/$date/yso/$filename -f marcxml
 
     # Rename the processed file
     mv "$INPUT_FILE" "${INPUT_FILE%.xml}.processed"
