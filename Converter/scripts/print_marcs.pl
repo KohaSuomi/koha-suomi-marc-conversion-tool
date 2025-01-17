@@ -51,12 +51,13 @@ sub usage {
   --biblionumber_file  File containing biblionumbers to print.
   --check_sv           Check if record is in swedish and print to separate file.
   --no_rda             Do not print RDA records.
+  --start_file         Start biblionumber from file.
 
 USAGE
     exit $_[0];
 }
 
-my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers, $biblionumber_file, $check_sv, $no_rda );
+my ( $help, $config, $path, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers, $biblionumber_file, $check_sv, $no_rda, $start_file );
 
 GetOptions(
     'h|help'             => \$help,
@@ -67,7 +68,8 @@ GetOptions(
     'v|verbose'          => \$verbose,
     'biblionumber_file:s'=> \$biblionumber_file,
     'check_sv'           => \$check_sv,
-    'no_rda'          => \$no_rda,
+    'no_rda'             => \$no_rda,
+    'start_file:s'       => \$start_file,
 
 ) || usage(1);
 
@@ -88,36 +90,50 @@ if ( $biblionumber_file && -e $biblionumber_file ) {
     close $fh;
 }
 
+if ($start_file) {
+    open( my $fh, '<', $start_file );
+    while ( my $line = <$fh> ) {
+        chomp $line;
+        $biblionumber = $line;
+    }
+    close $fh;
+}
+
 my $count = 0;
 my $chunker = Converter::Modules::Chunker->new(undef, $limit, $pagesize, $biblionumber, $verbose, @biblionumbers);
+my $last_biblionumber = 0;
+my $batch_size = 1;
+my $batch_count = 0;
 
 while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
+    last if $batch_count >= $batch_size;
     my $xml = MARC::File::XML::header('UTF-8');
     my $sv_xml = MARC::File::XML::header('UTF-8');
     my $timestamp = POSIX::strftime( "%Y%m%d%H%M%S", localtime );
     $count++;
     my $records_count = 0;
     my $sv_records_count = 0;
-    my $filecount = sprintf( "%06d", $count );
-    my $filename = $filecount."_MARCrecordsChunk_fi.xml";
-    my $svFileName = $filecount."_MARCrecordsChunk_sv.xml";
+    my $filecount = sprintf( "%05d", $count );
+    my $filename = $timestamp."_MARCrecordsChunk_fi.xml";
+    my $svFileName = $timestamp."_MARCrecordsChunk_sv.xml";
     foreach my $record (@$records) {
         try {
             #fetch and parse records
-            $record = deleteNullFields($record);
-            my $marc_xml = marc2marcxml($record, 'UTF-8', C4::Context->preference("marcflavour"));
+            $record->{metadata} = deleteNullFields($record->{metadata});
+            my $marc_xml = marc2marcxml($record->{metadata}, 'UTF-8', C4::Context->preference("marcflavour"));
             my $parser = XML::LibXML->new(recover => 1);
             my $doc = $parser->load_xml(string => $marc_xml);
             my ( $row ) = $doc->findnodes("/*");
             #add records to new xml file
-            return if $no_rda && checkRDARecord($record);
-            if ($check_sv && svRecord($record)) {
+            return if $no_rda && checkRDARecord($record->{metadata});
+            if ($check_sv && svRecord($record->{metadata})) {
                 $sv_xml .= $row."\n";
                 $sv_records_count++;
             } else {
                 $xml .= $row."\n";
                 $records_count++;
             }
+            $last_biblionumber = $record->{biblionumber}++;
         }
         catch {
             warn $@ if $@;
@@ -140,6 +156,14 @@ while (my $records = $chunker->getChunkAsMARCRecord(undef, undef)) {
         close $fh;
         print "Added ".$sv_records_count." swedish records to file ".$svFileName.".\n" if $verbose;
     }
+    $batch_count++;
+}
+
+if ($start_file && $last_biblionumber) {
+    print "Writing last biblionumber $last_biblionumber to file $start_file\n" if $verbose;
+    open(my $fh, '>', $start_file);
+    print $fh $last_biblionumber;
+    close $fh;
 }
 
 sub primary_language {

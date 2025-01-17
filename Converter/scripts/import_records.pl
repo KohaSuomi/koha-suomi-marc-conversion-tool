@@ -88,7 +88,11 @@ opendir(my $dh, $dir) or die "Cannot open directory: $!";
 my $count = 0;
 
 # Read files in timestamp order
-my @files = sort { $a cmp $b } grep { /^\d{6}/ } readdir $dh;
+my @files = sort {
+    my ($a_time) = $a =~ /(\d{14})/;
+    my ($b_time) = $b =~ /(\d{14})/;
+    $a_time cmp $b_time;
+} grep { /^\d{14}/ } readdir $dh;
 
 # Process files in timestamp order
 foreach my $filename (@files) {
@@ -98,14 +102,24 @@ foreach my $filename (@files) {
     #    last;
     #}
     next if -d "$dir/$filename";
+
+    # Check if the file exists in the processed directory
+    if (-e "$dir/processed/$filename") {
+        print "Skipping already processed file: $filename\n";
+        next;
+    }
+
     print "Processing file: $filename\n";
     # Full path to the file
     my $file_path = "$dir/$filename";
     # Import the file
     my $batch_id = $koha_importer->importRecords($file_path);
     # Move the file to the processed directory
+    unless ($batch_id) {
+        unlink $file_path or warn "Could not delete file: $!";
+        next;
+    }
     move_file($file_path);
-    next unless $batch_id;
     $count++;
     last if $count == $batch_size && $batch_size > 0;
 }

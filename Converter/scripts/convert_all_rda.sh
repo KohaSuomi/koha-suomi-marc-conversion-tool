@@ -74,11 +74,13 @@ date=$(date +%Y%m%d)
 echo "Creating a new directory with the current date"
 mkdir -p "$CONVERT_PATH/$date"
 
+NEXT_BIBLIONUMBER=$(perl -I $HOME_DIR $SCRIPT_DIR/last_imported.pl)
+
 # Run print_marcs.pl
 echo "Running print_marcs.pl"
 mkdir -p "$CONVERT_PATH/$date/xml"
 if [ -z "$BIBLIO_FILE" ]; then
-    perl -I $HOME_DIR $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv
+    perl -I $HOME_DIR $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --biblionumber $NEXT_BIBLIONUMBER -s 500
 else
     perl -I $HOME_DIR $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --biblionumber_file $BIBLIO_FILE
 fi

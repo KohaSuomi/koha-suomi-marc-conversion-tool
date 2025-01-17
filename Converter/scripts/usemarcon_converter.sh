@@ -44,6 +44,10 @@ fi
 # Loop through each file in the input folder
 for file in "$INPUT_FOLDER"/*_"$LANGUAGE".xml
 do
+    if [ ! -f "$file" ]; then
+        echo "No files to process"
+        exit 1
+    fi
     # Get the filename without the path
     filename=$(basename "$file")
 

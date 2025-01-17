@@ -384,27 +384,28 @@ class YsoConverter():
                 if faulty_vocabularies:      
                     logging.warning("Korvataan puutteelliset sanastot vuoden 2019 static-alkuisilla sanastoilla" )
                     while True:
-                        answer = input("1. Jatka ohjelman suoritusta tämän päivän sanastoilla vai 2. Suorita konversio työhakemiston vanhoilla static-alkuisilla sanastoilla (1/2)?")
-                        if answer.lower() == "1":
-                            break
-                        if answer.lower() == "2":
-                            for fv in faulty_vocabularies:
-                                g = Graph()
-                                graphs.update({fv: g})
-                                try:
-                                    logging.info("parsitaan uudestaan sanastoa %s"%fv)
-                                    path = os.path.join(static_vocabulary_directory, static_vocabulary_files[fv])
-                                    g.parse(path, format='ttl')
-                                except FileNotFoundError:
-                                    logging.error("Tiedostoa %s ei löytynyt levyltä. "
-                                        "Korvaavan tiedoston lataaminen ei ole onnistunut tai tiedosto on poistettu. "
-                                        "Hae static-alkuinen tiedosto projektin GitHub-repositoriosta "
-                                        "ja tallenna ne ohjelman kansioon")
-                                    sys.exit(2)
+                        #answer = input("1. Jatka ohjelman suoritusta tämän päivän sanastoilla vai 2. Suorita konversio työhakemiston vanhoilla static-alkuisilla sanastoilla (1/2)?")
+                        break
+                        # if answer.lower() == "1":
+                        #     break
+                        # if answer.lower() == "2":
+                        #     for fv in faulty_vocabularies:
+                        #         g = Graph()
+                        #         graphs.update({fv: g})
+                        #         try:
+                        #             logging.info("parsitaan uudestaan sanastoa %s"%fv)
+                        #             path = os.path.join(static_vocabulary_directory, static_vocabulary_files[fv])
+                        #             g.parse(path, format='ttl')
+                        #         except FileNotFoundError:
+                        #             logging.error("Tiedostoa %s ei löytynyt levyltä. "
+                        #                 "Korvaavan tiedoston lataaminen ei ole onnistunut tai tiedosto on poistettu. "
+                        #                 "Hae static-alkuinen tiedosto projektin GitHub-repositoriosta "
+                        #                 "ja tallenna ne ohjelman kansioon")
+                        #             sys.exit(2)
 
-                            for fv in faulty_vocabularies:
-                                self.vocabularies.parse_vocabulary(fv, graphs)
-                            break
+                        #     for fv in faulty_vocabularies:
+                        #         self.vocabularies.parse_vocabulary(fv, graphs)
+                        #     break
             with open('vocabularies.pkl', 'wb') as output:  # Overwrites any existing file.
                 pickle.dump(self.vocabularies, output, pickle.HIGHEST_PROTOCOL)
             logging.info("sanastot tallennettu muistiin ja tiedostoon vocabularies.pkl")

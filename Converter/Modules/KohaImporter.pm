@@ -97,6 +97,11 @@ sub importRecords {
         print "Staging records...\n";
         ( $errors, $marcrecords ) =
                 C4::ImportBatch::RecordsFromMARCXMLFile( $input_file, $self->encoding );
+
+        if (scalar @$marcrecords == 0) {
+            print "No records found in file\n";
+            return 0;
+        }
         
         # Stage records for import
         ( $batch_id, $num_valid, $num_items, @import_errors ) = BatchStageMarcRecords(
