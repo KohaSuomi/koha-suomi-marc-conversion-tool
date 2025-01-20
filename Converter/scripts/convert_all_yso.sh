@@ -49,6 +49,17 @@ while getopts "hd:b:m:c" opt; do
     esac
 done
 
+# Check if /usr/local/bin/ksbackup --indices is running
+if pgrep -f "/usr/local/bin/ksbackup --indices" > /dev/null; then
+    echo "/usr/local/bin/ksbackup --indices is running. Exiting."
+    exit 1
+fi
+
+if pgrep -f "/usr/local/bin/dumpdb" > /dev/null; then
+    echo "/usr/local/bin/dumpdb is running. Exiting."
+    exit 1
+fi
+
 # Check if the required DIRECTORY argument is provided
 if [ -z "$CONVERT_PATH" ]; then
     echo "Error: Directory to convert is required."
