@@ -60,6 +60,11 @@ if pgrep -f "/usr/local/bin/dumpdb" > /dev/null; then
     exit 1
 fi
 
+if pgrep -f "rebuild_elasticsearch.pl" > /dev/null; then
+    echo "rebuild_elasticsearch.pl is running. Exiting."
+    exit 1
+fi
+
 # Check if the required DIRECTORY argument is provided
 if [ -z "$CONVERT_PATH" ]; then
     echo "Error: Directory to convert is required."
