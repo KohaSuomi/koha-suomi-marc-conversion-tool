@@ -87,9 +87,9 @@ mkdir -p "$CONVERT_PATH/$date"
 echo "Running print_marcs.pl"
 mkdir -p "$CONVERT_PATH/$date/xml"
 if [ -z "$BIBLIO_FILE" ]; then
-    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --start_file $CONVERT_PATH/start_biblionumber.txt -s 500
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --start_file $CONVERT_PATH/start_biblionumber.txt -s 500
 else
-    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --biblionumber_file $BIBLIO_FILE
+    perl -I $SCRIPT_DIR/../../ $SCRIPT_DIR/print_marcs.pl -p $CONVERT_PATH/$date/xml/ --check_sv --biblionumber_file $BIBLIO_FILE
 fi
 
 # Run ISBD conversion for fi
